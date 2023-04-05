@@ -1,6 +1,12 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav mode="side" [(opened)]="opened" #sidenav class="sidenav"
-    >Sidenav content
+    >
+
+    <div class="logo-container">Platz für Logo</div>
+    <ul>
+      <li><mat-icon>fact_check</mat-icon>Dashboard</li>
+      <li><mat-icon>perm_identity</mat-icon>User</li>
+    </ul>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -12,3 +18,5 @@
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<router-outlet></router-outlet>
