@@ -5,15 +5,17 @@
       <th>Name</th>
       <th>Gender</th>
       <th>Birthday</th>
+      <th>E-Mail</th>
       <th>Adress</th>
       <th>Zip Code</th>
       <th>City</th>
     </tr>
-    <tr class="data-row" *ngFor="let user of users">
+    <tr class="data-row" *ngFor="let user of users let i = index" (click)="showUserDetail(user.id)">
       <td>{{ user.firstname }}</td>
       <td>{{ user.lastname }}</td>
       <td>{{ user.female ? 'female': 'male'}}</td>
       <td>{{ user.birthday.toDate().toISOString().split('T')[0]}}</td>
+      <td>{{ user.email }}</td>
       <td>{{ user.adress }}</td>
       <td>{{ user.zipcode }}</td>
       <td>{{ user.city }}</td>

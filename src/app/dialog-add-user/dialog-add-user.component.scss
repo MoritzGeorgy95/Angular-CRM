@@ -21,6 +21,12 @@
     }
 }
 
+.input-row.mail {
+    mat-form-field {
+        width: 100%;
+    }
+}
+ 
 .checkboxes {
     display: flex;
     align-items: center;

@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit{
   users:any;
 
   ngOnInit() {
-    this.usersService.getData();
+    this.usersService.getAll();
     this.users = this.usersService.users;
   }
 

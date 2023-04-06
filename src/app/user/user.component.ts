@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { UsersService } from '../users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -7,14 +8,17 @@ import { UsersService } from '../users.service';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  users: any
+  users: any;
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, private router: Router) {}
 
   ngOnInit() {
-    this.usersService.getData();
+    this.usersService.getAll();
     this.users = this.usersService.users;
   }
 
+  showUserDetail(id:any) {
+    this.router.navigateByUrl(`/user/${id}`);
+  }
   
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from '../users.service';
-import { addDoc } from 'firebase/firestore';
+import { FieldValue, addDoc, updateDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -9,8 +9,7 @@ import { addDoc } from 'firebase/firestore';
   styleUrls: ['./dialog-add-user.component.scss'],
 })
 export class DialogAddUserComponent {
-  
-  data= {
+  data = {
     firstname: '',
     lastname: '',
     birthday: undefined,
@@ -18,22 +17,23 @@ export class DialogAddUserComponent {
     female: false,
     zipcode: '',
     adress: '',
-    city: ''
-  } 
+    city: '',
+    email: '',
+    id: ''
+  };
 
-  constructor(private dialog: MatDialog, private usersService: UsersService) {
-
-  }
+  constructor(private dialog: MatDialog, private usersService: UsersService) {}
 
   onNoClick() {
     this.dialog.closeAll();
   }
 
   async submitData() {
+    const docRef = await addDoc(this.usersService.collection, this.data);
     
-    await addDoc(this.usersService.collection, this.data);
+    await updateDoc(docRef, { id: docRef.id });
+
     this.dialog.closeAll();
-    
   }
 
   toggleMale() {
@@ -45,5 +45,4 @@ export class DialogAddUserComponent {
     this.data.male = false;
     this.data.female = true;
   }
- 
 }
