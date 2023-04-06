@@ -2,10 +2,10 @@
   <mat-sidenav mode="side" [(opened)]="opened" #sidenav class="sidenav"
     >
 
-    <div class="logo-container">Platz für Logo</div>
+    <div class="logo-container"><img src="assets/img/logo.png" alt="logo"></div>
     <ul>
       <li [routerLink]="['/']"><mat-icon>fact_check</mat-icon>Dashboard</li>
-      <li [routerLink]="['/user']"><mat-icon>perm_identity</mat-icon>User</li>
+      <li [routerLink]="['/user']"><mat-icon>perm_identity</mat-icon>Users</li>
     </ul>
   </mat-sidenav>
   <mat-sidenav-content>

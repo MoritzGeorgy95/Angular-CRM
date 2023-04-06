@@ -1,49 +1,51 @@
 .example-container {
-    height: 100vh;
-    border-right: 1px solid black;
+  height: 100vh;
+  border-right: 1px solid black;
 }
 
 .menu-icon {
-    cursor: pointer;
-    color: white;
-    background: unset;
-    margin-right: 1rem;
+  cursor: pointer;
+  color: white;
+  background: unset;
+  margin-right: 1rem;
 }
 
-
 .sidenav {
-    width: 300px;
+  width: 300px;
 }
 
 .logo-container {
-    border-bottom: 1px solid rgba($color: #000000, $alpha: .5);
-    min-height: 64px;
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
+  border-bottom: 1px solid rgba($color: #000000, $alpha: 0.5);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  img {
+    height: 64px;
+    margin-left: 20%;
+  }
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 
-    li {
-        padding: 1rem 0 1rem 1rem;
-        display: flex;
-        align-items: center;
-        transition: 225ms all ease-in-out;
-        mat-icon {
-            margin-right: .5rem;
-        }
-        &:hover {
-            cursor: pointer;
-            background: rgba($color: #000000, $alpha: 0.1);
-        }
+  li {
+    padding: 1rem 0 1rem 1rem;
+    display: flex;
+    align-items: center;
+    transition: 225ms all ease-in-out;
+    mat-icon {
+      margin-right: 0.5rem;
     }
-    
+    &:hover {
+      cursor: pointer;
+      background: rgba($color: #000000, $alpha: 0.1);
+    }
+  }
 }
 
 .router-container {
-    padding: 1rem;
+  padding: 1rem;
 }
+

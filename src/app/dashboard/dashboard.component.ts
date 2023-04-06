@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Firestore, collectionData } from '@angular/fire/firestore';
+import { UsersService } from '../users.service';
 import {
   addDoc,
   onSnapshot,
@@ -20,22 +21,16 @@ import {
 })
 
 export class DashboardComponent implements OnInit{
-  constructor(private dialog: MatDialog, private firestore: Firestore) {}
+  constructor(private dialog: MatDialog, private usersService: UsersService) {}
 
-  users: object[] = [];
-  collection:any;
+  users:any;
 
   ngOnInit() {
-    this.collection= collection(this.firestore, 'users');
-    console.log(collectionData(this.collection))
+    this.usersService.getData();
+    this.users = this.usersService.users;
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogAddUserComponent, {});
-
-    dialogRef.afterClosed().subscribe((result) => {
-      this.users.push(result);
-      console.log(this.users);
-    });
+    this.dialog.open(DialogAddUserComponent, {});
   }
 }

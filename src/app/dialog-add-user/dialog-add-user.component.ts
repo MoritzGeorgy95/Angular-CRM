@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { UsersService } from '../users.service';
+import { addDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -19,11 +21,19 @@ export class DialogAddUserComponent {
     city: ''
   } 
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private usersService: UsersService) {
+
   }
 
   onNoClick() {
     this.dialog.closeAll();
+  }
+
+  async submitData() {
+    
+    await addDoc(this.usersService.collection, this.data);
+    this.dialog.closeAll();
+    
   }
 
   toggleMale() {

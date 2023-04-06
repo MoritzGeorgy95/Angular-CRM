@@ -1,1 +1,22 @@
-<p>user works!</p>
+<mat-card>
+  <table class="user-table">
+    <tr>
+      <th>Firstname</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Birthday</th>
+      <th>Adress</th>
+      <th>Zip Code</th>
+      <th>City</th>
+    </tr>
+    <tr class="data-row" *ngFor="let user of users">
+      <td>{{ user.firstname }}</td>
+      <td>{{ user.lastname }}</td>
+      <td>{{ user.female ? 'female': 'male'}}</td>
+      <td>{{ user.birthday.toDate().toISOString().split('T')[0]}}</td>
+      <td>{{ user.adress }}</td>
+      <td>{{ user.zipcode }}</td>
+      <td>{{ user.city }}</td>
+    </tr>
+  </table>
+</mat-card>
