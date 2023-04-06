@@ -1,0 +1,30 @@
+.mat-dialog-title {
+    margin: 0;
+}
+
+.mat-dialog-content {
+    padding: 1rem;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+    mat-form-field {
+        width: 50%;
+    }
+}
+
+.input-row.adress {
+    mat-form-field {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
+
+.checkboxes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 50%;
+    padding-bottom: 22px;
+}

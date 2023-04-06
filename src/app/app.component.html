@@ -4,8 +4,8 @@
 
     <div class="logo-container">Platz für Logo</div>
     <ul>
-      <li><mat-icon>fact_check</mat-icon>Dashboard</li>
-      <li><mat-icon>perm_identity</mat-icon>User</li>
+      <li [routerLink]="['/']"><mat-icon>fact_check</mat-icon>Dashboard</li>
+      <li [routerLink]="['/user']"><mat-icon>perm_identity</mat-icon>User</li>
     </ul>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -16,7 +16,10 @@
         <span>Simple CRM</span>
       </mat-toolbar-row>
     </mat-toolbar>
+
+    <div class="router-container">
+      <router-outlet></router-outlet>
+    </div> 
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<router-outlet></router-outlet>
