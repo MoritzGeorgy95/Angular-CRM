@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "crm-system-f7e71": {
+      "hosting": {
+        "crm-app": [
+          "crm-system-f7e71"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "crm-system-f7e71"
+  }
+}

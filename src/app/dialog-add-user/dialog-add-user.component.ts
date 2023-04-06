@@ -14,6 +14,9 @@ export class DialogAddUserComponent {
     birthday: undefined,
     male: true,
     female: false,
+    zipcode: '',
+    adress: '',
+    city: ''
   } 
 
   constructor(private dialog: MatDialog) {
