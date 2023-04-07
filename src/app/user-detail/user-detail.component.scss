@@ -1,0 +1,61 @@
+.header-card {
+    background: salmon;
+    height: 300px;
+    .user-detail-container {
+        display: flex;
+        align-items: flex-end;
+        height: 100%;
+        padding-left: 1rem;
+        padding-bottom: 1rem;
+
+        div {
+            display: flex;
+            align-items: center;
+            img {
+                width: 120px;
+               }
+        }
+    }
+
+    .description-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 2rem;
+        align-items: unset !important;
+        color: white;
+
+        h1 {
+            margin: 0;
+        }
+        p {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.info-card {
+    margin-top: 2rem;
+    position: relative;
+    mat-card-header {
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+
+    p {
+        padding-top: 16px;
+        padding-left: 16px;
+        margin: 0;
+    }
+
+    p:last-of-type {
+        margin-bottom: 1rem;
+    }
+
+    .edit-menu-button {
+        position: absolute;
+        right: 2px;
+        top: 2px;
+    }
+}
+
