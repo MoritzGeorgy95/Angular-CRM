@@ -1,0 +1,16 @@
+<h1 mat-dialog-title class="mat-dialog-title">Edit {{data.data[data.data.length -1]}}</h1>
+<div mat-dialog-content class="mat-dialog-content">
+    <mat-form-field appearance="outline" *ngFor="let item of data.data.slice(0, -1) let i=index">
+        <mat-label>Edit</mat-label>
+        <input
+          matInput
+          [(ngModel)]="data.data[i]"
+          [value]= "item"
+        />
+      </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="updateData()">Ok</button>
+</div>
+  

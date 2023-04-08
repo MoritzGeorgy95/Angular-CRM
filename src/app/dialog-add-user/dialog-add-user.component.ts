@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from '../users.service';
-import { FieldValue, addDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, updateDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-dialog-add-user',

@@ -1,3 +1,5 @@
+<div *ngIf="userData">
+
 <mat-card class="header-card">
   <div class="user-detail-container">
     <div>
@@ -23,16 +25,24 @@
     Adress: {{ userData.adress }} | {{ userData.zipcode }}, {{ userData.city }}
   </p>
   <p>Email: {{ userData.email }}</p>
-  <button mat-icon-button class="edit-menu-button" class="edit-menu-button">
+  <button mat-icon-button class="edit-menu-button" [matMenuTriggerFor]="menu1" >
     <mat-icon>more_vert</mat-icon>
   </button>
+  <mat-menu #menu1="matMenu">
+    <button mat-menu-item (click)="editDataDialog([userData.adress, userData.zipcode, userData.city, 'Adress'])">Edit <mat-icon>mode_edit</mat-icon></button>
+  </mat-menu>
 </mat-card>
 
 <mat-card class="info-card">
   <mat-card-header> Personal Data </mat-card-header>
   <p>Gender: {{ userData.female ? "female" : "male" }}</p>
   <p>Birthday: {{ userData.birthday.toDate().toISOString().split("T")[0] }}</p>
-  <button mat-icon-button class="edit-menu-button">
+  <button mat-icon-button class="edit-menu-button" [matMenuTriggerFor]="menu2">
     <mat-icon>more_vert</mat-icon>
   </button>
+  <mat-menu #menu2="matMenu">
+    <button mat-menu-item (click)="editDataDialog([userData.female, userData.birthday, 'Personal Data'])">Edit <mat-icon>mode_edit</mat-icon></button>
+  </mat-menu>
 </mat-card>
+
+</div>
