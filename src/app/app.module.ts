@@ -24,11 +24,13 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UsersService } from './users.service';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DialogEditDataComponent } from './dialog-edit-data/dialog-edit-data.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -58,10 +60,12 @@ import {MatMenuModule} from '@angular/material/menu';
     MatProgressBarModule,
     MatCardModule,
     MatMenuModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
+    provideStorage(()=> getStorage())
   ],
   providers: [UsersService],
   bootstrap: [AppComponent],

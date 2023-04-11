@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData } from '@angular/fire/firestore';
+import { Firestore} from '@angular/fire/firestore';
+import { Storage} from '@angular/fire/storage';
 import {
   addDoc,
   onSnapshot,
@@ -12,6 +13,7 @@ import {
   getDocs,
 } from 'firebase/firestore';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +24,7 @@ export class UsersService {
   collection:any;
   currentUser:any;
 
-  constructor(private firestore: Firestore) {
+  constructor(private firestore: Firestore, private storage: Storage) {
     this.collection= collection(this.firestore, 'users');
     this.users= [];
     this.currentUser= {};

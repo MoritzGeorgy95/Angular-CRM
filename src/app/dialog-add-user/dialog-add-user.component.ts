@@ -12,14 +12,14 @@ export class DialogAddUserComponent {
   data = {
     firstname: '',
     lastname: '',
-    birthday: undefined,
+    birthday: null,
     male: true,
     female: false,
     zipcode: '',
     adress: '',
     city: '',
     email: '',
-    id: ''
+    id: '',
   };
 
   constructor(private dialog: MatDialog, private usersService: UsersService) {}
@@ -30,7 +30,7 @@ export class DialogAddUserComponent {
 
   async submitData() {
     const docRef = await addDoc(this.usersService.collection, this.data);
-    
+
     await updateDoc(docRef, { id: docRef.id });
 
     this.dialog.closeAll();
@@ -44,5 +44,9 @@ export class DialogAddUserComponent {
   toggleFemale() {
     this.data.male = false;
     this.data.female = true;
+  }
+
+  onFileSelected(event: Event) {
+    
   }
 }

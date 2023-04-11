@@ -75,6 +75,10 @@
         <input matInput placeholder="City" [(ngModel)]="data.city" />
       </mat-form-field>
     </div>
+    <div class="input-row">
+      <mat-icon class="upload-file-icon">upload_file</mat-icon>
+      <input type="file" (change)="onFileSelected($event)">
+    </div>
   </div>
 </div>
 <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->

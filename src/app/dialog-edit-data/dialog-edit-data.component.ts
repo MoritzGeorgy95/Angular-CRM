@@ -17,7 +17,6 @@ export class DialogEditDataComponent implements OnInit{
   url:any;
 
   ngOnInit(): void {
-    console.log(this.data.data);
   }
 
   closeDialog() {
@@ -25,7 +24,12 @@ export class DialogEditDataComponent implements OnInit{
   }
 
   async updateData() {
-    let docRef= doc(this.usersService.collection, this.url)
-    await updateDoc(docRef, {})
+    let docRef= doc(this.usersService.collection, this.url);
+    await updateDoc(docRef, this.data.data);
+    this.dialog.closeAll();
+  }
+
+  trackByFn(index:any, item:any) {
+    return index;  
   }
 }

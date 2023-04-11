@@ -9,14 +9,21 @@
             ? 'assets/img/avatar_female.png'
             : 'assets/img/avatar_male.png'
         "
-        alt=""
+        alt="" 
       />
       <div class="description-container">
         <h1>{{ userData.firstname + " " + userData.lastname }}</h1>
         <p>{{ userData.email }}</p>
       </div>
     </div>
+    <button mat-icon-button class="edit-menu-button" [matMenuTriggerFor]="menu0" >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu0="matMenu">
+      <button mat-menu-item (click)="editDataDialog({firstname: userData.firstname, lastname: userData.lastname, placeholder: 'Name'})">Edit <mat-icon>mode_edit</mat-icon></button>
+    </mat-menu>
   </div>
+ 
 </mat-card>
 
 <mat-card class="info-card">
@@ -29,7 +36,7 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu1="matMenu">
-    <button mat-menu-item (click)="editDataDialog([userData.adress, userData.zipcode, userData.city, 'Adress'])">Edit <mat-icon>mode_edit</mat-icon></button>
+    <button mat-menu-item (click)="editDataDialog({adress: userData.adress, zipcode: userData.zipcode, city: userData.city, placeholder: 'Adress'})">Edit <mat-icon>mode_edit</mat-icon></button>
   </mat-menu>
 </mat-card>
 
@@ -41,7 +48,7 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu2="matMenu">
-    <button mat-menu-item (click)="editDataDialog([userData.female, userData.birthday, 'Personal Data'])">Edit <mat-icon>mode_edit</mat-icon></button>
+    <button mat-menu-item (click)="editDataDialog({female: userData.female, birthday: userData.birthday, placeholder: 'Personal Data'})">Edit <mat-icon>mode_edit</mat-icon></button>
   </mat-menu>
 </mat-card>
 

@@ -16,6 +16,10 @@ export class UserDetailComponent {
   panelOpenState = false;
   
   constructor( private location: Location, private usersService: UsersService, private dialog: MatDialog) {
+    this.getCurrentUser();
+  }
+
+  getCurrentUser() {
     this.url = this.location.path().split('/')[2];
     this.usersService.getSingle(this.url).then(()=> {
       this.userData= this.usersService.currentUser;  
@@ -23,9 +27,12 @@ export class UserDetailComponent {
   }
 
   editDataDialog(data:any) {
-    this.dialog.open(DialogEditDataComponent, {
+    const dialogRef= this.dialog.open(DialogEditDataComponent, {
       data: {data}
     });
-  }
 
+    dialogRef.afterClosed().subscribe(()=> {
+      this.getCurrentUser();
+    })
+  }
 }

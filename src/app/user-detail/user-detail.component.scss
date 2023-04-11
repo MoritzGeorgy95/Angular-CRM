@@ -1,19 +1,26 @@
 .header-card {
     background: salmon;
     height: 300px;
+   
     .user-detail-container {
         display: flex;
         align-items: flex-end;
         height: 100%;
         padding-left: 1rem;
         padding-bottom: 1rem;
-
+        position: relative;
         div {
             display: flex;
             align-items: center;
             img {
                 width: 120px;
                }
+        }
+        .edit-menu-button {
+            position: absolute;
+            right: 2px;
+            top: 2px;
+            color: white;
         }
     }
 
