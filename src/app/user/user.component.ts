@@ -18,7 +18,7 @@ export class UserComponent {
   }
 
   showUserDetail(id:any) {
-    this.router.navigateByUrl(`/user/${id}`);
+    this.router.navigateByUrl(`/users/${id}`);
   }
   
 }

@@ -14,15 +14,18 @@ export class UserDetailComponent {
   userData:any;
   url:any;
   panelOpenState = false;
+  customAvatar: any;
   
   constructor( private location: Location, private usersService: UsersService, private dialog: MatDialog) {
     this.getCurrentUser();
+  
   }
 
   getCurrentUser() {
     this.url = this.location.path().split('/')[2];
     this.usersService.getSingle(this.url).then(()=> {
       this.userData= this.usersService.currentUser;  
+      this.customAvatar= this.usersService.currentUserCustomImage;
     });
   }
 

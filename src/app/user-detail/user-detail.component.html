@@ -4,13 +4,12 @@
   <div class="user-detail-container">
     <div>
       <img
-        [src]="
-          userData.female
-            ? 'assets/img/avatar_female.png'
-            : 'assets/img/avatar_male.png'
-        "
-        alt="" 
+        [src]="userData.female ? 'assets/img/avatar_female.png' : 'assets/img/avatar_male.png'"
+
+        alt="default-avatar"
+        *ngIf="!customAvatar" 
       />
+      <img [src]="customAvatar" alt="custom-avatar" *ngIf="customAvatar">
       <div class="description-container">
         <h1>{{ userData.firstname + " " + userData.lastname }}</h1>
         <p>{{ userData.email }}</p>

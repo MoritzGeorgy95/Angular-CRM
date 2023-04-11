@@ -1,4 +1,4 @@
-<h1 mat-dialog-title class="mat-dialog-title">Add new User</h1>
+<h1 mat-dialog-title class="mat-dialog-title">Add new Client</h1>
 <div mat-dialog-content class="mat-dialog-content">
   <div>
     <div class="input-row">
@@ -75,9 +75,11 @@
         <input matInput placeholder="City" [(ngModel)]="data.city" />
       </mat-form-field>
     </div>
-    <div class="input-row">
-      <mat-icon class="upload-file-icon">upload_file</mat-icon>
-      <input type="file" (change)="onFileSelected($event)">
+    <div class="input-row filerow">
+      <label for="file" class="filepicker-label">      <mat-icon class="upload-file-icon">upload_file</mat-icon>
+         Select a file</label>
+         <p>If desired upload custom client avatar</p>
+      <input type="file" (change)="onFileSelected($event)" id="file" class="file">
     </div>
   </div>
 </div>
