@@ -32,6 +32,9 @@ import { DialogEditDataComponent } from './dialog-edit-data/dialog-edit-data.com
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { DialogDeleteClientComponent } from './dialog-delete-client/dialog-delete-client.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -63,6 +66,8 @@ import { DialogDeleteClientComponent } from './dialog-delete-client/dialog-delet
     MatCardModule,
     MatMenuModule,
     HttpClientModule,
+    DragDropModule,
+    MatProgressSpinnerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
