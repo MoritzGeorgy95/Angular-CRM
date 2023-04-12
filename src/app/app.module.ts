@@ -31,6 +31,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DialogEditDataComponent } from './dialog-edit-data/dialog-edit-data.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
+import { DialogDeleteClientComponent } from './dialog-delete-client/dialog-delete-client.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     DialogAddUserComponent,
     UserDetailComponent,
     DialogEditDataComponent,
+    DialogDeleteClientComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,68 +1,73 @@
 .header-card {
-    background: salmon;
-    height: 300px;
-   
-    .user-detail-container {
-        display: flex;
-        align-items: flex-end;
-        height: 100%;
-        padding-left: 1rem;
-        padding-bottom: 1rem;
-        position: relative;
-        div {
-            display: flex;
-            align-items: center;
-            img {
-                width: 120px;
-               }
-        }
-        .edit-menu-button {
-            position: absolute;
-            right: 2px;
-            top: 2px;
-            color: white;
-        }
-    }
+  background: linear-gradient(to top left, #f9b44d, #f3961f);
+  height: 300px;
 
-    .description-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-left: 2rem;
-        align-items: unset !important;
-        color: white;
-
-        h1 {
-            margin: 0;
-        }
-        p {
-            margin-bottom: 0;
-        }
+  .user-detail-container {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    position: relative;
+    div {
+      display: flex;
+      align-items: center;
+      .standard-avatar {
+        width: 120px;
+      }
+      .custom-avatar {
+        width: 135px;
+        height: 135px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
+    .edit-menu-button {
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      color: white;
+    }
+  }
+
+  .description-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2rem;
+    align-items: unset !important;
+    color: white;
+
+    h1 {
+      margin: 0;
+    }
+    p {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .info-card {
-    margin-top: 2rem;
-    position: relative;
-    mat-card-header {
-        font-size: 1.4rem;
-        font-weight: 500;
-    }
+  margin-top: 2rem;
+  position: relative;
+  mat-card-header {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
 
-    p {
-        padding-top: 16px;
-        padding-left: 16px;
-        margin: 0;
-    }
+  p {
+    padding-top: 16px;
+    padding-left: 16px;
+    margin: 0;
+  }
 
-    p:last-of-type {
-        margin-bottom: 1rem;
-    }
+  p:last-of-type {
+    margin-bottom: 1rem;
+  }
 
-    .edit-menu-button {
-        position: absolute;
-        right: 2px;
-        top: 2px;
-    }
+  .edit-menu-button {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+  }
 }
-

@@ -1,0 +1,20 @@
+
+.warning-container {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.3rem;
+    background: #de5e5e;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+
+
+    mat-icon {
+        color: white;
+    }
+
+    p {
+        color: white;
+        margin: 0;
+        margin-left: .5rem;
+    }
+}

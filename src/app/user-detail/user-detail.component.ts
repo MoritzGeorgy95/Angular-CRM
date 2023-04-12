@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { UsersService } from '../users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditDataComponent } from '../dialog-edit-data/dialog-edit-data.component';
+import { DialogDeleteClientComponent } from '../dialog-delete-client/dialog-delete-client.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -38,4 +39,9 @@ export class UserDetailComponent {
       this.getCurrentUser();
     })
   }
+
+  deleteClientDialog() {
+    this.dialog.open(DialogDeleteClientComponent, {})
+  }
+
 }

@@ -68,11 +68,22 @@
           matInput
           placeholder="Zip Code"
           [(ngModel)]="data.zipcode"
-        />
+        /> 
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>City</mat-label>
         <input matInput placeholder="City" [(ngModel)]="data.city" />
+      </mat-form-field>
+    </div>
+    <div class="input-row company">
+      <mat-form-field appearance="outline">
+        <mat-label>Affiliated Company</mat-label>
+        <input
+          matInput
+          placeholder="Company"
+          [(ngModel)]="data.company"
+        />
+        <mat-icon matSuffix>warehouse</mat-icon>
       </mat-form-field>
     </div>
     <div class="input-row filerow">
@@ -82,7 +93,7 @@
       <input type="file" (change)="onFileSelected($event)" id="file" class="file">
     </div>
   </div>
-</div>
+</div> 
 <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>

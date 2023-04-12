@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from '../users.service';
 import { addDoc, updateDoc } from 'firebase/firestore';
-import { FileUpload } from '../models/file-upload';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -21,9 +20,11 @@ export class DialogAddUserComponent {
     city: '',
     email: '',
     id: '',
+    company: ''
   };
 
   customImage: File; 
+
 
   constructor(private dialog: MatDialog, private usersService: UsersService) {}
 
