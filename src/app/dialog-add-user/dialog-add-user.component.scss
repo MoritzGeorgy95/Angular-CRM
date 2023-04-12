@@ -32,6 +32,7 @@
 
     p {
         margin: 0;
+        margin-left: .5rem;
     }
 }
 
@@ -68,6 +69,7 @@ input[type="number"] {
 
 .file {
   visibility: hidden;
+  width: 0;
 }
 
 .filepicker-label {
@@ -90,3 +92,15 @@ input[type="number"] {
     margin-right: .5rem;
   }
 }
+
+.reset-file-icon {
+  margin-bottom: -7px;
+  color: #d74949;
+  transition: 225ms all ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+

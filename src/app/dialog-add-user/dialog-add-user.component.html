@@ -89,7 +89,8 @@
     <div class="input-row filerow">
       <label for="file" class="filepicker-label">      <mat-icon class="upload-file-icon">upload_file</mat-icon>
          Select a file</label>
-         <p>If desired upload custom client avatar</p>
+         <p>{{customImage ? customImage.name : "If desired upload custom client avatar (.jpg or .png Format)"}} <mat-icon *ngIf="customImage" (click)="resetCustomImage()" class="reset-file-icon">delete</mat-icon>
+         </p>
       <input type="file" (change)="onFileSelected($event)" id="file" class="file">
     </div>
   </div>

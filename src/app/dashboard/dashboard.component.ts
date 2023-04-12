@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
-import { MatDialog } from '@angular/material/dialog';
 import { Firestore, collectionData } from '@angular/fire/firestore';
 import { UsersService } from '../users.service';
 import {
@@ -21,7 +19,7 @@ import {
 })
 
 export class DashboardComponent implements OnInit{
-  constructor(private dialog: MatDialog, private usersService: UsersService) {}
+  constructor(private usersService: UsersService) {}
 
   users:any;
 
@@ -30,7 +28,5 @@ export class DashboardComponent implements OnInit{
     this.users = this.usersService.users;
   }
 
-  openDialog() {
-    this.dialog.open(DialogAddUserComponent, {});
-  }
+  
 }

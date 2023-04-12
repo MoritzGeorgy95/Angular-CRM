@@ -23,7 +23,7 @@ export class DialogAddUserComponent {
     company: ''
   };
 
-  customImage: File; 
+  customImage: File | null; 
 
 
   constructor(private dialog: MatDialog, private usersService: UsersService) {}
@@ -60,7 +60,12 @@ export class DialogAddUserComponent {
   onFileSelected(event: any) {
     const file= event.target.files[0];
     if (file) {
+      console.log(file)
       this.customImage = file;
     }
+  }
+
+  resetCustomImage() {
+    this.customImage= null;
   }
 }

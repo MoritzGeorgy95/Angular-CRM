@@ -12,15 +12,36 @@
     div {
       display: flex;
       align-items: center;
-      .standard-avatar {
-        width: 120px;
+
+      .avatar-container {
+        position: relative;
+
+        .add-photo-icon {
+          color: white;
+          z-index: 1;
+          position: absolute;
+          bottom: 0;
+          right: 1rem;
+          transition: 225ms all ease-in-out;
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.1);
+
+          }
+        }
+
+        .standard-avatar {
+          width: 120px;
+        }
+        .custom-avatar {
+          width: 135px;
+          height: 135px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
       }
-      .custom-avatar {
-        width: 135px;
-        height: 135px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
+      
     }
     .edit-menu-button {
       position: absolute;
