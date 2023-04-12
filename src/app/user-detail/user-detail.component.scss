@@ -71,3 +71,23 @@
     top: 2px;
   }
 }
+
+
+
+.deletion-success {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  mat-icon {
+    margin-bottom: 1rem;
+    width: 100px;
+    height: 100px;
+    font-size: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

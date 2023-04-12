@@ -8,40 +8,48 @@ import { DialogDeleteClientComponent } from '../dialog-delete-client/dialog-dele
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.scss']
+  styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent {
-
-  userData:any;
-  url:any;
+  userData: any;
+  url: any;
   panelOpenState = false;
   customAvatar: any;
-  
-  constructor( private location: Location, private usersService: UsersService, private dialog: MatDialog) {
+  userDeleted: boolean = false;
+
+  constructor(
+    private location: Location,
+    private usersService: UsersService,
+    private dialog: MatDialog
+  ) {
     this.getCurrentUser();
-  
   }
 
   getCurrentUser() {
     this.url = this.location.path().split('/')[2];
-    this.usersService.getSingle(this.url).then(()=> {
-      this.userData= this.usersService.currentUser;  
-      this.customAvatar= this.usersService.currentUserCustomImage;
+    this.usersService.getSingle(this.url).then(() => {
+      this.userData = this.usersService.currentUser;
+      this.customAvatar = this.usersService.currentUserCustomImage;
     });
   }
 
-  editDataDialog(data:any) {
-    const dialogRef= this.dialog.open(DialogEditDataComponent, {
-      data: {data}
+  editDataDialog(data: any) {
+    const dialogRef = this.dialog.open(DialogEditDataComponent, {
+      data: { data },
     });
 
-    dialogRef.afterClosed().subscribe(()=> {
+    dialogRef.afterClosed().subscribe(() => {
       this.getCurrentUser();
-    })
+    });
   }
 
   deleteClientDialog() {
-    this.dialog.open(DialogDeleteClientComponent, {})
-  }
+    const dialogRef = this.dialog.open(DialogDeleteClientComponent, {});
 
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.userDeleted = true;
+      }
+    });
+  }
 }

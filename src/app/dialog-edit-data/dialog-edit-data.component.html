@@ -2,7 +2,7 @@
 <div mat-dialog-content class="mat-dialog-content">
   <ng-container *ngFor="let item of data.data | keyvalue let i= index trackBy: trackByFn">
     <mat-form-field appearance="outline" *ngIf="item.key !== 'placeholder'">
-      <mat-label>Edit</mat-label>
+      <mat-label>{{ item.key }}</mat-label>
       <input
        
         matInput

@@ -1,4 +1,4 @@
-<div *ngIf="userData">
+<div *ngIf="userData && !userDeleted">
   <mat-card class="header-card">
     <div class="user-detail-container">
       <div>
@@ -71,7 +71,9 @@
             adress: userData.adress,
             zipcode: userData.zipcode,
             city: userData.city,
-            placeholder: 'Adress'
+            email: userData.email,
+            company: userData.company,
+            placeholder: 'Contact Data'
           })
         "
       >
@@ -109,3 +111,16 @@
     </mat-menu>
   </mat-card>
 </div>
+
+<div *ngIf="userDeleted" class="deletion-success">
+
+  <mat-icon class="delete-icon-big">delete_sweep</mat-icon>
+  <h1>
+    Client Account deletion successful.  
+  </h1>
+
+  <button [routerLink]="['/users']">
+    Go back to client overview
+  </button>
+</div>
+

@@ -10,6 +10,6 @@
 
     <div mat-dialog-actions>
         <button mat-button (click)="onNoClick()">Cancel</button>
-        <button mat-button cdkFocusInitial (click)="deleteClientAccount()">Delete</button>
+        <button mat-button cdkFocusInitial [mat-dialog-close]="success" (click)="deleteClientAccount()">Delete</button>
       </div>
 </div>
