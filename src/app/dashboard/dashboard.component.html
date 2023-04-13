@@ -1,28 +1,69 @@
 <div class="dashboard">
-    <h1>Welcome Cunts!</h1>
-    <div class="widget-container">
-
-        <div class="widget date" cdkDrag cdkDragBoundary=".widget-container">
-
-            <h2>
-                {{ formattedDate }}
-            </h2>
-        </div>
-
-        <div class="widget weather" cdkDrag cdkDragBoundary=".widget-container">
-            <div *ngIf="cityName && temperature">
-                <h2>
-                    {{ cityName }}
-                </h2>
-                <h2>
-                    {{ temperature }} C°
-                </h2>
-            </div>
-
-            <div *ngIf="!cityName && !temperature" class="fetching-weather-container">
-                <h2>Fetching weather data</h2>
-                <mat-spinner></mat-spinner>
-            </div>
-        </div>
+  <h1>Welcome User!</h1>
+  <div class="widget-container">
+    <div
+      class="widget date"
+      cdkDrag
+      cdkDragBoundary=".widget-container"
+      #widget
+      (cdkDragEnded)="getWidgetFinalPos($event)"
+    >
+      <h2>
+        {{ formattedDate }}
+      </h2>
     </div>
+
+    <div
+      class="widget weather"
+      cdkDrag
+      cdkDragBoundary=".widget-container"
+      #widget
+      (cdkDragEnded)="getWidgetFinalPos($event)"
+    >
+      <div *ngIf="cityName && temperature">
+        <h2>
+          {{ cityName }}
+        </h2>
+        <h2>{{ temperature }} C°</h2>
+      </div>
+
+      <div *ngIf="!cityName && !temperature" class="fetching-weather-container">
+        <h2>Fetching weather data</h2>
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+    <div
+      class="widget calendar"
+      cdkDrag
+      cdkDragBoundary=".widget-container"
+      #widget
+      (cdkDragEnded)="getWidgetFinalPos($event)"
+    >
+      <div>
+        <h2>Add Outlook calendar</h2>
+        <button
+          mat-fab
+          matTooltip="Add Outlook calendar"
+          class="add-outlook-btn"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div
+      class="widget notifications"
+      cdkDrag
+      cdkDragBoundary=".widget-container"
+      #widget
+      (cdkDragEnded)="getWidgetFinalPos($event)"
+    >
+      <div>
+        <h2>Notifications</h2>
+        
+      </div>
+    </div>
+  </div>
+  <button mat-fab class="add-user-btn" matTooltip="Add new Widget to dashboard" (click)="openAddWidgetDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

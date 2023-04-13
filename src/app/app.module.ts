@@ -34,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DialogDeleteClientComponent } from './dialog-delete-client/dialog-delete-client.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DialogAddWidgetComponent } from './dialog-add-widget/dialog-add-widget.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     UserDetailComponent,
     DialogEditDataComponent,
     DialogDeleteClientComponent,
+    DialogAddWidgetComponent,
   ],
   imports: [
     BrowserModule,

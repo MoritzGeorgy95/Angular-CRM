@@ -1,17 +1,19 @@
 .dashboard {
     height: calc(100vh - 100px);
-    border: 1px solid red;
     display: flex;
     align-items: center;
     flex-direction: column;
 
     .widget-container {
-        border: 1px solid blue;
         width: 100%;
-        padding: 1rem;
+        padding: 8rem 1rem 1rem 1rem;
         box-sizing: border-box;
         height: 100%;
-        
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
         .widget {
             padding: 1rem;
             // border: 1px solid pink;
@@ -21,12 +23,16 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 13px;
             background: #ffffff;
             box-shadow: 0px 0px 4px rgb(0 0 0 / 10%);
             border-radius: 30px;
             text-align: center;
-            min-height: 100px;
+            height: 150px;
+            width: 250px;
+
+            h2 {
+                margin: 0;
+            }
 
             .fetching-weather-container {
                 display: flex;
@@ -34,23 +40,31 @@
                 align-items: center;
                 flex-direction: column;
 
-                h2 {
-                    margin-bottom: 1rem;
-                }
+               
             }
         }
 
-        .widget.date {
-           h2 {
-            margin: 0;
-           }
+        .widget.notifications {
+            height: unset;
+            width: 100%;
         }
 
-        .widget.weather {
-            h2 {
-                margin: 0;
-            }
-        }
         
     }
+
+    .add-user-btn {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+        background: #6D5BD8 !important;
+    }
+
+    .add-outlook-btn {
+        background: #6D5BD8 !important;      
+        margin-top: 1rem;  
+    }
+}
+
+mat-spinner {
+    margin-top: 1rem;
 }
