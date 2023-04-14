@@ -40,7 +40,7 @@
       (cdkDragEnded)="getWidgetFinalPos($event)"
     >
       <div>
-        <h2>Add Outlook calendar</h2>
+        <h2>Notifications</h2>
         <button
           mat-fab
           matTooltip="Add Outlook calendar"
@@ -57,10 +57,8 @@
       #widget
       (cdkDragEnded)="getWidgetFinalPos($event)"
     >
-      <div>
-        <h2>Notifications</h2>
-        
-      </div>
+        <h2>Client Calendar</h2>
+        <app-calendar-component></app-calendar-component>
     </div>
   </div>
   <button mat-fab class="add-user-btn" matTooltip="Add new Widget to dashboard" (click)="openAddWidgetDialog()">

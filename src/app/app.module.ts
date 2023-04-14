@@ -8,11 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserComponent } from './user/user.component';
-import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
+
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,14 +24,30 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UsersService } from './users.service';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-import { DialogEditDataComponent } from './dialog-edit-data/dialog-edit-data.component';
+
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
-import { DialogDeleteClientComponent } from './dialog-delete-client/dialog-delete-client.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+//components
+import { AppComponent } from './app.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { DialogEditDataComponent } from './dialog-edit-data/dialog-edit-data.component';
+import { DialogDeleteClientComponent } from './dialog-delete-client/dialog-delete-client.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserComponent } from './user/user.component';
+import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
 import { DialogAddWidgetComponent } from './dialog-add-widget/dialog-add-widget.component';
+import { CalendarComponentComponent } from './calendar-component/calendar-component.component';
+
+//calendar
+import { CommonModule } from '@angular/common';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -47,9 +60,18 @@ import { DialogAddWidgetComponent } from './dialog-add-widget/dialog-add-widget.
     DialogEditDataComponent,
     DialogDeleteClientComponent,
     DialogAddWidgetComponent,
+    CalendarComponentComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    FormsModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    NgbModalModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -74,8 +96,7 @@ import { DialogAddWidgetComponent } from './dialog-add-widget/dialog-add-widget.
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
-    provideStorage(()=> getStorage())
-  ],
+    provideStorage(()=> getStorage())],
   providers: [UsersService],
   bootstrap: [AppComponent],
 })

@@ -19,6 +19,7 @@ import {
 } from 'firebase/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddWidgetComponent } from '../dialog-add-widget/dialog-add-widget.component';
+import { CalendarComponentComponent } from '../calendar-component/calendar-component.component';
 
 @Component({
   selector: 'app-dashboard',
