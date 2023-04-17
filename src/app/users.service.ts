@@ -61,9 +61,12 @@ export class UsersService {
     const docRef= ref(this.storage, `documents/${id}`);
     const docFiles = await list(docRef);
     if(docFiles.items.length > 0) {
-      docFiles.items.forEach(item => {
-        this.currentUserDocuments.push(item);
-      })
+      this.currentUserDocuments= [];
+      for (let i = 0; i < docFiles.items.length; i++) {
+        const doc = docFiles.items[i];
+        const url= await getDownloadURL(doc);
+        this.currentUserDocuments.push({doc: doc, url: url, selected: false});
+      }
     }
     else {
       this.currentUserDocuments= null;

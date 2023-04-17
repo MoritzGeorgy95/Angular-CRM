@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogEditDataComponent } from '../dialog-edit-data/dialog-edit-data.component';
 import { DialogDeleteClientComponent } from '../dialog-delete-client/dialog-delete-client.component';
 import { DialogUploadFileComponent } from '../dialog-upload-file/dialog-upload-file.component';
-import * as pdfjsLib from 'pdfjs-dist';
 
 
 @Component({
@@ -20,6 +19,7 @@ export class UserDetailComponent {
   customAvatar: any;
   userDeleted: boolean = false;
   documents:any; 
+  editMenuOpen: boolean= false;
 
   constructor(
     private location: Location,
@@ -59,10 +59,27 @@ export class UserDetailComponent {
   }
 
   uploadDocumentDialog() {
-    this.dialog.open(DialogUploadFileComponent, {});
+    const dialogRef = this.dialog.open(DialogUploadFileComponent, {});
+    dialogRef.afterClosed().subscribe(() => {
+      this.getCurrentUser();
+    });
   }
 
-  showDocuments() {
-    console.dir(this.documents)
+  openPDF(url:any) {
+    window.open(url.url, '_blank')
+  }
+  
+  toggleEditMenu() {
+    if (this.editMenuOpen) {
+      this.editMenuOpen= false;
+    }
+    else {
+      this.editMenuOpen= true;
+    }
+  }
+
+  deleteDocuments() {
+    this.documents = this.documents.filter((d:any) => !d.selected);
+
   }
 }

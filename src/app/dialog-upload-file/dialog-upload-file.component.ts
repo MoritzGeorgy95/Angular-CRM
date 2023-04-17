@@ -24,6 +24,9 @@ export class DialogUploadFileComponent {
     if(this.document) {
       await this.usersService.UploadFile(this.document, this.id);
       this.dialog.closeAll();
+    } 
+    else {
+      alert('Please select a file!')
     }
   }
 

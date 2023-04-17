@@ -9,6 +9,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
@@ -47,6 +48,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { DialogUploadFileComponent } from './dialog-upload-file/dialog-upload-file.component';
 
 
 
@@ -60,9 +62,11 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     DialogEditDataComponent,
     DialogDeleteClientComponent,
     DialogAddWidgetComponent,
+    DialogUploadFileComponent,
     CalendarComponentComponent,
   ],
   imports: [
+    NgxExtendedPdfViewerModule,
     BrowserModule,
     CommonModule,
     FormsModule,

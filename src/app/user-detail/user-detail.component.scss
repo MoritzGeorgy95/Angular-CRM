@@ -27,7 +27,6 @@
 
           &:hover {
             transform: scale(1.1);
-
           }
         }
 
@@ -41,7 +40,6 @@
           object-fit: cover;
         }
       }
-      
     }
     .edit-menu-button {
       position: absolute;
@@ -93,8 +91,6 @@
   }
 }
 
-
-
 .deletion-success {
   height: 50vh;
   display: flex;
@@ -114,30 +110,26 @@
 }
 
 .document-container {
-  height: 400px;
+  min-height: 400px;
   margin-top: 2rem;
   padding: 16px 16px 0;
   background: white;
-  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
   border-radius: 4px;
   position: relative;
-
 
   h1 {
     font-size: 1.4rem;
     font-weight: 500;
   }
- 
-  .document-drop-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
 
+  .document-drop-container {
     .document-placeholder {
       display: flex;
       align-items: center;
-      margin-bottom: 6rem;
+      justify-content: center;
+      margin-top: 8rem;
 
       mat-icon {
         transform: scale(1.5);
@@ -149,13 +141,96 @@
         margin-left: 1rem;
       }
     }
+
+    .documents-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      height: fit-content;
+    }
+    .pdf-card {
+      position: relative;
+      border-radius: 0.5rem;
+      background-color: lightgray;
+      width: 220px;
+      height: 150px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: 225ms all ease-in-out;
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      mat-checkbox {
+        position: absolute;
+        top: -1rem;
+        left: -1rem;
+      }
+
+      .pdf-title-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          margin: 0;
+          margin-left: 0.5rem;
+        }
+
+        mat-icon {
+          color: blue;
+        }
+      }
+
+      .pdf-preview-wrapper {
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 7px;
+        border-radius: 7px;
+        height: 80%;
+
+        mat-icon {
+          color: red;
+          transform: scale(1.5);
+        }
+      }
+    }
+    .pdf-card-no-hover {
+      cursor: auto;
+      &:hover {
+        transform: none;
+      }
+    }
   }
 
   .add-btn {
     position: absolute;
     top: 2rem;
     right: 2rem;
-    background: #6D5BD8 !important;
+    background: #6d5bd8 !important;
   }
 
+  .edit-document-btn {
+    position: absolute;
+    top: 7rem;
+    right: 2rem;
+    background: #6d5bd8 !important;
+    z-index: 2;
+  }
+
+  .edit-document-menu {
+    position: absolute;
+    background: lightgray;
+    top: 9rem;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 1rem;
+    z-index: 0;
+    border-bottom-left-radius: 1.9rem;
+    border-bottom-right-radius: 1.9rem;
+  }
 }
