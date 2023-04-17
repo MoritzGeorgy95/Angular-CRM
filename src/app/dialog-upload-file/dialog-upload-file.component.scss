@@ -1,0 +1,51 @@
+.input-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.file {
+  visibility: hidden;
+  width: 0;
+}
+
+.filepicker-label {
+  padding: 10px 20px;
+  border-radius: 25px;
+  background: rgb(63, 81, 181);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: 225ms all ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  mat-icon {
+    color: white;
+    margin-right: 0.5rem;
+  }
+}
+
+.reset-file-icon {
+  margin-bottom: -7px;
+  color: #d74949;
+  transition: 225ms all ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.file-name {
+  margin-top: 1rem;
+}
+
+.mat-dialog-content {
+    padding: 4rem;
+}

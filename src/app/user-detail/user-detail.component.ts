@@ -4,6 +4,9 @@ import { UsersService } from '../users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditDataComponent } from '../dialog-edit-data/dialog-edit-data.component';
 import { DialogDeleteClientComponent } from '../dialog-delete-client/dialog-delete-client.component';
+import { DialogUploadFileComponent } from '../dialog-upload-file/dialog-upload-file.component';
+import * as pdfjsLib from 'pdfjs-dist';
+
 
 @Component({
   selector: 'app-user-detail',
@@ -31,6 +34,7 @@ export class UserDetailComponent {
     this.usersService.getSingle(this.url).then(() => {
       this.userData = this.usersService.currentUser;
       this.customAvatar = this.usersService.currentUserCustomImage;
+      this.documents= this.usersService.currentUserDocuments;
     });
   }
 
@@ -52,5 +56,13 @@ export class UserDetailComponent {
         this.userDeleted = true;
       }
     });
+  }
+
+  uploadDocumentDialog() {
+    this.dialog.open(DialogUploadFileComponent, {});
+  }
+
+  showDocuments() {
+    console.dir(this.documents)
   }
 }

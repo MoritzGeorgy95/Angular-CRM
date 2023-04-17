@@ -1,0 +1,25 @@
+<h1 mat-dialog-title class="mat-dialog-title">Upload document</h1>
+<div mat-dialog-content class="mat-dialog-content mat-dialog-content">
+  <label for="file" class="filepicker-label">
+    <mat-icon class="upload-file-icon">upload_file</mat-icon> Select a
+    file</label
+  >
+  <p class="file-name">
+    {{
+      document
+        ? document.name
+        : ""
+    }}
+    <mat-icon
+      *ngIf="document"
+      (click)="resetDocument()"
+      class="reset-file-icon"
+      >delete</mat-icon
+    >
+  </p>
+  <input type="file" (change)="onFileSelected($event)" id="file" class="file" />
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="uploadDocument()" cdkFocusInitial>Ok</button>
+</div>
