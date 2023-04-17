@@ -86,17 +86,16 @@ export class UsersService {
 
   async UploadFile(file: File, id: string) {
     const allowedTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/pdf'
     ];
 
     if (allowedTypes.indexOf(file.type) === -1) {
-      alert('Invalid file type! Please upload a PDF or a Word Document.');
+      alert('Invalid file type! Documents have to be in pdf format!');
     } else {
       const filePath = `documents/${id}/${file.name}`;
       const documentRef = ref(this.storage, filePath);
       await uploadBytes(documentRef, file);
     }
   }
+  
 }

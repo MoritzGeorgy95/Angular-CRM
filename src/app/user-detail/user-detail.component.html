@@ -123,7 +123,7 @@
   <div class="document-container">
     <h1>Documents</h1>
     <div class="document-drop-container">
-      <div class="document-placeholder" *ngIf="!documents">
+      <div class="document-placeholder" *ngIf="!documents || documents.length === 0">
         <mat-icon>article</mat-icon>
         <h2>No documents uploaded. Click on add button to upload new</h2>
       </div>
