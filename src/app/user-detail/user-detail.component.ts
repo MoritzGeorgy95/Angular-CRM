@@ -16,6 +16,7 @@ export class UserDetailComponent {
   panelOpenState = false;
   customAvatar: any;
   userDeleted: boolean = false;
+  documents:any; 
 
   constructor(
     private location: Location,

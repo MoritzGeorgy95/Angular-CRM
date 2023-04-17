@@ -117,6 +117,23 @@
       </button>
     </mat-menu>
   </mat-card>
+
+  <div class="document-container">
+    <h1>Documents</h1>
+    <div class="document-drop-container"> 
+      <div class="document-placeholder" *ngIf="!documents">
+        <mat-icon>article</mat-icon>
+        <h2>No documents uploaded. Click on add button to upload new</h2>
+      </div>
+    </div>
+      <button
+        mat-fab
+        matTooltip="Upload Document"
+        class="add-btn"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+  </div>
 </div>
 
 <div *ngIf="userDeleted" class="deletion-success">
