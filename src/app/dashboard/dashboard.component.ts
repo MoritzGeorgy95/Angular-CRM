@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
     this.usersService.getAll();
     this.users = this.usersService.users;
     this.getCurrentDate();
-    // this.getCurrentWeather();
+    this.getCurrentWeather();
 
     
   }

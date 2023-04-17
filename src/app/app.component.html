@@ -2,10 +2,10 @@
   <mat-sidenav mode="side" [(opened)]="opened" #sidenav class="sidenav"
     >
 
-    <div class="logo-container"><img src="assets/img/logo.png" alt="logo"></div>
+    <div class="logo-container"><img src="assets/img/logo-new.png" alt="logo"></div>
     <ul>
       <li [routerLink]="['/']"><mat-icon>fact_check</mat-icon>Dashboard</li>
-      <li [routerLink]="['/users']"><mat-icon>perm_identity</mat-icon>Users</li>
+      <li [routerLink]="['/users']"><mat-icon>perm_identity</mat-icon>Clients</li>
     </ul>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -13,7 +13,7 @@
       <mat-toolbar-row>
         
           <mat-icon class="menu-icon" (click)="sidenav.toggle()">menu</mat-icon>
-        <span>Simple CRM</span>
+        <span>Toolio CRM</span>
       </mat-toolbar-row>
     </mat-toolbar>
 

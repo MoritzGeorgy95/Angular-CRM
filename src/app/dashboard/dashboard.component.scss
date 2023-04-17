@@ -1,5 +1,4 @@
 .dashboard {
-    height: calc(100vh - 100px);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -44,7 +43,7 @@
             }
         }
 
-        .widget.notifications {
+        .widget.calendar {
             height: unset;
             width: 100%;
         }
@@ -67,7 +66,6 @@
 
 mat-spinner {
     margin-top: 1rem;
-    display: none;
 }
 
 app-calendar-component {
