@@ -15,3 +15,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .flatpickr-time {
     display: none !important;
 }
+
+.custom-modalbox  {
+    max-height: 75% !important;
+    overflow-y: auto !important;
+
+    .mat-mdc-dialog-surface {
+        padding: 1rem 1rem 2rem 1rem !important;
+    }
+}
+

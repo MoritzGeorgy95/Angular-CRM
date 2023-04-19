@@ -19,7 +19,7 @@ import {
 } from 'firebase/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddWidgetComponent } from '../dialog-add-widget/dialog-add-widget.component';
-import { CalendarComponentComponent } from '../calendar-component/calendar-component.component';
+import { DialogCalendarComponent } from '../dialog-calendar/dialog-calendar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,14 +35,13 @@ export class DashboardComponent implements OnInit {
   formattedDate: string;
   cityName: string;
   temperature: number;
+  weatherIcon: number;
 
   ngOnInit() {
     this.usersService.getAll();
     this.users = this.usersService.users;
     this.getCurrentDate();
     this.getCurrentWeather();
-
-    
   }
 
 
@@ -87,6 +86,7 @@ export class DashboardComponent implements OnInit {
     let weatherResponse = await fetch(weatherUrl);
     let weatherData = await weatherResponse.json();
     this.temperature = weatherData[0].Temperature.Metric.Value;
+    this.weatherIcon= weatherData[0].WeatherIcon;
     console.log(weatherData);
   }
 
@@ -120,5 +120,11 @@ export class DashboardComponent implements OnInit {
 
   openAddWidgetDialog() {
     this.dialog.open(DialogAddWidgetComponent);
+  }
+
+  openCalendarViewDialog() {
+    this.dialog.open(DialogCalendarComponent, {
+      panelClass: 'custom-modalbox'
+    });
   }
 }

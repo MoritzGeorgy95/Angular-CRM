@@ -1,3 +1,11 @@
+<div class="searchbar-container">
+  <h1>Client Overview</h1>
+  <mat-form-field appearance="outline" class="search-form-field">
+    <mat-label>Search Client</mat-label>
+    <input matInput type="search"/>
+  </mat-form-field>
+</div>
+
 <mat-card>
   <table class="user-table">
     <tr>
@@ -10,11 +18,15 @@
       <th>Zip Code</th>
       <th>City</th>
     </tr>
-    <tr class="data-row" *ngFor="let user of users let i = index" (click)="showUserDetail(user.id)">
+    <tr
+      class="data-row"
+      *ngFor="let user of users; let i = index"
+      (click)="showUserDetail(user.id)"
+    >
       <td>{{ user.firstname }}</td>
       <td>{{ user.lastname }}</td>
-      <td>{{ user.female ? 'female': 'male'}}</td>
-      <td>{{ user.birthday.toDate().toISOString().split('T')[0]}}</td>
+      <td>{{ user.female ? "female" : "male" }}</td>
+      <td>{{ user.birthday.toDate().toISOString().split("T")[0] }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.adress }}</td>
       <td>{{ user.zipcode }}</td>
@@ -22,6 +34,11 @@
     </tr>
   </table>
 </mat-card>
-<button (click)="openDialog()"mat-fab class="add-user-btn"  matTooltip="Add new Client Account">
+<button
+  (click)="openDialog()"
+  mat-fab
+  id="add-user-btn"
+  matTooltip="Add new Client Account"
+>
   <mat-icon>add</mat-icon>
 </button>

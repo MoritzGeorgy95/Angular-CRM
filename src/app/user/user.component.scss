@@ -1,3 +1,19 @@
+.searchbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h1 {
+        margin: 0;
+    }
+
+    .search-form-field .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+  }
+}
+
+
 table {
     border-collapse: collapse;
 }
@@ -37,7 +53,7 @@ th, td {
 }
 
 
-.add-user-btn {
+#add-user-btn {
     position: absolute;
     bottom: 2rem;
     right: 2rem;

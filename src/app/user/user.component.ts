@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, ViewEncapsulation} from '@angular/core';
 import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,7 +7,8 @@ import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.compo
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
+  encapsulation : ViewEncapsulation.None,
 })
 export class UserComponent {
   users: any;
@@ -24,7 +25,14 @@ export class UserComponent {
   }
   
   openDialog() {
-    this.dialog.open(DialogAddUserComponent, {});
+    const dialogRef= this.dialog.open(DialogAddUserComponent, {});
+
+    dialogRef.afterClosed().subscribe(()=> {
+      this.usersService.getAll();
+      this.users = this.usersService.users;
+    })
+
   }
+
 
 }

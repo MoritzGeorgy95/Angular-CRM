@@ -8,6 +8,7 @@ import { addDoc, updateDoc } from 'firebase/firestore';
   templateUrl: './dialog-add-user.component.html',
   styleUrls: ['./dialog-add-user.component.scss'],
 })
+
 export class DialogAddUserComponent {
   data = {
     firstname: '',
@@ -24,7 +25,6 @@ export class DialogAddUserComponent {
   };
 
   customImage: File | null; 
-
 
   constructor(private dialog: MatDialog, private usersService: UsersService) {}
 
@@ -44,7 +44,7 @@ export class DialogAddUserComponent {
     }
 
     this.dialog.closeAll();
-
+    
   }
 
   toggleMale() {

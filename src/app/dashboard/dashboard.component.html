@@ -25,6 +25,7 @@
           {{ cityName }}
         </h2>
         <h2>{{ temperature }} C°</h2>
+        <img [src]="'assets/img/icons/' + weatherIcon + '.svg'" alt="">
       </div>
 
       <div *ngIf="!cityName && !temperature" class="fetching-weather-container">
@@ -38,17 +39,11 @@
       cdkDragBoundary=".widget-container"
       #widget
       (cdkDragEnded)="getWidgetFinalPos($event)"
-    >
-      <div>
+    >   
+
+        <mat-icon>notifications</mat-icon>
         <h2>Notifications</h2>
-        <button
-          mat-fab
-          matTooltip="Add Outlook calendar"
-          class="add-outlook-btn"
-        >
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
+       
     </div>
     <div
       class="widget calendar"
@@ -56,9 +51,20 @@
       cdkDragBoundary=".widget-container"
       #widget
       (cdkDragEnded)="getWidgetFinalPos($event)"
-    >
+      (click)="openCalendarViewDialog()"
+    >   
+        <mat-icon>calendar_month</mat-icon>
         <h2>Client Calendar</h2>
-        <app-calendar-component></app-calendar-component>
+    </div>
+    <div
+      class="widget todo"
+      cdkDrag
+      cdkDragBoundary=".widget-container"
+      #widget
+      (cdkDragEnded)="getWidgetFinalPos($event)"
+    >   
+        <mat-icon>description</mat-icon>
+        <h2>Notepad</h2>
     </div>
   </div>
   <button mat-fab class="add-user-btn" matTooltip="Add new Widget to dashboard" (click)="openAddWidgetDialog()">
