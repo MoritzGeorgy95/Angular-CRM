@@ -28,7 +28,7 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private usersService: UsersService, private dialog: MatDialog) {
+  constructor(public usersService: UsersService, private dialog: MatDialog) {
   }
 
   @ViewChildren('widget') widgetElements: QueryList<ElementRef>;

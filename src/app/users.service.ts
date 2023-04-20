@@ -1,17 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { Storage } from '@angular/fire/storage';
-import {
-  addDoc,
-  onSnapshot,
-  collection,
-  CollectionReference,
-  doc,
-  DocumentData,
-  getDoc,
-  updateDoc,
-  getDocs,
-} from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 
 import { getDownloadURL, list, ref, uploadBytes } from 'firebase/storage';
 import { BehaviorSubject } from 'rxjs';
@@ -20,7 +10,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersService {
-  
   private _users: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public readonly users = this._users.asObservable();
 
@@ -28,11 +17,10 @@ export class UsersService {
   currentUser: any;
   currentUserCustomImage: any;
   currentUserDocuments: any;
-  currentlyLoggedIn:string;
+  currentlyLoggedIn: string;
+  currentlyLoggedInUserName: string;
 
-  constructor(private firestore: Firestore, public storage: Storage) {
-
-  }
+  constructor(private firestore: Firestore, public storage: Storage) {}
 
   async getAll() {
     const users: any[] = [];
@@ -51,7 +39,10 @@ export class UsersService {
 
     //get multimedia data
     //imgs
-    const imgRef = ref(this.storage, `user_${this.currentlyLoggedIn}/avatarImages/${id}`);
+    const imgRef = ref(
+      this.storage,
+      `user_${this.currentlyLoggedIn}/avatarImages/${id}`
+    );
     const imgFiles = await list(imgRef);
     if (imgFiles.items.length == 1) {
       const avatarRef = imgFiles.items[0];
@@ -60,18 +51,20 @@ export class UsersService {
       this.currentUserCustomImage = null;
     }
     //docs
-    const docRef= ref(this.storage, `user_${this.currentlyLoggedIn}/documents/${id}`);
+    const docRef = ref(
+      this.storage,
+      `user_${this.currentlyLoggedIn}/documents/${id}`
+    );
     const docFiles = await list(docRef);
-    if(docFiles.items.length > 0) {
-      this.currentUserDocuments= [];
+    if (docFiles.items.length > 0) {
+      this.currentUserDocuments = [];
       for (let i = 0; i < docFiles.items.length; i++) {
         const doc = docFiles.items[i];
-        const url= await getDownloadURL(doc);
-        this.currentUserDocuments.push({doc: doc, url: url, selected: false});
+        const url = await getDownloadURL(doc);
+        this.currentUserDocuments.push({ doc: doc, url: url, selected: false });
       }
-    }
-    else {
-      this.currentUserDocuments= null;
+    } else {
+      this.currentUserDocuments = null;
     }
   }
 
@@ -87,9 +80,7 @@ export class UsersService {
   }
 
   async UploadFile(file: File, id: string) {
-    const allowedTypes = [
-      'application/pdf'
-    ];
+    const allowedTypes = ['application/pdf'];
 
     if (allowedTypes.indexOf(file.type) === -1) {
       alert('Invalid file type! Documents have to be in pdf format!');
@@ -99,11 +90,14 @@ export class UsersService {
       await uploadBytes(documentRef, file);
     }
   }
-  
-  connectToDatabase(loggedInUser:string) {
-    this.currentlyLoggedIn= loggedInUser;
-    this.collection = collection(this.firestore, `user_${this.currentlyLoggedIn}`);
+
+  connectToDatabase(loggedInUser: string, loggedInUserUserName:string) {
+    this.currentlyLoggedIn = loggedInUser;
+    this.currentlyLoggedInUserName= loggedInUserUserName;
+    this.collection = collection(
+      this.firestore,
+      `user_${this.currentlyLoggedIn}`
+    );
     this.getAll();
   }
-
 }
