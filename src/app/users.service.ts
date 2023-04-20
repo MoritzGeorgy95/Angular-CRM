@@ -28,13 +28,10 @@ export class UsersService {
   currentUser: any;
   currentUserCustomImage: any;
   currentUserDocuments: any;
+  currentlyLoggedIn:string;
 
   constructor(private firestore: Firestore, public storage: Storage) {
-    this.collection = collection(this.firestore, 'users');
-    this.currentUser = {};
-    this.currentUserCustomImage = '';
-    this.currentUserDocuments= [];
-    this.getAll();
+
   }
 
   async getAll() {
@@ -48,13 +45,13 @@ export class UsersService {
 
   async getSingle(id: any) {
     //get text data
-    let infoRef = doc(this.firestore, `users/${id}`);
+    let infoRef = doc(this.firestore, `user_${this.currentlyLoggedIn}/${id}`);
     let infoData = await getDoc(infoRef);
     this.currentUser = infoData.data();
 
     //get multimedia data
     //imgs
-    const imgRef = ref(this.storage, `avatarImages/${id}`);
+    const imgRef = ref(this.storage, `user_${this.currentlyLoggedIn}/avatarImages/${id}`);
     const imgFiles = await list(imgRef);
     if (imgFiles.items.length == 1) {
       const avatarRef = imgFiles.items[0];
@@ -63,7 +60,7 @@ export class UsersService {
       this.currentUserCustomImage = null;
     }
     //docs
-    const docRef= ref(this.storage, `documents/${id}`);
+    const docRef= ref(this.storage, `user_${this.currentlyLoggedIn}/documents/${id}`);
     const docFiles = await list(docRef);
     if(docFiles.items.length > 0) {
       this.currentUserDocuments= [];
@@ -83,7 +80,7 @@ export class UsersService {
     if (allowedTypes.indexOf(file.type) === -1) {
       alert('Invalid file type! Please upload a PNG or JPEG image.');
     } else {
-      const filePath = `avatarImages/${id}/${file.name}`;
+      const filePath = `user_${this.currentlyLoggedIn}/avatarImages/${id}/${file.name}`;
       const imagesRef = ref(this.storage, filePath);
       await uploadBytes(imagesRef, file);
     }
@@ -97,10 +94,16 @@ export class UsersService {
     if (allowedTypes.indexOf(file.type) === -1) {
       alert('Invalid file type! Documents have to be in pdf format!');
     } else {
-      const filePath = `documents/${id}/${file.name}`;
+      const filePath = `user_${this.currentlyLoggedIn}/documents/${id}/${file.name}`;
       const documentRef = ref(this.storage, filePath);
       await uploadBytes(documentRef, file);
     }
   }
   
+  connectToDatabase(loggedInUser:string) {
+    this.currentlyLoggedIn= loggedInUser;
+    this.collection = collection(this.firestore, `user_${this.currentlyLoggedIn}`);
+    this.getAll();
+  }
+
 }

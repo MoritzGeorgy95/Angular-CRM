@@ -25,14 +25,15 @@ export class LoginComponent {
     this.password= 'password'
 
     setTimeout(()=> {
+      this.usersService.connectToDatabase('guest')
       this.router.navigateByUrl('/dashboard');
     }, 1500)
   }
 
   logIn() {
     signInWithEmailAndPassword(this.auth, this.email, this.password).then(() => {
-      // this.router.navigateByUrl('/dashboard');
-      console.log(this.auth.currentUser?.uid)
+      this.usersService.connectToDatabase(this.auth.currentUser?.uid || '')
+      this.router.navigateByUrl('/dashboard');
     })
     .catch(error => {
       alert(error)
@@ -43,9 +44,9 @@ export class LoginComponent {
     createUserWithEmailAndPassword(this.auth, this.email, this.password).then(() => {
       this.signUpSuccess= true;
 
-      setTimeout(()=> {
+      // setTimeout(()=> {
 
-      }, 1000)
+      // }, 1000)
 
     }).catch(error => {
       alert(error)
