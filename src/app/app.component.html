@@ -1,12 +1,15 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" *ngIf="router.url !== '/login'">
   <mat-sidenav mode="side" [(opened)]="opened" #sidenav class="sidenav"
     >
 
     <div class="logo-container"><img src="assets/img/logo-new.png" alt="logo"></div>
     <ul>
       <li [routerLink]="['/']"><mat-icon>fact_check</mat-icon>Dashboard</li>
-      <li [routerLink]="['/users']"><mat-icon>perm_identity</mat-icon>Clients</li>
+      <li [routerLink]="['/users']"><mat-icon>groups</mat-icon>Clients</li>
+      <li [routerLink]="['/users']"><mat-icon>policy</mat-icon>Legal Notice</li>
+      <li [routerLink]="['/login']"><mat-icon>logout</mat-icon>Logout</li>
     </ul>
+    <!-- <img src="assets/img/sidebar_placeholder_img.png" alt="Placeholder img" class="sidenav-placeholder-img"> -->
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -23,3 +26,7 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
+
+<div *ngIf="router.url == '/login'">
+  <app-login></app-login>
+</div>

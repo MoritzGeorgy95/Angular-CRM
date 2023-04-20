@@ -14,12 +14,16 @@ import {
 } from 'firebase/firestore';
 
 import { getDownloadURL, list, ref, uploadBytes } from 'firebase/storage';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  users: any;
+  
+  private _users: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  public readonly users = this._users.asObservable();
+
   collection: any;
   currentUser: any;
   currentUserCustomImage: any;
@@ -27,18 +31,19 @@ export class UsersService {
 
   constructor(private firestore: Firestore, public storage: Storage) {
     this.collection = collection(this.firestore, 'users');
-    this.users = [];
     this.currentUser = {};
     this.currentUserCustomImage = '';
     this.currentUserDocuments= [];
+    this.getAll();
   }
 
   async getAll() {
-    this.users = [];
+    const users: any[] = [];
     const dataBundle = await getDocs(this.collection);
     dataBundle.forEach((doc) => {
-      this.users.push(doc.data());
+      users.push(doc.data());
     });
+    this._users.next(users);
   }
 
   async getSingle(id: any) {

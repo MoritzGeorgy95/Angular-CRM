@@ -20,6 +20,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddWidgetComponent } from '../dialog-add-widget/dialog-add-widget.component';
 import { DialogCalendarComponent } from '../dialog-calendar/dialog-calendar.component';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,7 +28,8 @@ import { DialogCalendarComponent } from '../dialog-calendar/dialog-calendar.comp
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private usersService: UsersService, private dialog: MatDialog) {}
+  constructor(private usersService: UsersService, private dialog: MatDialog) {
+  }
 
   @ViewChildren('widget') widgetElements: QueryList<ElementRef>;
 
@@ -36,6 +38,9 @@ export class DashboardComponent implements OnInit {
   cityName: string;
   temperature: number;
   weatherIcon: number;
+  notes: Array<string>= ['lala'];
+  notes$: Observable<string[]>= of(this.notes);
+  currenNote: string;
 
   ngOnInit() {
     this.usersService.getAll();
@@ -44,11 +49,11 @@ export class DashboardComponent implements OnInit {
     this.getCurrentWeather();
   }
 
-
-  ngAfterViewInit() {
-    
+  saveNote() {
+    this.notes.push(this.currenNote);
+    this.currenNote= '';
   }
-
+  
   getCurrentDate() {
     const date = new Date();
     this.formattedDate = date.toLocaleString('en-US', {

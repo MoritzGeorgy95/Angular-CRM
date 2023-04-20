@@ -9,7 +9,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
@@ -25,11 +24,13 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UsersService } from './users.service';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 //components
 import { AppComponent } from './app.component';
@@ -50,6 +51,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogUploadFileComponent } from './dialog-upload-file/dialog-upload-file.component';
 import { DialogCalendarComponent } from './dialog-calendar/dialog-calendar.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -66,12 +68,12 @@ import { DialogCalendarComponent } from './dialog-calendar/dialog-calendar.compo
     DialogUploadFileComponent,
     CalendarComponentComponent,
     DialogCalendarComponent,
+    LoginComponent,
   ],
   imports: [
-    NgxExtendedPdfViewerModule,
     BrowserModule,
+    MatExpansionModule,
     CommonModule,
-    FormsModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,

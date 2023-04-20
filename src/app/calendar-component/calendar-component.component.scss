@@ -1,0 +1,40 @@
+.calendar-view-options {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+
+    .btn-group {
+        display: flex;
+        gap: 1rem;
+
+        div {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 225ms all ease-in-out;
+
+            mat-icon {
+                color: #ad2121;
+                transform: scale(1.2);
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    h3 {
+        text-align: center;
+        color:  #6D5BD8;
+        font-weight: 600;
+        font-size: 1.2rem;
+
+    }
+
+    h1 {
+        font-weight: 600;
+    }
+}

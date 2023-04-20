@@ -1,0 +1,31 @@
+<div class="login-header-container"> 
+    <img src="assets/img/logo-new.png" alt="logo">
+    <div>
+      No account yet? 
+      <button mat-raised-button color="primary">Sign Up</button>
+    </div>
+  </div>
+  <div class="login-container">
+    <h1>Login</h1>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter your Email</mat-label>
+      <input matInput [(ngModel)]="guestEmail">
+      <button mat-icon-button matSuffix>
+        <mat-icon>email</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="guestPassword">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="login-button-wrapper">
+      <button mat-raised-button color="primary">Log in</button>
+      <button mat-raised-button (click)="guestLogin()">Guest Login</button>
+    </div>
+  </div>
+  <!-- <div class="signup-container">
+
+  </div> -->

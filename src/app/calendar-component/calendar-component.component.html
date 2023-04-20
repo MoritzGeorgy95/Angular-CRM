@@ -1,5 +1,6 @@
-<div class="row text-center">
+<div class="row text-center calendar-view-options">
     <div class="col-md-4">
+      <h3>Navigate</h3>
       <div class="btn-group">
         <div
           class="btn btn-primary"
@@ -8,7 +9,7 @@
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()"
         >
-          Previous
+          <mat-icon>arrow_back_ios</mat-icon> Previous
         </div>
         <div
           class="btn btn-outline-secondary"
@@ -24,14 +25,15 @@
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()"
         >
-          Next
+        Next <mat-icon>arrow_forward_ios</mat-icon> 
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+      <h1>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h1>
     </div>
     <div class="col-md-4">
+      <h3>Change View</h3>
       <div class="btn-group">
         <div
           class="btn btn-primary"

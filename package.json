@@ -29,6 +29,7 @@
     "flatpickr": "^4.6.13",
     "ng2-pdf-viewer": "^9.1.5",
     "ngx-extended-pdf-viewer": "^17.0.0-alpha.0",
+    "pdf-thumbnails-generator": "^1.0.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

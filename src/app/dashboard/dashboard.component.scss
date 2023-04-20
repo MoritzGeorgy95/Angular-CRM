@@ -1,73 +1,108 @@
 .dashboard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .widget-container {
+    width: 100%;
+    padding: 1rem 1rem 1rem 1rem;
+    box-sizing: border-box;
+    height: 100%;
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    .widget {
+      padding: 1rem;
+      // border: 1px solid pink;
+      cursor: pointer;
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+      box-shadow: 0px 0px 4px rgb(0 0 0 / 10%);
+      border-radius: 30px;
+      text-align: center;
+      height: 200px;
+      width: 300px;
 
-    .widget-container {
-        width: 100%;
-        padding: 8rem 1rem 1rem 1rem;
-        box-sizing: border-box;
-        height: 100%;
+      h2 {
+        margin: 0;
+      }
+
+      .fetching-weather-container {
         display: flex;
-        align-items: flex-start;
         justify-content: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-        .widget {
-            padding: 1rem;
-            // border: 1px solid pink;
-            cursor: pointer;
-            width: fit-content;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: #ffffff;
-            box-shadow: 0px 0px 4px rgb(0 0 0 / 10%);
-            border-radius: 30px;
-            text-align: center;
-            height: 150px;
-            width: 250px;
+        align-items: center;
+        flex-direction: column;
+      }
 
-            h2 {
-                margin: 0;
-            }
+      .widget-description-container {
+        display: flex;
+        align-items: center;
 
-            .fetching-weather-container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-            }
+        mat-icon {
+          margin-right: 1rem;
         }
+      }
+    }
 
-        .widget.weather, .widget.date {
-            cursor: auto;
-        }
+    .widget.weather,
+    .widget.date {
+      cursor: auto;
+    }
 
-        .widget.weather img {
-            width: 120px;
-        }
+    .widget.weather img {
+      width: 120px;
+    }
+
+    .widget.notepad {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      cursor: auto;
+
+      .notes-container {
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      .note-input-field {
+        width: 100%;
+        border-radius: 30px;
         
+      }
     }
+  }
 
-    .add-user-btn {
-        position: absolute;
-        bottom: 2rem;
-        right: 2rem;
-        background: #6D5BD8 !important;
+  .add-user-btn {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    background: #6d5bd8 !important;
+    mat-icon {
+      color: white;
     }
+  }
 
-    .add-outlook-btn {
-        background: #6D5BD8 !important;      
-        margin-top: 1rem;  
-    }
+  .add-outlook-btn {
+    background: #6d5bd8 !important;
+    margin-top: 1rem;
+  }
 }
 
 mat-spinner {
-    margin-top: 1rem;
+  margin-top: 1rem;
+  // display: none;
+}
+
+mat-icon {
+  color: #6d5bd8;
 }
 
 app-calendar-component {
-    width: 100%;
+  width: 100%;
 }
