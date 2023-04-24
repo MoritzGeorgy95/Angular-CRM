@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { Storage } from '@angular/fire/storage';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 
 import { getDownloadURL, list, ref, uploadBytes } from 'firebase/storage';
 import { BehaviorSubject } from 'rxjs';
@@ -10,9 +10,11 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersService {
+
   private _users: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public readonly users = this._users.asObservable();
 
+  notes: any= [];
   collection: any;
   currentUser: any;
   currentUserCustomImage: any;
@@ -26,7 +28,14 @@ export class UsersService {
     const users: any[] = [];
     const dataBundle = await getDocs(this.collection);
     dataBundle.forEach((doc) => {
-      users.push(doc.data());
+      let data= doc.data() as {id?: string, notes?: any[]}
+      if ('id' in data) {
+        users.push(data);
+      }
+      else {
+        this.notes= data.notes;
+      }
+      
     });
     this._users.next(users);
   }
@@ -91,6 +100,7 @@ export class UsersService {
     }
   }
 
+
   connectToDatabase(loggedInUser: string, loggedInUserUserName:string) {
     this.currentlyLoggedIn = loggedInUser;
     this.currentlyLoggedInUserName= loggedInUserUserName;
@@ -100,4 +110,10 @@ export class UsersService {
     );
     this.getAll();
   }
+
+  async addNotesDocument(loggedInUser: string) {
+    this.currentlyLoggedIn = loggedInUser;
+    await setDoc(doc(this.firestore, `user_${this.currentlyLoggedIn}`, 'notes'), {notes: []})
+  }
+
 }

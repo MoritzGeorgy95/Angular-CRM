@@ -4,17 +4,21 @@ import { Observable, of } from 'rxjs';
 @Component({
   selector: 'app-dialog-notepad',
   templateUrl: './dialog-notepad.component.html',
-  styleUrls: ['./dialog-notepad.component.scss']
+  styleUrls: ['./dialog-notepad.component.scss'],
 })
 export class DialogNotepadComponent {
-  notes$: Observable<string[]>= of(this.data.data);
-  currenNote: string;
+  notes$: Observable<string[]> = of(this.data.data);
+  currenNote: string= '';
 
-  constructor(private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) {
-  }
+  constructor(
+    private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
-    saveNote() {
-    this.data.data.push(this.currenNote);
-    this.currenNote= '';
+  saveNote() {
+    if (this.currenNote != '') {
+      this.data.data.push(this.currenNote);
+      this.currenNote = '';
+    }
   }
 }

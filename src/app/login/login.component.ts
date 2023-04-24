@@ -21,12 +21,12 @@ export class LoginComponent {
     
   }
 
-  guestLogin() {
+  async guestLogin() {
     this.email= 'guest@email.com';
     this.password= 'password'
+    this.usersService.connectToDatabase('guest', 'Guest');
 
-    setTimeout(()=> {
-      this.usersService.connectToDatabase('guest', 'Guest')
+    setTimeout(()=> { 
       this.router.navigateByUrl('/dashboard');
     }, 1500)
   }
@@ -51,11 +51,13 @@ export class LoginComponent {
       this.signUpSuccess= true;
       await updateProfile(user, { displayName: this.userName });
       setTimeout(()=> {
+        this.usersService.addNotesDocument(this.auth.currentUser?.uid || '')
         this.logIn()
+       
       })
     }
   } catch (error) {
-    console.error(error);
+    alert(error);
   }
   }
 

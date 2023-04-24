@@ -4,6 +4,7 @@ import {
   ViewChildren,
   QueryList,
   ElementRef,
+  AfterViewInit,
 } from '@angular/core';
 import { Firestore, collectionData } from '@angular/fire/firestore';
 import { UsersService } from '../users.service';
@@ -39,11 +40,13 @@ export class DashboardComponent implements OnInit {
   cityName: string;
   temperature: number;
   weatherIcon: number;
-  notes: Array<string>= ['default data','lala','lala','lala','lala','lala','lala','lala'];
+  notes: Array<any>= [];
   notes$: Observable<string[]>= of(this.notes);
+
   ngOnInit() {
-    this.usersService.getAll();
     this.users = this.usersService.users;
+    this.notes= this.usersService.notes;
+    console.log(this.notes);
     this.getCurrentDate();
     // this.getCurrentWeather();
   }

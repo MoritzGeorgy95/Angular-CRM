@@ -66,14 +66,15 @@
       #widget
       (cdkDragEnded)="getWidgetFinalPos($event)"
       (click)="openNotepadDialog(notes)"
+      [style.justify-content]="notes.length === 0 ? 'center' : ''"
     >
       <div class="widget-description-container">
         <img src="assets/img/notes.png" alt="" class="widget-icon"/>
         <h2>Notepad</h2>
       </div>
-      <div class="notes-container">
+      <div class="notes-container" *ngIf="notes.length > 0" >
         <ul>
-          <li *ngFor="let note of notes$ | async">
+          <li *ngFor="let note of notes">
             {{ note }}
           </li>
         </ul>
