@@ -18,7 +18,7 @@ export class UsersService {
   currentUserCustomImage: any;
   currentUserDocuments: any;
   currentlyLoggedIn: string;
-  currentlyLoggedInUserName: string;
+  currentlyLoggedInUserName: string= "Guest";
 
   constructor(private firestore: Firestore, public storage: Storage) {}
 

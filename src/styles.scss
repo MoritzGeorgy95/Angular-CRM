@@ -18,7 +18,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .custom-modalbox  {
-    max-height: 80% !important;
+    max-height: 90% !important;
+    width: 60% !important;
     overflow-y: auto !important;
 
     .mat-mdc-dialog-surface {
@@ -26,3 +27,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
 }
 
+
+.notepad-box {
+    min-width: 40% !important;
+    
+}

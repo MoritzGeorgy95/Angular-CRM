@@ -21,6 +21,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddWidgetComponent } from '../dialog-add-widget/dialog-add-widget.component';
 import { DialogCalendarComponent } from '../dialog-calendar/dialog-calendar.component';
 import { Observable, of } from 'rxjs';
+import { DialogNotepadComponent } from '../dialog-notepad/dialog-notepad.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,20 +39,13 @@ export class DashboardComponent implements OnInit {
   cityName: string;
   temperature: number;
   weatherIcon: number;
-  notes: Array<string>= ['lala'];
+  notes: Array<string>= ['default data','lala','lala','lala','lala','lala','lala','lala'];
   notes$: Observable<string[]>= of(this.notes);
-  currenNote: string;
-
   ngOnInit() {
     this.usersService.getAll();
     this.users = this.usersService.users;
     this.getCurrentDate();
-    this.getCurrentWeather();
-  }
-
-  saveNote() {
-    this.notes.push(this.currenNote);
-    this.currenNote= '';
+    // this.getCurrentWeather();
   }
   
   getCurrentDate() {
@@ -123,13 +117,25 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  openAddWidgetDialog() {
-    this.dialog.open(DialogAddWidgetComponent);
-  }
+  // openAddWidgetDialog() {
+  //   this.dialog.open(DialogAddWidgetComponent);
+  // }
 
   openCalendarViewDialog() {
     this.dialog.open(DialogCalendarComponent, {
       panelClass: 'custom-modalbox'
     });
+  }
+
+  openNotepadDialog(data:any) {
+    const dialogRef= this.dialog.open(DialogNotepadComponent, {
+      panelClass: 'notepad-box',
+      data: {data}
+      
+    })
+
+    dialogRef.afterClosed().subscribe((data)=> {
+      this.notes= data;
+    })
   }
 }

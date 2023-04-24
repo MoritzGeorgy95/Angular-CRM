@@ -1,5 +1,4 @@
 <div class="dashboard">
-  <h1>Welcome {{usersService.currentlyLoggedInUserName}}!</h1>
   <div class="widget-container">
     <div
       class="widget date"
@@ -11,6 +10,7 @@
       <h2>
         {{ formattedDate }}
       </h2>
+      <img src="assets/img/clock.png" alt="" class="widget-icon clock" />
     </div>
 
     <div
@@ -41,7 +41,7 @@
       (cdkDragEnded)="getWidgetFinalPos($event)"
     >
       <div class="widget-description-container">
-        <mat-icon>notifications</mat-icon>
+        <img src="assets/img/notifications.png" alt="" class="widget-icon" />
         <h2>Notifications</h2>
       </div>
     </div>
@@ -54,7 +54,8 @@
       (click)="openCalendarViewDialog()"
     >
       <div class="widget-description-container">
-        <mat-icon>calendar_month</mat-icon>
+        <!-- <mat-icon>calendar_month</mat-icon> -->
+        <img src="assets/img/calendar.png" alt="" class="widget-icon calendar"/>
         <h2>Client Calendar</h2>
       </div>
     </div>
@@ -64,9 +65,10 @@
       cdkDragBoundary=".widget-container"
       #widget
       (cdkDragEnded)="getWidgetFinalPos($event)"
+      (click)="openNotepadDialog(notes)"
     >
       <div class="widget-description-container">
-        <mat-icon>description</mat-icon>
+        <img src="assets/img/notes.png" alt="" class="widget-icon"/>
         <h2>Notepad</h2>
       </div>
       <div class="notes-container">
@@ -76,21 +78,14 @@
           </li>
         </ul>
       </div>
-      <mat-form-field class="note-input-field" appearance="outline">
-        <mat-label>Add a note to your notepad</mat-label>
-        <textarea matInput style="resize: none;" [(ngModel)]="currenNote"></textarea>
-        <button mat-icon-button matSuffix (click)="saveNote()">
-          <mat-icon>save</mat-icon>
-        </button>
-      </mat-form-field>
+      <div class="frozen-glass"></div>
     </div>
-    <button
-      mat-fab
-      class="add-user-btn"
-      matTooltip="Add new Widget to dashboard"
-      (click)="openAddWidgetDialog()"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
   </div>
+  <!-- <button
+        mat-fab
+        class="add-user-btn"
+        matTooltip="Add new Widget to dashboard"
+      >
+        <mat-icon>add</mat-icon>
+      </button> -->
 </div>

@@ -8,6 +8,7 @@
   color: white;
   background: unset;
   margin-right: 1rem;
+  transform: scale(1.2);
 }
 
 .sidenav {
@@ -18,10 +19,11 @@
   display: flex;
   align-items: center;
   padding: 0 1rem;
+  height: 10vh;
   box-shadow: 0px 4px 4px -2px rgba(0, 0, 0, 0.2);
 
   img {
-    height: 64px;
+    max-height: 100%;
     margin-left: 1rem;
   }
 }
@@ -39,7 +41,7 @@ ul {
     transition: 225ms all ease-in-out;
     mat-icon {
       margin-right: 1rem;
-      color: #6D5BD8;
+      color: #141d2f;
     }
     &:hover {
       cursor: pointer;
@@ -65,8 +67,54 @@ ul {
 
 .router-container {
   padding: 1rem;
+  height: 90vh;
+  box-sizing: border-box;
 }
 
 mat-toolbar {
-  background: #6D5BD8 !important;
+  background: #141d2f !important;
+  height: 10vh;
+}
+
+mat-toolbar-row {
+  justify-content: space-between;
+  height: 100%;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  .notifications-container {
+    gap: 1.5rem;
+    position: relative;
+    img {
+      width: 50px;
+      cursor: pointer;
+    }
+    mat-icon {
+      transform: scale(1.2);
+      cursor: pointer;
+      transition: all 225ms ease-in-out;
+      &:hover {
+        color: grey;
+      }
+    }
+    .color-dot {
+      position: absolute;
+      right: .5rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background-color: green;
+      outline: 1px solid white;
+      bottom: 0;
+    }
+  }
+
 }

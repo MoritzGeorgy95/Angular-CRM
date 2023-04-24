@@ -52,6 +52,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogUploadFileComponent } from './dialog-upload-file/dialog-upload-file.component';
 import { DialogCalendarComponent } from './dialog-calendar/dialog-calendar.component';
 import { LoginComponent } from './login/login.component';
+import { DialogNotepadComponent } from './dialog-notepad/dialog-notepad.component';
 
 
 
@@ -69,6 +70,7 @@ import { LoginComponent } from './login/login.component';
     CalendarComponentComponent,
     DialogCalendarComponent,
     LoginComponent,
+    DialogNotepadComponent,
   ],
   imports: [
     BrowserModule,

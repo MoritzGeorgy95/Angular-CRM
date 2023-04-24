@@ -1,0 +1,56 @@
+ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  ul li {
+    display: flex;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  ul li::before {
+    content: "\e5cc";
+    font-family: "Material Icons";
+    margin-right: 1rem;
+    text-align: left;
+    transform: scale(2);
+    color: gray;
+  }
+
+
+.mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cta-btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.note-input-field {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notes-container {
+  max-height: 350px;
+  margin-bottom: 2rem;
+  overflow-y: auto;
+}
+
+
+.mat-icon {
+  cursor: pointer;
+  transition: 225ms all ease-in-out;
+  border-radius: 50%;
+  &:hover {
+    background-color: #ececec;
+    ;
+  }
+}

@@ -14,9 +14,19 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        
+        <div>
           <mat-icon class="menu-icon" (click)="sidenav.toggle()">menu</mat-icon>
-        <span>Toolio CRM</span>
+          <h2>Toolio CRM</h2>
+        </div>
+        <div>
+          <h2>{{time}}, {{usersService.currentlyLoggedInUserName}}!</h2>
+        </div>
+        <div class="notifications-container">
+          <mat-icon>notifications</mat-icon>
+          <mat-icon>info</mat-icon>
+          <img src="assets/img/icon_person.png" alt="person-icon">
+          <div class="color-dot"></div>
+        </div>
       </mat-toolbar-row>
     </mat-toolbar>
 
