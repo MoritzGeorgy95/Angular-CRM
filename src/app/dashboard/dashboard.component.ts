@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   temperature: number;
   weatherIcon: number;
   notes: Array<any>= [];
-  notes$: Observable<string[]>= of(this.notes);
+
 
   ngOnInit() {
     this.users = this.usersService.users;
