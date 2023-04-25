@@ -1,8 +1,8 @@
 <div *ngIf="userData && !userDeleted">
   <mat-card class="header-card">
+    <div class="placeholder-wrapper"></div>
     <div class="user-detail-container">
-      <div>
-        <div class="avatar-container">
+        <div class="avatar-wrapper">
           <img
             [src]="
               userData.female
@@ -11,13 +11,13 @@
             "
             alt="default-avatar"
             *ngIf="!customAvatar"
-            class="standard-avatar"
+            class="standard-avatar avatar"
           />
           <img
             [src]="customAvatar"
             alt="custom-avatar"
             *ngIf="customAvatar"
-            class="custom-avatar"
+            class="custom-avatar avatar"
           />
 
           <mat-icon class="add-photo-icon" *ngIf="!customAvatar"
@@ -27,9 +27,25 @@
 
         <div class="description-container">
           <h1>{{ userData.firstname + " " + userData.lastname }}</h1>
-          <p>{{ userData.email }}</p>
+          <div>
+            <mat-icon>pin_drop</mat-icon>
+            <p>
+              {{ userData.adress }} | {{ userData.zipcode }},
+              {{ userData.city }}
+            </p>
+          </div>
+          <div>
+            <mat-icon>contact_page</mat-icon>
+            <p>{{ userData.email }} | {{userData.company}}</p>
+          </div>
         </div>
-      </div>
+      <button
+        mat-button
+        class="send-msg-button"
+      > 
+        <mat-icon>send</mat-icon>
+        Message
+      </button>  
       <button
         mat-icon-button
         class="edit-menu-button"
@@ -60,11 +76,11 @@
   <mat-card class="info-card">
     <mat-card-header> Contact </mat-card-header>
     <p>
-      Adress: {{ userData.adress }} | {{ userData.zipcode }},
+      <span>Adress:</span> {{ userData.adress }} | {{ userData.zipcode }},
       {{ userData.city }}
     </p>
-    <p>Email: {{ userData.email }}</p>
-    <p>Affiliated Company: {{ userData.company }}</p>
+    <p><span>Email:</span> {{ userData.email }}</p>
+    <p><span>Affiliated Company:</span> {{ userData.company }}</p>
     <button
       mat-icon-button
       class="edit-menu-button"
@@ -93,9 +109,9 @@
 
   <mat-card class="info-card">
     <mat-card-header> Personal Data </mat-card-header>
-    <p>Gender: {{ userData.female ? "female" : "male" }}</p>
+    <p><span>Gender:</span> {{ userData.female ? "female" : "male" }}</p>
     <p>
-      Birthday: {{ userData.birthday.toDate().toISOString().split("T")[0] }}
+      <span>Birthday:</span> {{ userData.birthday.toDate().toISOString().split("T")[0] }}
     </p>
     <button
       mat-icon-button
@@ -169,6 +185,8 @@
     </button>
     <div class="edit-document-menu" *ngIf="editMenuOpen">
       <mat-icon (click)="deleteDocuments()">delete</mat-icon>
+      <p>Delete</p>
+      <p>{{getSelectedDocumentsCount()}} Document(s)</p>
     </div>
   </div>
 </div>

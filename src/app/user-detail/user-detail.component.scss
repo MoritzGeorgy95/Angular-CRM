@@ -1,67 +1,76 @@
 .header-card {
-  background: linear-gradient(to bottom, #7c8baa, #3f4b6c);
-  height: 300px;
+  background: rgba($color: #000000, $alpha: 0.1);
+  height: 400px;
+
+  .placeholder-wrapper {
+    height: 40%;
+  }
 
   .user-detail-container {
     display: flex;
     align-items: flex-end;
-    height: 100%;
-    padding-left: 1rem;
-    padding-bottom: 1rem;
+    background: linear-gradient(to bottom, #4f5c6b, #141d2f);
+    height: 60%;
+    padding-left: 2rem;
+    padding-bottom: 3rem;
     position: relative;
-    div {
-      display: flex;
-      align-items: center;
+    color: white;
 
-      .avatar-container {
-        position: relative;
+    .avatar-wrapper {
+      position: absolute;
+      top: -50%;
+      transform: translateY(30%);
+      left: 2rem;
+      width: 150px;
+      height: 150px;
+      border-radius: 100%;
+      border: 4px solid white;
+      overflow: hidden;
 
-        .add-photo-icon {
-          color: white;
-          z-index: 1;
-          position: absolute;
-          bottom: 0;
-          right: 1rem;
-          transition: 225ms all ease-in-out;
-          cursor: pointer;
-
-          &:hover {
-            transform: scale(1.1);
-          }
-        }
-
-        .standard-avatar {
-          width: 120px;
-        }
-        .custom-avatar {
-          width: 135px;
-          height: 135px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
+      img {
+        object-fit: cover;
+        width: 100%;
       }
     }
+
     .edit-menu-button {
       position: absolute;
       right: 2px;
       top: 2px;
+    }
+
+    .send-msg-button {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      background-color: #29abe2;
       color: white;
+      font-size: 1.1rem;
+      mat-icon {
+        transform: scale(1.1);
+      }
     }
-  }
 
-  .description-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 2rem;
-    align-items: unset !important;
-    color: white;
+    .description-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
 
-    h1 {
-      margin: 0;
-    }
-    p {
-      margin-bottom: 0;
+      div {
+        display: flex;
+        gap: 1rem;
+        mat-icon {
+          color: #29abe2;
+        }
+      }
+      h1 {
+        margin: 0;
+      }
+      p {
+        margin-bottom: 0;
+        font-size: 1.1rem;
+      }
     }
   }
 }
@@ -69,9 +78,20 @@
 .info-card {
   margin-top: 2rem;
   position: relative;
+  background: rgba($color: #000000, $alpha: 0.06);
+
   mat-card-header {
     font-size: 1.4rem;
     font-weight: 500;
+  }
+
+  span {
+    color: #29abe2;
+    font-weight: 500;
+  }
+
+  span, p {
+    font-size: 1rem;
   }
 
   p {
@@ -123,7 +143,7 @@
   min-height: 400px;
   margin-top: 2rem;
   padding: 16px 16px 0;
-  background: white;
+  background: rgba($color: #000000, $alpha: 0.1);
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
     0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
   border-radius: 4px;
@@ -143,6 +163,7 @@
 
       mat-icon {
         transform: scale(1.5);
+        color: #29abe2;
       }
 
       h2 {
@@ -189,7 +210,7 @@
         }
 
         mat-icon {
-          color: blue;
+          color: #29abe2;
         }
       }
 
@@ -218,36 +239,51 @@
 
   .add-btn {
     position: absolute;
-    top: 2rem;
+    bottom: 2rem;
     right: 2rem;
-    background: #6d5bd8 !important;
+    background: #141d2f !important;
   }
 
   .edit-document-btn {
     position: absolute;
-    top: 7rem;
+    bottom: 7rem;
     right: 2rem;
-    background: #6d5bd8 !important;
+    background: #141d2f !important;
     z-index: 2;
   }
 
   .edit-document-menu {
     position: absolute;
-    background: lightgray;
-    top: 9rem;
-    right: 2rem;
+    background: white;
+    bottom: 9rem;
+    right: 4rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 3rem 1rem;
     z-index: 0;
+    border-top-left-radius: 1.9rem;
+    border-top-right-radius: 1.9rem;
     border-bottom-left-radius: 1.9rem;
-    border-bottom-right-radius: 1.9rem;
+    gap: 0.5rem;
+
+
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    mat-icon {
+      color: red;
+      cursor: pointer;
+
+    }
   }
 }
 
 mat-spinner {
   margin-top: 1rem;
-  transform: scale(.8);
+  transform: scale(0.8);
 }
 
 .mat-mdc-progress-spinner {

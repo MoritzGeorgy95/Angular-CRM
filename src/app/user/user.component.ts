@@ -50,4 +50,8 @@ export class UserComponent {
       )
     );
   }
+
+  sendMail(mail:string) {
+    window.location.href = `mailto:${mail}`;
+  }
 }

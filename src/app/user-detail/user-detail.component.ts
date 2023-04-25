@@ -99,4 +99,8 @@ export class UserDetailComponent {
     }
   }
   }
+
+  getSelectedDocumentsCount(): number {
+    return this.documents.filter((doc: any) => doc.selected).length;
+  }
 }

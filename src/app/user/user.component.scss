@@ -1,61 +1,78 @@
 .searchbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 
-    h1 {
-        margin: 0;
-    }
+  h1 {
+    margin: 0;
+  }
 
-    .search-form-field .mat-mdc-form-field-subscript-wrapper {
-        display: none;
+  .search-form-field .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
 }
 
-
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
-
-tr {
-    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.87);
+tr:nth-of-type(odd) {
+  background-color: rgba($color: #000000, $alpha: 0.1);
 }
 
 tr:first-of-type {
-    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
-}
-
-tr:last-of-type {
-    border-bottom: unset;
+  background-color: #3f4b6c;
+  color: white;
 }
 
 th {
-    color: rgba($color: #000000, $alpha: 0.4);
-    font-weight: 500;
-  }
-    
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 1rem 0 1rem 1rem;
+}
+
 td {
-    text-align: center;
+  text-align: center;
+  padding: 2rem 0 2rem 1rem;
+  font-size: 1rem;
+
+  mat-icon {
+    vertical-align: inherit;
+    color: #FFA500;
+  }
 }
 
-th, td {
-    padding: 1rem 0;
+.send-mail {
+  cursor: pointer;
+  transition: 125ms all ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+    transition: 125ms;
+  }
 }
 
-.data-row {
-    transition: 225ms all ease-in-out;
-    &:hover {
-        background: rgba($color: #000000, $alpha: .1);
-        cursor: pointer;
-    }
+.details-hover {
+  color: #29abe2;
+  transition: 225ms all ease-in-out;
+  &:hover {
+    cursor: pointer;
+    color: #3f4b6c;
+  }
 }
 
+// .data-row {
+//     transition: 225ms all ease-in-out;
+//     &:hover {
+//         background: rgba($color: orange, $alpha: .3);
+//         cursor: pointer;
+//     }
+// }
 
 #add-user-btn {
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    background: #6D5BD8 !important;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  background: #141d2f !important;
 }
