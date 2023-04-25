@@ -7,7 +7,7 @@
       <li [routerLink]="['/']"><mat-icon>fact_check</mat-icon>Dashboard</li>
       <li [routerLink]="['/users']"><mat-icon>groups</mat-icon>Clients</li>
       <li [routerLink]="['/users']"><mat-icon>policy</mat-icon>Legal Notice</li>
-      <li [routerLink]="['/login']"><mat-icon>logout</mat-icon>Logout</li>
+      <li (click)="logout()"><mat-icon>logout</mat-icon>Logout</li>
     </ul>
     <!-- <img src="assets/img/sidebar_placeholder_img.png" alt="Placeholder img" class="sidenav-placeholder-img"> -->
   </mat-sidenav>

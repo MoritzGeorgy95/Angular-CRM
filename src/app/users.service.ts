@@ -100,11 +100,6 @@ export class UsersService {
     }
   }
 
-  async uploadNote() {
-    
-  }
-
-
   connectToDatabase(loggedInUser: string, loggedInUserUserName:string) {
     this.currentlyLoggedIn = loggedInUser;
     this.currentlyLoggedInUserName= loggedInUserUserName;

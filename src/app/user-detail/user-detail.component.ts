@@ -55,6 +55,7 @@ export class UserDetailComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.userDeleted = true;
+        this.usersService.getAll();
       }
     });
   }

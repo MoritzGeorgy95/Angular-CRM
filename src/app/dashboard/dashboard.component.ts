@@ -31,26 +31,22 @@ import { DialogNotepadComponent } from '../dialog-notepad/dialog-notepad.compone
 })
 export class DashboardComponent implements OnInit {
   constructor(public usersService: UsersService, private dialog: MatDialog) {
+    this.notes = this.usersService.notes;
   }
 
   @ViewChildren('widget') widgetElements: QueryList<ElementRef>;
 
-  users: any;
   formattedDate: string;
   cityName: string;
   temperature: number;
   weatherIcon: number;
-  notes: Array<any>= [];
-
+  notes: Array<any> = [];
 
   ngOnInit() {
-    this.users = this.usersService.users;
-    this.notes= this.usersService.notes;
-    console.log(this.notes);
     this.getCurrentDate();
-    // this.getCurrentWeather();
+    this.getCurrentWeather();
   }
-  
+
   getCurrentDate() {
     const date = new Date();
     this.formattedDate = date.toLocaleString('en-US', {
@@ -66,16 +62,24 @@ export class DashboardComponent implements OnInit {
   }
 
   async getCurrentWeather() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.getPos(position);
-        },
-        (error) => {
-          this.rejectPos(error);
-        }
-      );
+    let cachedWeather = localStorage.getItem('weather');
+    if (cachedWeather) {
+      this.temperature = JSON.parse(cachedWeather).temperature;
+      this.cityName = JSON.parse(cachedWeather).cityName;
+      this.weatherIcon = JSON.parse(cachedWeather).weatherIcon;
+    } else {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.getPos(position);
+          },
+          (error) => {
+            this.rejectPos(error);
+          }
+        );
+      }
     }
+   
   }
 
   async getPos(position: any) {
@@ -88,15 +92,21 @@ export class DashboardComponent implements OnInit {
     let weatherResponse = await fetch(weatherUrl);
     let weatherData = await weatherResponse.json();
     this.temperature = weatherData[0].Temperature.Metric.Value;
-    this.weatherIcon= weatherData[0].WeatherIcon;
-    console.log(weatherData);
+    this.weatherIcon = weatherData[0].WeatherIcon;
+
+    // Store data in cache
+    const dataToCache = {
+      cityName: this.cityName,
+      temperature: this.temperature,
+      weatherIcon: this.weatherIcon,
+    };
+    localStorage.setItem('weather', JSON.stringify(dataToCache));
   }
 
   rejectPos(error: any) {
-    console.log(error.message);
+    alert(error.message);
   }
 
-  
   getWidgetFinalPos(event: any) {
     //get positional data for currently dragged widget
     const draggedWidget = event.source.element.nativeElement;
@@ -112,33 +122,26 @@ export class DashboardComponent implements OnInit {
           draggedWidgetRect.bottom > targetWidgetRect.top &&
           draggedWidgetRect.top < targetWidgetRect.bottom
         ) {
-          
           event.source._dragRef.reset();
-
         }
       }
     });
   }
 
-  // openAddWidgetDialog() {
-  //   this.dialog.open(DialogAddWidgetComponent);
-  // }
-
   openCalendarViewDialog() {
     this.dialog.open(DialogCalendarComponent, {
-      panelClass: 'custom-modalbox'
+      panelClass: 'custom-modalbox',
     });
   }
 
-  openNotepadDialog(data:any) {
-    const dialogRef= this.dialog.open(DialogNotepadComponent, {
+  openNotepadDialog(data: any) {
+    const dialogRef = this.dialog.open(DialogNotepadComponent, {
       panelClass: 'notepad-box',
-      data: {data}
-      
-    })
+      data: { data },
+    });
 
-    dialogRef.afterClosed().subscribe((data)=> {
-      this.notes= data;
-    })
+    dialogRef.afterClosed().subscribe((data) => {
+      this.notes = data;
+    });
   }
 }

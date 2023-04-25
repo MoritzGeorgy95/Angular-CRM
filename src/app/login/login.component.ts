@@ -25,7 +25,8 @@ export class LoginComponent {
     this.email= 'guest@email.com';
     this.password= 'password'
     this.usersService.connectToDatabase('guest', 'Guest');
-
+    localStorage.setItem('authToken', 'guest');
+    
     setTimeout(()=> { 
       this.router.navigateByUrl('/dashboard');
     }, 1500)
@@ -34,8 +35,14 @@ export class LoginComponent {
   async logIn() {
     try {
       await signInWithEmailAndPassword(this.auth, this.email, this.password);
-      this.usersService.connectToDatabase(this.auth.currentUser?.uid || '', this.auth.currentUser?.displayName || '');
-      this.router.navigateByUrl('/dashboard');
+      const user = this.auth.currentUser;
+      if(user) {
+        const authData= {id: user.uid, name: user.displayName};
+        localStorage.setItem('authToken', JSON.stringify(authData));
+        this.usersService.connectToDatabase(user.uid, user.displayName || '');
+        this.router.navigateByUrl('/dashboard');
+      }
+     
     }
     catch (error) {
       alert(error)

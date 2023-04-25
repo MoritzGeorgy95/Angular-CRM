@@ -1,5 +1,5 @@
 .header-card {
-  background: linear-gradient(to top left, #f9b44d, #f3961f);
+  background: linear-gradient(to bottom, #7c8baa, #3f4b6c);
   height: 300px;
 
   .user-detail-container {
@@ -106,6 +106,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .deletion-scs-button {
+    background: #141d2f;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    border-radius: 25px;
   }
 }
 
@@ -233,4 +243,13 @@
     border-bottom-left-radius: 1.9rem;
     border-bottom-right-radius: 1.9rem;
   }
+}
+
+mat-spinner {
+  margin-top: 1rem;
+  transform: scale(.8);
+}
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #141d2f;
 }

@@ -175,7 +175,12 @@
 
 <div *ngIf="userDeleted" class="deletion-success">
   <mat-icon class="delete-icon-big">delete_sweep</mat-icon>
-  <h1>Client Account deletion successful.</h1>
+  <h1>Account deletion successful.</h1>
 
-  <button [routerLink]="['/users']">Go back to client overview</button>
+  <button class="deletion-scs-button" [routerLink]="['/users']">Go back to client overview</button>
+</div>
+
+<div *ngIf="!userDeleted && !userData" class="deletion-success">
+  <h1>Loading client data</h1>
+  <mat-spinner></mat-spinner>
 </div>

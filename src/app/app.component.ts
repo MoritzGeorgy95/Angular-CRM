@@ -1,19 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from './users.service';
+import { Auth, signInWithCustomToken } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'crm-app';
   opened: boolean = true;
   time: string;
 
-  constructor(public router: Router, public usersService: UsersService) {
+  constructor(
+    private auth: Auth,
+    public router: Router,
+    public usersService: UsersService
+  ) {
     this.getCurrentHour();
+  }
+
+  async ngOnInit() {
+    const authToken = localStorage.getItem('authToken');
+
+    if (authToken) {
+      if (authToken === 'guest') {
+        this.usersService.connectToDatabase('guest', 'Guest');
+        
+      } else {
+        const authData = JSON.parse(authToken);
+        this.usersService.connectToDatabase(authData.id, authData.name);
+      }
+    } else {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   getCurrentHour() {
@@ -28,5 +49,10 @@ export class AppComponent {
     } else {
       this.time = 'Good night';
     }
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigateByUrl('/login');
   }
 }
