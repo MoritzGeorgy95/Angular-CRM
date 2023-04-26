@@ -1,33 +1,90 @@
 <div class="searchbar-container">
   <h1>Client Overview</h1>
 
-  <mat-expansion-panel
-    (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false"
-  >
-    <mat-expansion-panel-header>
-      <mat-panel-description>
-        Filter clients <mat-icon>filter_alt</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
-  </mat-expansion-panel>
+  <div class="search-items-wrapper">
+    <mat-card-content class="modified-mc-content">
+      <mat-expansion-panel id="filter-form">
+        <mat-expansion-panel-header>
+          <mat-icon>filter_list</mat-icon> Filter clients
+        </mat-expansion-panel-header>
+        <h3 style="font-weight: 600">Filter by</h3>
+        <div class="filter-option">
+          <p>Company</p>
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="companyInput"
+            (click)="onCheckboxClicked('company')"
+          ></mat-checkbox>
+        </div>
+        <mat-form-field *ngIf="companyInput" appearance="outline">
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="queryParam"
+            placeholder="Type in company name"
+          />
+        </mat-form-field>
 
-  <mat-form-field appearance="outline" class="search-form-field">
-    <mat-label>Search Client</mat-label>
-    <input
-      matInput
-      type="search"
-      (input)="searchUser()"
-      [(ngModel)]="searchText"
-    />
-  </mat-form-field>
+        <div class="filter-option">
+          <p>City</p>
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="cityInput"
+            (click)="onCheckboxClicked('city')"
+          ></mat-checkbox>
+        </div>
+        <mat-form-field *ngIf="cityInput" appearance="outline">
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="queryParam"
+            placeholder="Type in city name"
+          />
+        </mat-form-field>
+
+        <div class="filter-option">
+          <p>Gender</p>
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="genderInput"
+            (click)="onCheckboxClicked('gender')"
+          ></mat-checkbox>
+        </div>
+        <mat-form-field *ngIf="genderInput" appearance="outline">
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="queryParam"
+            placeholder="Type in gender"
+          />
+        </mat-form-field>
+        <div class="button-wrapper">
+          <button (click)="applyFilter()">Apply Filter</button>
+          <button (click)="resetFilter()">Reset Filter</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-card-content>
+
+    <mat-form-field
+      appearance="outline"
+      class="search-form-field"
+      id="search-form"
+    >
+      <mat-label>Search Client</mat-label>
+      <input
+        matInput
+        type="search"
+        (input)="searchUser()"
+        [(ngModel)]="searchText"
+      />
+    </mat-form-field>
+  </div>
 </div>
 
-<mat-card>
+<mat-card class="table-wrapper">
   <table class="user-table">
     <tr>
-      <th>ID</th>
+      <th>No.</th>
       <th>Firstname</th>
       <th>Lastname</th>
       <th>Gender</th>
@@ -36,21 +93,26 @@
       <th>Adress</th>
       <th>Zip Code</th>
       <th>City</th>
+      <th>Company</th>
       <th></th>
     </tr>
     <tr
       class="data-row"
       *ngFor="let user of users$ | async; let i = index"
-    > 
-      <td>{{i + 1 }}</td>
+      #dataRow
+    >
+      <td>{{ i + 1 }}</td>
       <td>{{ user.firstname }}</td>
       <td>{{ user.lastname }}</td>
       <td>{{ user.female ? "female" : "male" }}</td>
       <td>{{ user.birthday.toDate().toISOString().split("T")[0] }}</td>
-      <td class="send-mail" (click)="sendMail(user.email)">{{ user.email }} <mat-icon>mail</mat-icon></td>
+      <td class="send-mail" (click)="sendMail(user.email)">
+        {{ user.email }} <mat-icon>mail</mat-icon>
+      </td>
       <td>{{ user.adress }}</td>
       <td>{{ user.zipcode }}</td>
       <td>{{ user.city }}</td>
+      <td>{{ user.company }}</td>
       <td (click)="showUserDetail(user.id)" class="details-hover">Details</td>
     </tr>
   </table>
@@ -64,6 +126,6 @@
   <mat-icon>add</mat-icon>
 </button>
 
-<div>
-
+<div class="stats-container">
+  <h3>Number of clients: {{ (users$ | async)?.length }}</h3>
 </div>

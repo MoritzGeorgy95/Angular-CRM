@@ -6,8 +6,8 @@
           <img
             [src]="
               userData.female
-                ? 'assets/img/avatar_female.png'
-                : 'assets/img/avatar_male.png'
+                ? 'assets/img/avatar_female.jpg'
+                : 'assets/img/avatar_male.jpg'
             "
             alt="default-avatar"
             *ngIf="!customAvatar"
@@ -80,7 +80,7 @@
       {{ userData.city }}
     </p>
     <p><span>Email:</span> {{ userData.email }}</p>
-    <p><span>Affiliated Company:</span> {{ userData.company }}</p>
+   
     <button
       mat-icon-button
       class="edit-menu-button"
@@ -128,6 +128,32 @@
             female: userData.female,
             birthday: userData.birthday,
             placeholder: 'Personal Data'
+          })
+        "
+      >
+        Edit <mat-icon>mode_edit</mat-icon>
+      </button>
+    </mat-menu>
+  </mat-card>
+  <mat-card class="info-card">
+    <mat-card-header> Company Data </mat-card-header>
+    <p><span>Company:</span>  {{ userData.company }}</p>
+    <p><span>Website:</span> {{userData.website}}</p>
+    <button
+      mat-icon-button
+      class="edit-menu-button"
+      [matMenuTriggerFor]="menu3"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu3="matMenu">
+      <button
+        mat-menu-item
+        (click)="
+          editDataDialog({
+            company: userData.company,
+            website: userData.website,
+            placeholder: 'Company Data'
           })
         "
       >
@@ -202,3 +228,6 @@
   <h1>Loading client data</h1>
   <mat-spinner></mat-spinner>
 </div>
+
+
+

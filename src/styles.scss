@@ -1,34 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .flatpickr-months {
-    display: none !important;
+  display: none !important;
 }
 
 .flatpickr-innerContainer {
-    display: none !important;
+  display: none !important;
 }
 
 .flatpickr-time {
-    display: none !important;
+  display: none !important;
 }
 
-.custom-modalbox  {
-    max-height: 90% !important;
-    width: 60% !important;
-    overflow-y: auto !important;
+.custom-modalbox {
+  max-height: 90% !important;
+  width: 60% !important;
+  overflow-y: auto !important;
 
-    .mat-mdc-dialog-surface {
-        padding: 1rem 1rem 2rem 1rem !important;
-    }
+  .mat-mdc-dialog-surface {
+    padding: 1rem 1rem 2rem 1rem !important;
+  }
 }
-
 
 .notepad-box {
-    min-width: 40% !important;
-    
+  min-width: 40% !important;
+}
+
+.modified-mc-content {
+  height: 0;
+  padding-top: 0 !important;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.modified-mc-content > mat-expansion-panel {
+  z-index: 1;
+}
+
+.modified-mc-content > mat-expansion-panel > .mat-expansion-panel-content {
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.modified-mc-content mat-chip {
+  height: auto;
 }

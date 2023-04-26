@@ -12,6 +12,83 @@
   .search-form-field .mat-mdc-form-field-subscript-wrapper {
     display: none;
   }
+
+  .search-items-wrapper {
+    display: flex;
+
+    #search-form {
+      align-self: start;
+    }
+
+    #filter-form {
+      box-shadow: none;
+      border: 1px solid rgba($color: #000000, $alpha: 0.4);
+      mat-expansion-panel-header {
+        font-size: 1rem;
+        font-weight: 400;
+        color: rgba($color: #000000, $alpha: 0.5);
+        padding-top: 6px;
+        padding-left: 50px;
+        padding-right: 50px;
+
+        mat-icon {
+          margin-right: 0.5rem;
+        }
+
+        span:first-of-type {
+          margin-right: 2rem;
+        }
+        .mat-expansion-indicator::after {
+          margin-bottom: 9px;
+        }
+      }
+
+      .filter-option {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+
+        p {
+          margin: 0;
+          margin-right: 1rem;
+          vertical-align: middle;
+          font-size: 1rem;
+        }
+      }
+
+      .button-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1.5rem;
+        gap: 1rem;
+
+        button {
+          padding: 11px;
+          border: radius;
+          border-radius: 10px;
+          border: none;
+          color: white;
+          font-size: 1rem;
+          background-color: #3f4b6c;
+          cursor: pointer;
+          transition: 225ms all ease-in-out;
+
+          &:hover {
+            background-color: #141d2f;
+          }
+        }
+      }
+    }
+  }
+}
+
+.table-wrapper {
+  max-height: 65vh;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 table {
@@ -25,6 +102,8 @@ tr:nth-of-type(odd) {
 tr:first-of-type {
   background-color: #3f4b6c;
   color: white;
+  position: sticky;
+  top: 0;
 }
 
 th {
@@ -40,7 +119,7 @@ td {
 
   mat-icon {
     vertical-align: inherit;
-    color: #FFA500;
+    color: #ffa500;
   }
 }
 
@@ -75,4 +154,18 @@ td {
   bottom: 2rem;
   right: 2rem;
   background: #141d2f !important;
+}
+
+.stats-container {
+  position: absolute;
+  bottom: 2rem;
+  left: 1rem;
+  display: flex;
+
+  h3 {
+    margin: 0;
+    font-weight: 500;
+    color: #141d2f;
+    font-size: 1.1rem;
+  }
 }

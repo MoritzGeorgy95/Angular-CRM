@@ -101,6 +101,11 @@ export class UserDetailComponent {
   }
 
   getSelectedDocumentsCount(): number {
-    return this.documents.filter((doc: any) => doc.selected).length;
+
+    let numberDocs= 0;
+    if (this.documents && this.documents.length > 0) {
+      numberDocs = this.documents.filter((doc: any) => doc.selected).length;
+    }
+    return numberDocs
   }
 }

@@ -21,7 +21,8 @@ export class DialogAddUserComponent {
     city: '',
     email: '',
     id: '',
-    company: ''
+    company: '',
+    website: ''
   };
 
   customImage: File | null; 

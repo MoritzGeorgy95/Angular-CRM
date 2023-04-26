@@ -86,6 +86,17 @@
         <mat-icon matSuffix>location_city</mat-icon>
       </mat-form-field>
     </div>
+    <div class="input-row company">
+      <mat-form-field appearance="outline">
+        <mat-label>Company Website</mat-label>
+        <input
+          matInput
+          placeholder="Company"
+          [(ngModel)]="data.website"
+        />
+        <mat-icon matSuffix>language</mat-icon>
+      </mat-form-field>
+    </div>
     <div class="input-row filerow">
       <label for="file" class="filepicker-label">      <mat-icon class="upload-file-icon">upload_file</mat-icon>
          Select a file</label>
