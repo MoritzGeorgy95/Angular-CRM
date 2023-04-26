@@ -215,6 +215,30 @@
       <p>{{getSelectedDocumentsCount()}} Document(s)</p>
     </div>
   </div>
+  <div class="project-container">
+    <h1>Projects</h1>
+    <div class="projects-wrapper">
+      <div class="project-card"></div>
+    </div>
+
+    <button
+      mat-fab
+      matTooltip="Upload Document"
+      class="add-btn"
+      (click)="uploadDocumentDialog()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <button
+      mat-fab
+      matTooltip="Delete Documents"
+      class="edit-document-btn"
+      (click)="toggleEditMenu()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
 </div>
 
 <div *ngIf="userDeleted" class="deletion-success">

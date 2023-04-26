@@ -20,6 +20,7 @@ export class UserDetailComponent {
   userDeleted: boolean = false;
   documents:any; 
   editMenuOpen: boolean= false;
+  projects:any;
 
   constructor(
     private location: Location,
@@ -82,8 +83,8 @@ export class UserDetailComponent {
 
   async deleteDocuments() {
     this.documents = this.documents.filter((d:any) => !d.selected);
-
-    const userStorageRef = ref(this.storage, `documents/${this.url}`);
+    this.editMenuOpen= false;
+    const userStorageRef = ref(this.storage, `user_${this.usersService.currentlyLoggedIn}/documents/${this.url}`);
     const files = (await list(userStorageRef)).items;
 
     // Loop over each file in the storage folder
