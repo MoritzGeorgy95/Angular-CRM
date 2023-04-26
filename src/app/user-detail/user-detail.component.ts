@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogEditDataComponent } from '../dialog-edit-data/dialog-edit-data.component';
 import { DialogDeleteClientComponent } from '../dialog-delete-client/dialog-delete-client.component';
 import { DialogUploadFileComponent } from '../dialog-upload-file/dialog-upload-file.component';
+import { DialogAddProjectComponent } from '../dialog-add-project/dialog-add-project.component';
 import { Storage, ref, list, deleteObject } from '@angular/fire/storage';
 
 @Component({
@@ -18,9 +19,14 @@ export class UserDetailComponent {
   panelOpenState = false;
   customAvatar: any;
   userDeleted: boolean = false;
-  documents:any; 
-  editMenuOpen: boolean= false;
-  projects:any;
+  documents: any;
+  editMenuOpen: boolean = false;
+  projects: any = [
+    { title: 'Lala', description: 'asasdasdasdasdasd', deadline: '27/04/2023' },
+    { title: 'Lala', description: 'asasdasdasdasdasd', deadline: '25/05/2023' },
+    { title: 'Lala', description: 'asasdasdasdasdasd', deadline: '24/12/2023' },
+  ];
+  date: any;
 
   constructor(
     private location: Location,
@@ -29,6 +35,7 @@ export class UserDetailComponent {
     private storage: Storage
   ) {
     this.getCurrentUser();
+    // this.sortprojectsByDeadline();
   }
 
   getCurrentUser() {
@@ -36,7 +43,7 @@ export class UserDetailComponent {
     this.usersService.getSingle(this.url).then(() => {
       this.userData = this.usersService.currentUser;
       this.customAvatar = this.usersService.currentUserCustomImage;
-      this.documents= this.usersService.currentUserDocuments;
+      this.documents = this.usersService.currentUserDocuments;
     });
   }
 
@@ -68,45 +75,91 @@ export class UserDetailComponent {
     });
   }
 
-  openPDF(url:any) {
-    window.open(url.url, '_blank')
+  addProjectDialog() {
+    const dialogRef = this.dialog.open(DialogAddProjectComponent);
+  }
+
+  openPDF(url: any) {
+    window.open(url.url, '_blank');
   }
 
   toggleEditMenu() {
     if (this.editMenuOpen) {
-      this.editMenuOpen= false;
-    }
-    else {
-      this.editMenuOpen= true;
+      this.editMenuOpen = false;
+    } else {
+      this.editMenuOpen = true;
     }
   }
 
   async deleteDocuments() {
-    this.documents = this.documents.filter((d:any) => !d.selected);
-    this.editMenuOpen= false;
-    const userStorageRef = ref(this.storage, `user_${this.usersService.currentlyLoggedIn}/documents/${this.url}`);
+    this.documents = this.documents.filter((d: any) => !d.selected);
+    this.editMenuOpen = false;
+    const userStorageRef = ref(
+      this.storage,
+      `user_${this.usersService.currentlyLoggedIn}/documents/${this.url}`
+    );
     const files = (await list(userStorageRef)).items;
 
     // Loop over each file in the storage folder
-  for (const file of files) {
-    // Check if the file's name is in the local array of selected documents
-    const fileIndex = this.documents.findIndex(
-      (d: any) => d.name === file.name
-    );
+    for (const file of files) {
+      // Check if the file's name is in the local array of selected documents
+      const fileIndex = this.documents.findIndex(
+        (d: any) => d.name === file.name
+      );
 
-    // If the file is not in the local array, delete it from storage
-    if (fileIndex === -1) {
-      await deleteObject(file);
+      // If the file is not in the local array, delete it from storage
+      if (fileIndex === -1) {
+        await deleteObject(file);
+      }
     }
-  }
   }
 
   getSelectedDocumentsCount(): number {
-
-    let numberDocs= 0;
+    let numberDocs = 0;
     if (this.documents && this.documents.length > 0) {
       numberDocs = this.documents.filter((doc: any) => doc.selected).length;
     }
-    return numberDocs
+    return numberDocs;
+  }
+
+  // sortprojectsByDeadline() {
+  //   let newArr = this.projects.map((project: any) => {
+  //     const deadlineStr = project.deadline;
+  //     const deadlineArr = deadlineStr.split('/');
+  //     const deadline = new Date(
+  //       `${deadlineArr[2]}-${deadlineArr[1]}-${deadlineArr[0]}`
+  //     );
+     
+  //     return { ...project, deadline: deadline };
+  //   });
+
+  //   let sortedArr= newArr.sort((a:any, b:any)=> {b.deadline - a.deadline});
+  //   this.projects= sortedArr;
+  // }
+
+  getDeadlineClass(project: any) {
+    const deadlineStr = project.deadline;
+    const deadlineArr = deadlineStr.split('/');
+    const deadline = new Date(
+      `${deadlineArr[2]}-${deadlineArr[1]}-${deadlineArr[0]}`
+    );
+    const now = new Date();
+    const diffInDays =
+      (deadline.getTime() - now.getTime()) / (1000 * 3600 * 24);
+    if (diffInDays < 7) {
+      return 'red';
+    } else if (diffInDays < 30) {
+      return 'orange';
+    } else {
+      return 'green';
+    }
   }
 }
+
+// date.toLocaleString('en-US', {
+//   month: 'long',
+//   day: 'numeric',
+//   year: 'numeric',
+//   hour: 'numeric',
+//   minute: 'numeric',
+// });

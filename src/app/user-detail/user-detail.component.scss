@@ -90,7 +90,8 @@
     font-weight: 500;
   }
 
-  span, p {
+  span,
+  p {
     font-size: 1rem;
   }
 
@@ -267,7 +268,6 @@
     border-bottom-left-radius: 1.9rem;
     gap: 0.5rem;
 
-
     p {
       margin: 0;
       font-size: 1.1rem;
@@ -276,12 +276,12 @@
     mat-icon {
       color: red;
       cursor: pointer;
-
     }
   }
 }
 
 .project-container {
+  min-height: 400px;
   margin-top: 2rem;
   padding: 16px 16px 0;
   background: rgba($color: #000000, $alpha: 0.1);
@@ -297,46 +297,53 @@
 
   .projects-wrapper {
     display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      padding-bottom: 2rem;
-      height: fit-content;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    height: fit-content;
 
-      .project-card {
-        position: relative;
-        border-radius: 0.5rem;
-        background-color: white;
-        width: 300px;
-        height: 200px;
-        padding: 1rem;
-        cursor: pointer;
-        transition: 225ms all ease-in-out;
-        &:hover {
-          transform: scale(1.1);
-        }
-  
-        mat-checkbox {
-          position: absolute;
-          top: -1rem;
-          left: -1rem;
-        }
-  
-        .pdf-title-row {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-  
-          p {
-            margin: 0;
-            margin-left: 0.5rem;
-          }
-  
-          mat-icon {
-            color: #29abe2;
-          }
-
-        }
+    .project-card {
+      position: relative;
+      border-radius: 0.5rem;
+      background-color: white;
+      width: 300px;
+      height: 200px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: 225ms all ease-in-out;
+      overflow-y: hidden;
+      &:hover {
+        transform: scale(1.1);
       }
+
+      h3:first-of-type {
+        width: -moz-fit-content;
+        width: fit-content;
+        color: white;
+        padding: 9px;
+        border-radius: 20px;
+      }
+
+      h3 {
+        margin: 0;
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .red {
+        background-color:  #ff6666;
+      }
+      .green {
+        background-color: #ff9933;
+      }
+      .orange {
+        background-color: #66cc66;
+      }
+    }
   }
 
   .add-btn {
@@ -353,7 +360,6 @@
     background: #141d2f !important;
     z-index: 2;
   }
-  
 }
 
 mat-spinner {

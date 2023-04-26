@@ -2,50 +2,47 @@
   <mat-card class="header-card">
     <div class="placeholder-wrapper"></div>
     <div class="user-detail-container">
-        <div class="avatar-wrapper">
-          <img
-            [src]="
-              userData.female
-                ? 'assets/img/avatar_female.jpg'
-                : 'assets/img/avatar_male.jpg'
-            "
-            alt="default-avatar"
-            *ngIf="!customAvatar"
-            class="standard-avatar avatar"
-          />
-          <img
-            [src]="customAvatar"
-            alt="custom-avatar"
-            *ngIf="customAvatar"
-            class="custom-avatar avatar"
-          />
+      <div class="avatar-wrapper">
+        <img
+          [src]="
+            userData.female
+              ? 'assets/img/avatar_female.jpg'
+              : 'assets/img/avatar_male.jpg'
+          "
+          alt="default-avatar"
+          *ngIf="!customAvatar"
+          class="standard-avatar avatar"
+        />
+        <img
+          [src]="customAvatar"
+          alt="custom-avatar"
+          *ngIf="customAvatar"
+          class="custom-avatar avatar"
+        />
 
-          <mat-icon class="add-photo-icon" *ngIf="!customAvatar"
-            >add_a_photo</mat-icon
-          >
-        </div>
+        <mat-icon class="add-photo-icon" *ngIf="!customAvatar"
+          >add_a_photo</mat-icon
+        >
+      </div>
 
-        <div class="description-container">
-          <h1>{{ userData.firstname + " " + userData.lastname }}</h1>
-          <div>
-            <mat-icon>pin_drop</mat-icon>
-            <p>
-              {{ userData.adress }} | {{ userData.zipcode }},
-              {{ userData.city }}
-            </p>
-          </div>
-          <div>
-            <mat-icon>contact_page</mat-icon>
-            <p>{{ userData.email }} | {{userData.company}}</p>
-          </div>
+      <div class="description-container">
+        <h1>{{ userData.firstname + " " + userData.lastname }}</h1>
+        <div>
+          <mat-icon>pin_drop</mat-icon>
+          <p>
+            {{ userData.adress }} | {{ userData.zipcode }},
+            {{ userData.city }}
+          </p>
         </div>
-      <button
-        mat-button
-        class="send-msg-button"
-      > 
+        <div>
+          <mat-icon>contact_page</mat-icon>
+          <p>{{ userData.email }} | {{ userData.company }}</p>
+        </div>
+      </div>
+      <button mat-button class="send-msg-button">
         <mat-icon>send</mat-icon>
         Message
-      </button>  
+      </button>
       <button
         mat-icon-button
         class="edit-menu-button"
@@ -80,7 +77,7 @@
       {{ userData.city }}
     </p>
     <p><span>Email:</span> {{ userData.email }}</p>
-   
+
     <button
       mat-icon-button
       class="edit-menu-button"
@@ -111,7 +108,8 @@
     <mat-card-header> Personal Data </mat-card-header>
     <p><span>Gender:</span> {{ userData.female ? "female" : "male" }}</p>
     <p>
-      <span>Birthday:</span> {{ userData.birthday.toDate().toISOString().split("T")[0] }}
+      <span>Birthday:</span>
+      {{ userData.birthday.toDate().toISOString().split("T")[0] }}
     </p>
     <button
       mat-icon-button
@@ -137,8 +135,8 @@
   </mat-card>
   <mat-card class="info-card">
     <mat-card-header> Company Data </mat-card-header>
-    <p><span>Company:</span>  {{ userData.company }}</p>
-    <p><span>Website:</span> {{userData.website}}</p>
+    <p><span>Company:</span> {{ userData.company }}</p>
+    <p><span>Website:</span> {{ userData.website }}</p>
     <button
       mat-icon-button
       class="edit-menu-button"
@@ -163,9 +161,12 @@
   </mat-card>
 
   <div class="document-container">
-    <h1>Documents</h1>
+    <h1>General Documents</h1>
     <div class="document-drop-container">
-      <div class="document-placeholder" *ngIf="!documents || documents.length === 0">
+      <div
+        class="document-placeholder"
+        *ngIf="!documents || documents.length === 0"
+      >
         <mat-icon>article</mat-icon>
         <h2>No documents uploaded. Click on add button to upload new</h2>
       </div>
@@ -212,20 +213,26 @@
     <div class="edit-document-menu" *ngIf="editMenuOpen">
       <mat-icon (click)="deleteDocuments()">delete</mat-icon>
       <p>Delete</p>
-      <p>{{getSelectedDocumentsCount()}} Document(s)</p>
+      <p>{{ getSelectedDocumentsCount() }} Document(s)</p>
     </div>
   </div>
   <div class="project-container">
     <h1>Projects</h1>
     <div class="projects-wrapper">
-      <div class="project-card"></div>
+      <div class="project-card" *ngFor="let project of projects">
+        <h3 [ngClass]="getDeadlineClass(project)">Deadline: {{project.deadline}}</h3>
+        <h3>{{project.title}}</h3>
+        <p>
+          {{project.description}}
+        </p>
+      </div>
     </div>
 
     <button
       mat-fab
       matTooltip="Upload Document"
       class="add-btn"
-      (click)="uploadDocumentDialog()"
+      (click)="addProjectDialog()"
     >
       <mat-icon>add</mat-icon>
     </button>
@@ -238,20 +245,18 @@
       <mat-icon>delete</mat-icon>
     </button>
   </div>
-
 </div>
 
 <div *ngIf="userDeleted" class="deletion-success">
   <mat-icon class="delete-icon-big">delete_sweep</mat-icon>
   <h1>Account deletion successful.</h1>
 
-  <button class="deletion-scs-button" [routerLink]="['/users']">Go back to client overview</button>
+  <button class="deletion-scs-button" [routerLink]="['/users']">
+    Go back to client overview
+  </button>
 </div>
 
 <div *ngIf="!userDeleted && !userData" class="deletion-success">
   <h1>Loading client data</h1>
   <mat-spinner></mat-spinner>
 </div>
-
-
-

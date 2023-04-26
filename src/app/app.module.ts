@@ -53,6 +53,7 @@ import { DialogUploadFileComponent } from './dialog-upload-file/dialog-upload-fi
 import { DialogCalendarComponent } from './dialog-calendar/dialog-calendar.component';
 import { LoginComponent } from './login/login.component';
 import { DialogNotepadComponent } from './dialog-notepad/dialog-notepad.component';
+import { DialogAddProjectComponent } from './dialog-add-project/dialog-add-project.component';
 
 
 
@@ -71,6 +72,7 @@ import { DialogNotepadComponent } from './dialog-notepad/dialog-notepad.componen
     DialogCalendarComponent,
     LoginComponent,
     DialogNotepadComponent,
+    DialogAddProjectComponent,
   ],
   imports: [
     BrowserModule,
