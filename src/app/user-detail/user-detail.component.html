@@ -173,14 +173,14 @@
       <div *ngIf="documents" class="documents-wrapper">
         <div
           *ngFor="let document of documents; let i = index"
-          [ngClass]="{ 'pdf-card': true, 'pdf-card-no-hover': editMenuOpen }"
-          (click)="!editMenuOpen && openPDF(document)"
+          [ngClass]="{ 'pdf-card': true, 'pdf-card-no-hover': editMenuOpen1 }"
+          (click)="!editMenuOpen1 && openPDF(document)"
         >
           <mat-checkbox
             (click)="$event.stopPropagation()"
             color="primary"
             class="edit-checkbox"
-            *ngIf="editMenuOpen"
+            *ngIf="editMenuOpen1"
             [(ngModel)]="document.selected"
           >
           </mat-checkbox>
@@ -210,7 +210,7 @@
     >
       <mat-icon>delete</mat-icon>
     </button>
-    <div class="edit-document-menu" *ngIf="editMenuOpen">
+    <div class="edit-document-menu" *ngIf="editMenuOpen1">
       <mat-icon (click)="deleteDocuments()">delete</mat-icon>
       <p>Delete</p>
       <p>{{ getSelectedDocumentsCount() }} Document(s)</p>
@@ -219,7 +219,7 @@
   <div class="project-container">
     <h1>Projects</h1>
     <div class="projects-wrapper">
-      <div class="project-card" *ngFor="let project of userData.projects">
+      <div  *ngFor="let project of userData.projects" class="project-card">
         <h3>{{project.title}}</h3>
         <p>
           {{project.description}}
@@ -227,12 +227,20 @@
         <h3>Deadline: {{project.deadline}}</h3>
         <img [src]="'assets/img/' + getDeadlineClass(project, 1)" alt="priority-icon" class="priority-icon">
         <div [ngClass]="[getDeadlineClass(project, 0), 'deadline-div']"></div>
+        <mat-checkbox
+            (click)="$event.stopPropagation()"
+            color="primary"
+            class="edit-checkbox"
+            *ngIf="editMenuOpen2"
+            [(ngModel)]="project.selected"
+          >
+          </mat-checkbox>
       </div>
     </div>
-
+   
     <button
       mat-fab
-      matTooltip="Upload Document"
+      matTooltip="Create project"
       class="add-btn"
       (click)="addProjectDialog()"
     >
@@ -242,11 +250,15 @@
       mat-fab
       matTooltip="Delete Documents"
       class="edit-document-btn"
-      (click)="toggleEditMenu()"
+      (click)="toggleEditMenu(1)"
     >
       <mat-icon>delete</mat-icon>
     </button>
-    
+    <div class="edit-projects-menu" *ngIf="editMenuOpen2">
+      <mat-icon (click)="deleteProjects()">delete</mat-icon>
+      <p>Delete</p>
+      <p>{{ getSelectedProjectsCount() }} Projects(s)</p>
+    </div>
   </div>
 </div>
 

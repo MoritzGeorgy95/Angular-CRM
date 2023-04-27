@@ -16,6 +16,7 @@ export class DialogAddProjectComponent {
   title:string='';
   description:string= '';
   deadline:any= null;
+  selected: boolean= false;
 
   constructor(private usersService: UsersService, private location: Location, private dialog: MatDialog) {
     this.url = this.location.path().split('/')[2];
@@ -27,7 +28,8 @@ export class DialogAddProjectComponent {
       projects: arrayUnion({
         title: this.title,
         description: this.description,
-        deadline: this.deadline.toLocaleDateString('en-US', {timeZone: 'CET'})
+        deadline: this.deadline.toISOString().slice(0, 10),
+        selected: this.selected
       })
     });
     this.dialog.closeAll();

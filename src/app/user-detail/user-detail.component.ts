@@ -7,6 +7,7 @@ import { DialogDeleteClientComponent } from '../dialog-delete-client/dialog-dele
 import { DialogUploadFileComponent } from '../dialog-upload-file/dialog-upload-file.component';
 import { DialogAddProjectComponent } from '../dialog-add-project/dialog-add-project.component';
 import { Storage, ref, list, deleteObject } from '@angular/fire/storage';
+import { doc, updateDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-user-detail',
@@ -20,7 +21,8 @@ export class UserDetailComponent {
   customAvatar: any;
   userDeleted: boolean = false;
   documents: any;
-  editMenuOpen: boolean = false;
+  editMenuOpen1: boolean = false;
+  editMenuOpen2: boolean = false;
   date: any;
 
   constructor(
@@ -30,7 +32,6 @@ export class UserDetailComponent {
     private storage: Storage
   ) {
     this.getCurrentUser();
-    // this.sortprojectsByDeadline();
   }
 
   getCurrentUser() {
@@ -39,6 +40,7 @@ export class UserDetailComponent {
       this.userData = this.usersService.currentUser;
       this.customAvatar = this.usersService.currentUserCustomImage;
       this.documents = this.usersService.currentUserDocuments;
+      this.sortProjectsByDeadline();
     });
   }
 
@@ -81,17 +83,25 @@ export class UserDetailComponent {
     window.open(url.url, '_blank');
   }
 
-  toggleEditMenu() {
-    if (this.editMenuOpen) {
-      this.editMenuOpen = false;
+  toggleEditMenu(selector: number = 0) {
+    if (selector === 0) {
+      if (this.editMenuOpen1) {
+        this.editMenuOpen1 = false;
+      } else {
+        this.editMenuOpen1 = true;
+      }
     } else {
-      this.editMenuOpen = true;
+      if (this.editMenuOpen2) {
+        this.editMenuOpen2 = false;
+      } else {
+        this.editMenuOpen2 = true;
+      }
     }
   }
 
   async deleteDocuments() {
     this.documents = this.documents.filter((d: any) => !d.selected);
-    this.editMenuOpen = false;
+    this.editMenuOpen1 = false;
     const userStorageRef = ref(
       this.storage,
       `user_${this.usersService.currentlyLoggedIn}/documents/${this.url}`
@@ -120,30 +130,40 @@ export class UserDetailComponent {
     return numberDocs;
   }
 
-  // sortprojectsByDeadline() {
-  //   let newArr = this.projects.map((project: any) => {
-  //     const deadlineStr = project.deadline;
-  //     const deadlineArr = deadlineStr.split('/');
-  //     const deadline = new Date(
-  //       `${deadlineArr[2]}-${deadlineArr[1]}-${deadlineArr[0]}`
-  //     );
-     
-  //     return { ...project, deadline: deadline };
-  //   });
+  async deleteProjects() {
+    this.userData.projects = this.userData.projects.filter((p: any) => !p.selected);
+    let docRef= doc(this.usersService.collection, this.url);
+    await updateDoc(docRef, {
+      projects: this.userData.projects
+    })
+    this.editMenuOpen2 = false;
+  }
 
-  //   let sortedArr= newArr.sort((a:any, b:any)=> {b.deadline - a.deadline});
-  //   this.projects= sortedArr;
-  // }
+  getSelectedProjectsCount(): number {
+    let numberProjs = 0;
+    if (this.userData.projects.length > 0) {
+      numberProjs = this.userData.projects.filter((p: any) => p.selected).length;
+    }
+    return numberProjs;
+  }
 
-  getDeadlineClass(project: any, useCase:number) {
-    const deadlineStr = project.deadline;
-    const deadlineArr = deadlineStr.split('/');
-    const deadline = new Date(
-      `${deadlineArr[2]}-${deadlineArr[1]}-${deadlineArr[0]}`
+  sortProjectsByDeadline(): void {
+    this.userData.projects.sort(
+      (a: { deadline: string }, b: { deadline: string }) => {
+        const deadlineA = new Date(a.deadline);
+        const deadlineB = new Date(b.deadline);
+        return deadlineA.getTime() - deadlineB.getTime();
+      }
     );
+  }
+
+  getDeadlineClass(project: any, useCase: number) {
+    const deadlineStr = project.deadline;
+    const deadline = new Date(deadlineStr);
     const now = new Date();
-    const diffInDays =
-      (deadline.getTime() - now.getTime()) / (1000 * 3600 * 24);
+    const diffInDays = Math.floor(
+      (deadline.getTime() - now.getTime()) / (1000 * 3600 * 24)
+    );
 
     if (useCase === 0) {
       if (diffInDays <= 7) {
@@ -153,8 +173,7 @@ export class UserDetailComponent {
       } else {
         return 'green';
       }
-    } 
-    else {
+    } else {
       if (diffInDays <= 7) {
         return 'arrow-red.png';
       } else if (diffInDays <= 30) {
@@ -162,15 +181,6 @@ export class UserDetailComponent {
       } else {
         return 'arrow-green.png';
       }
-    } 
-    
+    }
   }
 }
-
-// date.toLocaleString('en-US', {
-//   month: 'long',
-//   day: 'numeric',
-//   year: 'numeric',
-//   hour: 'numeric',
-//   minute: 'numeric',
-// });
