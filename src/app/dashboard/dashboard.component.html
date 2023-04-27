@@ -50,8 +50,10 @@
       cdkDrag
       cdkDragBoundary=".widget-container"
       #widget
-      (cdkDragEnded)="getWidgetFinalPos($event)"
+      (cdkDragStarted)="dragging= true"
       (click)="openCalendarViewDialog()"
+      (cdkDragEnded)="getWidgetFinalPos($event)"
+      
     >
       <div class="widget-description-container">
         <!-- <mat-icon>calendar_month</mat-icon> -->
@@ -64,6 +66,7 @@
       cdkDrag
       cdkDragBoundary=".widget-container"
       #widget
+      (cdkDragStarted)="dragging= true"
       (cdkDragEnded)="getWidgetFinalPos($event)"
       (click)="openNotepadDialog(notes)"
       [style.justify-content]="notes.length === 0 ? 'center' : ''"

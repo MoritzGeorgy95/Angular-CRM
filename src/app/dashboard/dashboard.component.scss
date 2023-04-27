@@ -13,7 +13,9 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    align-items: center;
+    column-gap: 3rem;
+    max-width: 1450px;
     .widget {
       padding: 1rem;
       cursor: pointer;
@@ -50,7 +52,7 @@
       }
     }
 
-    
+   
 
     .widget.weather,
     .widget.date {
@@ -61,6 +63,7 @@
       width: 150px;
     }
 
+    
     
 
     .widget.notepad {
@@ -149,4 +152,14 @@ app-calendar-component {
 
 .widget-icon.calendar {
   width: 55px;
+}
+
+
+@media screen and (max-width: 1420px) {
+ 
+
+  .widget-container {
+    row-gap: 2rem;
+    column-gap: 2rem;
+  }
 }

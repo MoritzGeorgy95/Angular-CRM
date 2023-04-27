@@ -41,6 +41,8 @@ export class DashboardComponent implements OnInit {
   temperature: number;
   weatherIcon: number;
   notes: Array<any> = [];
+  dragging:boolean= false;
+
 
   ngOnInit() {
     this.getCurrentDate();
@@ -126,22 +128,36 @@ export class DashboardComponent implements OnInit {
         }
       }
     });
+  
   }
 
   openCalendarViewDialog() {
-    this.dialog.open(DialogCalendarComponent, {
-      panelClass: 'custom-modalbox',
-    });
+    if(!this.dragging) {
+      this.dialog.open(DialogCalendarComponent, {
+        panelClass: 'custom-modalbox',
+      });
+    } 
+    else {
+      this.dragging= false;
+    }
+    
   }
 
   openNotepadDialog(data: any) {
-    const dialogRef = this.dialog.open(DialogNotepadComponent, {
-      panelClass: 'notepad-box',
-      data: { data },
-    });
+    if (!this.dragging) {
+      const dialogRef = this.dialog.open(DialogNotepadComponent, {
+        panelClass: 'notepad-box',
+        data: { data },
+      });
+  
+      dialogRef.afterClosed().subscribe((data) => {
+        this.notes = data;
+      });
+    }
 
-    dialogRef.afterClosed().subscribe((data) => {
-      this.notes = data;
-    });
+    else {
+      this.dragging= false;
+    }
+    
   }
 }
