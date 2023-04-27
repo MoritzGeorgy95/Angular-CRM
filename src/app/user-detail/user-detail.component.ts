@@ -137,7 +137,7 @@ export class UserDetailComponent {
   //   this.projects= sortedArr;
   // }
 
-  getDeadlineClass(project: any) {
+  getDeadlineClass(project: any, useCase:number) {
     const deadlineStr = project.deadline;
     const deadlineArr = deadlineStr.split('/');
     const deadline = new Date(
@@ -146,13 +146,26 @@ export class UserDetailComponent {
     const now = new Date();
     const diffInDays =
       (deadline.getTime() - now.getTime()) / (1000 * 3600 * 24);
-    if (diffInDays < 7) {
-      return 'red';
-    } else if (diffInDays < 30) {
-      return 'orange';
-    } else {
-      return 'green';
-    }
+
+    if (useCase === 0) {
+      if (diffInDays <= 7) {
+        return 'red';
+      } else if (diffInDays <= 30) {
+        return 'orange';
+      } else {
+        return 'green';
+      }
+    } 
+    else {
+      if (diffInDays <= 7) {
+        return 'arrow-red.png';
+      } else if (diffInDays <= 30) {
+        return 'arrow-orange.png';
+      } else {
+        return 'arrow-green.png';
+      }
+    } 
+    
   }
 }
 
