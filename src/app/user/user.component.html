@@ -107,7 +107,7 @@
       <td>{{ user.female ? "female" : "male" }}</td>
       <td>{{ user.birthday.toDate().toISOString().split("T")[0] }}</td>
       <td class="send-mail" (click)="sendMail(user.email)">
-        {{ user.email }} <mat-icon>mail</mat-icon>
+        {{ user.email }} <mat-icon>send</mat-icon>
       </td>
       <td>{{ user.adress }}</td>
       <td>{{ user.zipcode }}</td>

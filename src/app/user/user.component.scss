@@ -118,8 +118,10 @@ td {
   font-size: 1rem;
 
   mat-icon {
-    vertical-align: inherit;
-    color: #ffa500;
+    vertical-align: bottom;
+    color: #29abe2;
+    transform: rotate(-35deg);
+    margin-left: 5px;
   }
 }
 

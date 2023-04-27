@@ -54,6 +54,7 @@ import { DialogCalendarComponent } from './dialog-calendar/dialog-calendar.compo
 import { LoginComponent } from './login/login.component';
 import { DialogNotepadComponent } from './dialog-notepad/dialog-notepad.component';
 import { DialogAddProjectComponent } from './dialog-add-project/dialog-add-project.component';
+import { DialogEditProjectComponent } from './dialog-edit-project/dialog-edit-project.component';
 
 
 
@@ -73,6 +74,7 @@ import { DialogAddProjectComponent } from './dialog-add-project/dialog-add-proje
     LoginComponent,
     DialogNotepadComponent,
     DialogAddProjectComponent,
+    DialogEditProjectComponent,
   ],
   imports: [
     BrowserModule,

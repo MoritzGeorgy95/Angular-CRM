@@ -6,13 +6,31 @@ import { DialogEditDataComponent } from '../dialog-edit-data/dialog-edit-data.co
 import { DialogDeleteClientComponent } from '../dialog-delete-client/dialog-delete-client.component';
 import { DialogUploadFileComponent } from '../dialog-upload-file/dialog-upload-file.component';
 import { DialogAddProjectComponent } from '../dialog-add-project/dialog-add-project.component';
+import { DialogEditProjectComponent } from '../dialog-edit-project/dialog-edit-project.component';
 import { Storage, ref, list, deleteObject } from '@angular/fire/storage';
 import { doc, updateDoc } from 'firebase/firestore';
+import { trigger, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss'],
+  animations: [
+    trigger(
+      'enterAnimation', [
+        transition(':enter', [
+          animate('225ms', style({
+            opacity: 1
+          }))
+        ]),
+        transition(':leave', [
+          animate('225ms', style({
+            opacity: 0
+          }))
+        ])
+      ]
+    )
+  ]
 })
 export class UserDetailComponent {
   userData: any;
@@ -52,6 +70,15 @@ export class UserDetailComponent {
     dialogRef.afterClosed().subscribe(() => {
       this.getCurrentUser();
     });
+  }
+
+  projectDialog(i:number) {
+    const dialogRef= this.dialog.open(DialogEditProjectComponent, {
+      data: [this.userData.projects[i], i]
+    });
+    dialogRef.afterClosed().subscribe(()=> {
+      this.getCurrentUser();
+    })
   }
 
   deleteClientDialog() {
@@ -138,6 +165,8 @@ export class UserDetailComponent {
     })
     this.editMenuOpen2 = false;
   }
+
+  
 
   getSelectedProjectsCount(): number {
     let numberProjs = 0;

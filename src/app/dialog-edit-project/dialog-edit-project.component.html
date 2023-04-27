@@ -1,0 +1,43 @@
+<h1 mat-dialog-title class="mat-dialog-title">Edit Project</h1>
+<div mat-dialog-content class="mat-dialog-content">
+  <div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Project Title</mat-label>
+        <input matInput placeholder="Project Title" [(ngModel)]= "title"/>
+        <mat-icon matSuffix>title</mat-icon>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Project description</mat-label>
+        <textarea
+        matInput
+        placeholder="Project Description"
+        [(ngModel)]= "description"
+       
+        ></textarea>
+          
+        <mat-icon matSuffix>description</mat-icon>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Deadline</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]= "deadline"/>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</div> 
+<!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button cdkFocusInitial (click)="updateData()" [disabled]="title.length === 0 || description.length === 0 || deadline === null">Ok</button> 
+</div>
+
