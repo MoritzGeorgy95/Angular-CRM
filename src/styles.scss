@@ -36,24 +36,4 @@ body {
   min-width: 40% !important;
 }
 
-.modified-mc-content {
-  height: 0;
-  padding-top: 0 !important;
 
-  ::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.modified-mc-content > mat-expansion-panel {
-  z-index: 1;
-}
-
-.modified-mc-content > mat-expansion-panel > .mat-expansion-panel-content {
-  max-height: 50vh;
-  overflow: auto;
-}
-
-.modified-mc-content mat-chip {
-  height: auto;
-}

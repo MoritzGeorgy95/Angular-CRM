@@ -7,16 +7,18 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-dialog-edit-data',
   templateUrl: './dialog-edit-data.component.html',
-  styleUrls: ['./dialog-edit-data.component.scss']
+  styleUrls: ['./dialog-edit-data.component.scss'],
 })
-export class DialogEditDataComponent implements OnInit{
-  constructor(private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private usersService: UsersService, private location: Location) {
-    this.url= this.location.path().split('/')[2];
-  }
-  
-  url:any;
+export class DialogEditDataComponent {
+  url: any;
 
-  ngOnInit(): void {
+  constructor(
+    private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private usersService: UsersService,
+    private location: Location
+  ) {
+    this.url = this.location.path().split('/')[2];
   }
 
   closeDialog() {
@@ -24,12 +26,12 @@ export class DialogEditDataComponent implements OnInit{
   }
 
   async updateData() {
-    let docRef= doc(this.usersService.collection, this.url);
+    let docRef = doc(this.usersService.collection, this.url);
     await updateDoc(docRef, this.data.data);
     this.dialog.closeAll();
   }
 
-  trackByFn(index:any, item:any) {
-    return index;  
+  trackByFn(index: any, item: any) {
+    return index;
   }
 }

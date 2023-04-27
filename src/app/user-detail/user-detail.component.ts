@@ -21,11 +21,6 @@ export class UserDetailComponent {
   userDeleted: boolean = false;
   documents: any;
   editMenuOpen: boolean = false;
-  projects: any = [
-    { title: 'Lala', description: 'asasdasdasdasdasd', deadline: '27/04/2023' },
-    { title: 'Lala', description: 'asasdasdasdasdasd', deadline: '25/05/2023' },
-    { title: 'Lala', description: 'asasdasdasdasdasd', deadline: '24/12/2023' },
-  ];
   date: any;
 
   constructor(
@@ -77,6 +72,9 @@ export class UserDetailComponent {
 
   addProjectDialog() {
     const dialogRef = this.dialog.open(DialogAddProjectComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getCurrentUser();
+    });
   }
 
   openPDF(url: any) {
