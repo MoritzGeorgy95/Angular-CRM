@@ -56,10 +56,10 @@
       
     >
       <div class="widget-description-container">
-        <!-- <mat-icon>calendar_month</mat-icon> -->
         <img src="assets/img/calendar.png" alt="" class="widget-icon calendar"/>
         <h2>Client Calendar</h2>
       </div>
+      <p class="calendar-prompt">Click on widget to open calendar</p>
     </div>
     <div
       class="widget notepad"
@@ -68,16 +68,16 @@
       #widget
       (cdkDragStarted)="dragging= true"
       (cdkDragEnded)="getWidgetFinalPos($event)"
-      (click)="openNotepadDialog(notes)"
-      [style.justify-content]="notes.length === 0 ? 'center' : ''"
+      (click)="openNotepadDialog(notes$)"
+      [style.justify-content]="(notes$ | async).length === 0 ? 'center' : ''"
     >
       <div class="widget-description-container">
         <img src="assets/img/notes.png" alt="" class="widget-icon"/>
         <h2>Notepad</h2>
       </div>
-      <div class="notes-container" *ngIf="notes.length > 0" >
+      <div class="notes-container" *ngIf="(notes$ | async).length > 0" >
         <ul>
-          <li *ngFor="let note of notes">
+          <li *ngFor="let note of notes$ | async">
             {{ note }}
           </li>
         </ul>
@@ -85,11 +85,5 @@
       <div class="frozen-glass"></div>
     </div>
   </div>
-  <!-- <button
-        mat-fab
-        class="add-user-btn"
-        matTooltip="Add new Widget to dashboard"
-      >
-        <mat-icon>add</mat-icon>
-      </button> -->
+  
 </div>

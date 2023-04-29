@@ -1,21 +1,22 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
+  OnDestroy
 } from '@angular/core';
+
 import {
   startOfDay,
   endOfDay,
   subDays,
   addDays,
-  endOfMonth,
   isSameDay,
   isSameMonth,
-  addHours,
 } from 'date-fns';
+
+import { UsersService } from '../users.service';
+
+
 import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -23,6 +24,7 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
+import { doc, updateDoc } from 'firebase/firestore';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -45,10 +47,10 @@ const colors: Record<string, EventColor> = {
 @Component({
   selector: 'app-calendar-component',
   templateUrl: './calendar-component.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./calendar-component.component.scss']
 })
-export class CalendarComponentComponent {
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+export class CalendarComponentComponent implements OnDestroy {
 
   view: CalendarView = CalendarView.Month;
 
@@ -63,14 +65,14 @@ export class CalendarComponentComponent {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+      label: '<mat-icon>edit</mat-icon>',
       a11yLabel: 'Edit',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.handleEvent('Edited', event);
       },
     },
     {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
+      label: '<i class="fas fa-fw fa-trash-alt">Delete</i>',
       a11yLabel: 'Delete',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter((iEvent) => iEvent !== event);
@@ -85,46 +87,38 @@ export class CalendarComponentComponent {
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: { ...colors['red'] },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
+      title: 'Default Event',
       color: { ...colors['blue'] },
+      // actions: this.actions,
       allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
       resizable: {
         beforeStart: true,
         afterEnd: true,
       },
       draggable: true,
-    },
+     }
   ];
+
+
+
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private usersService: UsersService) {
+    this.events= this.usersService.events;
+  }
+
+
+  async storeEvents() {
+    let docRef= doc(this.usersService.collection, 'events');
+    await updateDoc(docRef, {events: this.events});
+    this.usersService.events= this.events;
+  }
+
+  ngOnDestroy(): void {
+    this.storeEvents()
+  }
+  
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -160,7 +154,7 @@ export class CalendarComponentComponent {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    // this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   addEvent(): void {
@@ -170,7 +164,7 @@ export class CalendarComponentComponent {
         title: 'New event',
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
-        color: colors['red'],
+        color: colors['blue'],
         draggable: true,
         resizable: {
           beforeStart: true,
@@ -191,4 +185,6 @@ export class CalendarComponentComponent {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
+
+  
 }

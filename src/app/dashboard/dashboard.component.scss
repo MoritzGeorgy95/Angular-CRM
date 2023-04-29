@@ -63,7 +63,18 @@
       width: 150px;
     }
 
-    
+    .widget.calendar {
+      position: relative;
+      .calendar-prompt {
+        position: absolute;
+        bottom: 2rem;
+        margin: 0;
+        margin-left: 9px;
+        font-size: 1rem;
+        color: #ccc;
+        font-style: italic;
+      }
+    }
     
 
     .widget.notepad {
@@ -114,15 +125,7 @@
     }
   }
 
-  // .add-user-btn {
-  //   position: absolute;
-  //   bottom: 2rem;
-  //   right: 2rem;
-  //   background: #141d2f !important;
-  //   mat-icon {
-  //     color: white;
-  //   }
-  // }
+
 }
 
 mat-spinner {

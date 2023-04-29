@@ -31,7 +31,8 @@ import { DialogNotepadComponent } from '../dialog-notepad/dialog-notepad.compone
 })
 export class DashboardComponent implements OnInit {
   constructor(public usersService: UsersService, private dialog: MatDialog) {
-    this.notes = this.usersService.notes;
+    this.notes$ = this.usersService.notes;
+    console.log(this.notes$)
   }
 
   @ViewChildren('widget') widgetElements: QueryList<ElementRef>;
@@ -40,7 +41,7 @@ export class DashboardComponent implements OnInit {
   cityName: string;
   temperature: number;
   weatherIcon: number;
-  notes: Array<any> = [];
+  notes$: Observable<any>;
   dragging:boolean= false;
 
 
@@ -151,7 +152,7 @@ export class DashboardComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe((data) => {
-        this.notes = data;
+        this.notes$ = data;
       });
     }
 

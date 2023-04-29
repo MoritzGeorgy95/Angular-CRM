@@ -102,9 +102,10 @@
             ],
             "styles": [
               "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/flatpickr/dist/flatpickr.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss",
-              "src/customTheme.scss"
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "src/styles.scss"
             ],
             "scripts": []
           }
