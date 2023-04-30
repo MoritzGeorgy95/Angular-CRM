@@ -21,7 +21,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddWidgetComponent } from '../dialog-add-widget/dialog-add-widget.component';
 import { DialogCalendarComponent } from '../dialog-calendar/dialog-calendar.component';
-import { Observable, of } from 'rxjs';
+import { Observable, of, toArray } from 'rxjs';
 import { DialogNotepadComponent } from '../dialog-notepad/dialog-notepad.component';
 
 @Component({
@@ -30,10 +30,7 @@ import { DialogNotepadComponent } from '../dialog-notepad/dialog-notepad.compone
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(public usersService: UsersService, private dialog: MatDialog) {
-    this.notes$ = this.usersService.notes;
-    console.log(this.notes$)
-  }
+ 
 
   @ViewChildren('widget') widgetElements: QueryList<ElementRef>;
 
@@ -42,7 +39,16 @@ export class DashboardComponent implements OnInit {
   temperature: number;
   weatherIcon: number;
   notes$: Observable<any>;
+  notes:Array<any>;
   dragging:boolean= false;
+
+  constructor(public usersService: UsersService, private dialog: MatDialog) {
+    this.notes$ = this.usersService.notes;
+    this.notes$.subscribe(notes => {
+      this.notes= notes;
+    })
+   
+  }
 
 
   ngOnInit() {

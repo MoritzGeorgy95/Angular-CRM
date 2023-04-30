@@ -19,7 +19,7 @@
     font-size: 2rem;
     font-weight: 600;
     font-size: 1.7rem;
-    border-bottom: 3px solid #6d5bd8;
+    border-bottom: 3px solid #141d2f;
     padding-bottom: 7px;
   }
 
@@ -32,6 +32,8 @@
     gap: 1rem;
     justify-content: center;
   }
+
+  
 }
 
 .login-header-container {
@@ -53,7 +55,7 @@
     gap: 0.5rem;
 
     mat-icon {
-      color: #6d5bd8;
+      color: #141d2f;
     }
   }
 }
@@ -74,5 +76,14 @@
   mat-icon {
     color: green;
     transform: scale(2);
+  }
+}
+
+.login-btn {
+  background-color: #141d2f !important;
+  color: white !important;
+  transition: 225ms all ease-in-out;
+  &:hover {
+    background-color: #29abe2 !important;
   }
 }

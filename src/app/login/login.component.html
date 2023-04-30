@@ -2,7 +2,7 @@
     <img src="assets/img/logo-new.png" alt="logo">
     <div *ngIf="!signupMode">
       No account yet? 
-      <button mat-raised-button color="primary" (click)="signupMode = true">Sign Up</button>
+      <button mat-raised-button class="login-btn" (click)="signupMode = true">Sign Up</button>
     </div>
     <div *ngIf="signupMode && !signUpSuccess" (click)="signupMode = false;" class="signup-header-container">
       <mat-icon>arrow_back_ios</mat-icon>
@@ -26,7 +26,7 @@
       </button>
     </mat-form-field>
     <div class="login-button-wrapper">
-      <button mat-raised-button color="primary" (click)="logIn()">Log in</button>
+      <button mat-raised-button class="login-btn" (click)="logIn()">Log in</button>
       <button mat-raised-button (click)="guestLogin()">Guest Login</button>
     </div>
   </div>
@@ -54,7 +54,7 @@
       </button>
     </mat-form-field>
     <div class="login-button-wrapper">
-      <button mat-raised-button color="primary" (click)="signUp()">Create Account</button>
+      <button mat-raised-button class="login-btn" (click)="signUp()">Create Account</button>
     </div>
   </div>
   <div class="signup-success-container" *ngIf="signUpSuccess">

@@ -9,25 +9,35 @@ import { doc, updateDoc } from 'firebase/firestore';
   styleUrls: ['./dialog-notepad.component.scss'],
 })
 export class DialogNotepadComponent {
-  notes$: Observable<string[]> = of(this.data.data);
   currenNote: string= '';
 
   constructor(
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any, 
     private usersService: UsersService
-  ) {}
+  ) {
+  }
 
   saveNote() {
     if (this.currenNote != '') {
-      this.data.data.push(this.currenNote);
+      this.data.data[0].notes.push(this.currenNote);
       this.currenNote = '';
       this.uploadNote();
     }
   }
 
+  async editNote(index: number) {
+
+  }
+
   async uploadNote() {
     let docRef= doc(this.usersService.collection, 'notes');
-    updateDoc(docRef, {notes: this.data.data});
+    updateDoc(docRef, {notes: this.data.data[0].notes});
+  }
+
+  async deleteNote(index:number) {
+    this.data.data[0].notes.splice(index, 1);
+    let docRef= doc(this.usersService.collection, 'notes');
+    updateDoc(docRef, {notes: this.data.data[0].notes});
   }
 }

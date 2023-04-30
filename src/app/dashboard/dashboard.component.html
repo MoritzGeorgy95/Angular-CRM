@@ -59,7 +59,6 @@
         <img src="assets/img/calendar.png" alt="" class="widget-icon calendar"/>
         <h2>Client Calendar</h2>
       </div>
-      <p class="calendar-prompt">Click on widget to open calendar</p>
     </div>
     <div
       class="widget notepad"
@@ -68,16 +67,18 @@
       #widget
       (cdkDragStarted)="dragging= true"
       (cdkDragEnded)="getWidgetFinalPos($event)"
-      (click)="openNotepadDialog(notes$)"
-      [style.justify-content]="(notes$ | async).length === 0 ? 'center' : ''"
+      (click)="openNotepadDialog(notes)"
     >
       <div class="widget-description-container">
         <img src="assets/img/notes.png" alt="" class="widget-icon"/>
         <h2>Notepad</h2>
       </div>
-      <div class="notes-container" *ngIf="(notes$ | async).length > 0" >
+      <div *ngIf="notes && notes[0] && notes[0].notes.length === 0">
+        <p class="placeholder">No notes in storage yet.</p>
+      </div>
+      <div class="notes-container" *ngIf="notes && notes[0] && notes[0].notes.length > 0">
         <ul>
-          <li *ngFor="let note of notes$ | async">
+          <li *ngFor="let note of notes[0].notes">
             {{ note }}
           </li>
         </ul>
