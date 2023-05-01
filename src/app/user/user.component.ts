@@ -9,8 +9,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
 

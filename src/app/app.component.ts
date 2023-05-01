@@ -37,6 +37,8 @@ export class AppComponent implements OnInit {
     }
   }
 
+
+
   getCurrentHour() {
     const currentHour = new Date().getHours();
 
