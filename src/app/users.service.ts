@@ -17,7 +17,9 @@ export class UsersService {
   private _notes: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public readonly notes = this._notes.asObservable();
 
-  events: any= [];
+  private _events: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  public readonly events = this._events.asObservable();
+
   collection: any;
   currentUser: any;
   currentUserCustomImage: any;
@@ -26,12 +28,12 @@ export class UsersService {
   currentlyLoggedInUserName: string= "Guest";
 
   constructor(private firestore: Firestore, public storage: Storage) {
-    //if local storage has user data getAll again to not loose notes or smth like that
   }
 
   async getAll() {
     const users: any[] = [];
     const notes: any[] = [];
+    const events: any[] = [];
 
     const dataBundle = await getDocs(this.collection);
     dataBundle.forEach((doc) => {
@@ -41,7 +43,7 @@ export class UsersService {
       }
 
       else if (data.events) {
-        this.events= data.events
+        events.push(data)
       }
 
       else {
@@ -51,6 +53,7 @@ export class UsersService {
     });
     this._users.next(users);
     this._notes.next(notes);
+    this._events.next(events);
   }
 
   async getSingle(id: any) {

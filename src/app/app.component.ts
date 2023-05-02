@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from './users.service';
-import { Auth, signInWithCustomToken } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',

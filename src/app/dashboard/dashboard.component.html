@@ -44,19 +44,33 @@
         <img src="assets/img/notifications.png" alt="" class="widget-icon" />
         <h2>Notifications</h2>
       </div>
+      <div *ngIf="events && events.length === 0">
+        <p class="placeholder">No notifications.</p>
+      </div>
+      <div class="notifications-container" *ngIf="events && events.length > 0">
+        <ul>
+          <li *ngFor="let event of events">
+            Event alert: {{ event.start.toDate().toISOString().split("T")[0] }};
+            {{ event.title }}
+          </li>
+        </ul>
+      </div>
     </div>
     <div
       class="widget calendar"
       cdkDrag
       cdkDragBoundary=".widget-container"
       #widget
-      (cdkDragStarted)="dragging= true"
+      (cdkDragStarted)="dragging = true"
       (click)="openCalendarViewDialog()"
       (cdkDragEnded)="getWidgetFinalPos($event)"
-      
     >
       <div class="widget-description-container">
-        <img src="assets/img/calendar.png" alt="" class="widget-icon calendar"/>
+        <img
+          src="assets/img/calendar.png"
+          alt=""
+          class="widget-icon calendar"
+        />
         <h2>Client Calendar</h2>
       </div>
     </div>
@@ -65,18 +79,21 @@
       cdkDrag
       cdkDragBoundary=".widget-container"
       #widget
-      (cdkDragStarted)="dragging= true"
+      (cdkDragStarted)="dragging = true"
       (cdkDragEnded)="getWidgetFinalPos($event)"
       (click)="openNotepadDialog(notes)"
     >
       <div class="widget-description-container">
-        <img src="assets/img/notes.png" alt="" class="widget-icon"/>
+        <img src="assets/img/notes.png" alt="" class="widget-icon" />
         <h2>Notepad</h2>
       </div>
       <div *ngIf="notes && notes[0] && notes[0].notes.length === 0">
         <p class="placeholder">No notes in storage yet.</p>
       </div>
-      <div class="notes-container" *ngIf="notes && notes[0] && notes[0].notes.length > 0">
+      <div
+        class="notes-container"
+        *ngIf="notes && notes[0] && notes[0].notes.length > 0"
+      >
         <ul>
           <li *ngFor="let note of notes[0].notes">
             {{ note }}
@@ -86,5 +103,4 @@
       <div class="frozen-glass"></div>
     </div>
   </div>
-  
 </div>

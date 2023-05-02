@@ -92,8 +92,6 @@
   </mwl-calendar-day-view>
 </div>
 
-<!-- Everything you see below is just for the demo, you don't need to include it in your app -->
-
 <br /><br /><br />
 
 <h3>
@@ -104,7 +102,7 @@
   <div class="clearfix"></div>
 </h3>
 
-<div class="table-responsive">
+<div class="table-responsive" *ngIf="events.length > 0">
   <table class="table table-bordered">
     <thead>
       <tr>

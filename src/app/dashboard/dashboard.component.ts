@@ -30,8 +30,6 @@ import { DialogNotepadComponent } from '../dialog-notepad/dialog-notepad.compone
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
- 
-
   @ViewChildren('widget') widgetElements: QueryList<ElementRef>;
 
   formattedDate: string;
@@ -39,17 +37,25 @@ export class DashboardComponent implements OnInit {
   temperature: number;
   weatherIcon: number;
   notes$: Observable<any>;
-  notes:Array<any>;
-  dragging:boolean= false;
+  notes: Array<any>;
+  events$: Observable<any>;
+  events: Array<any>;
+  dragging: boolean = false;
 
   constructor(public usersService: UsersService, private dialog: MatDialog) {
     this.notes$ = this.usersService.notes;
-    this.notes$.subscribe(notes => {
-      this.notes= notes;
-    })
-   
+    this.notes$.subscribe((notes) => {
+      this.notes = notes;
+    });
+    this.events$ = this.usersService.events;
+    this.events$.subscribe((events) => {
+      if (events.length > 0 && events[0].events) {
+        this.events = events[0].events;
+      } else {
+        this.events = [];
+      }
+    });
   }
-
 
   ngOnInit() {
     this.getCurrentDate();
@@ -88,7 +94,6 @@ export class DashboardComponent implements OnInit {
         );
       }
     }
-   
   }
 
   async getPos(position: any) {
@@ -135,19 +140,16 @@ export class DashboardComponent implements OnInit {
         }
       }
     });
-  
   }
 
   openCalendarViewDialog() {
-    if(!this.dragging) {
+    if (!this.dragging) {
       this.dialog.open(DialogCalendarComponent, {
         panelClass: 'custom-modalbox',
       });
-    } 
-    else {
-      this.dragging= false;
+    } else {
+      this.dragging = false;
     }
-    
   }
 
   openNotepadDialog(data: any) {
@@ -156,15 +158,12 @@ export class DashboardComponent implements OnInit {
         panelClass: 'notepad-box',
         data: { data },
       });
-  
+
       dialogRef.afterClosed().subscribe((data) => {
         this.notes$ = data;
       });
+    } else {
+      this.dragging = false;
     }
-
-    else {
-      this.dragging= false;
-    }
-    
   }
 }

@@ -26,9 +26,6 @@ export class DialogNotepadComponent {
     }
   }
 
-  async editNote(index: number) {
-
-  }
 
   async uploadNote() {
     let docRef= doc(this.usersService.collection, 'notes');

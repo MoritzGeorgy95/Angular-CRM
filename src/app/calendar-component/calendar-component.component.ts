@@ -1,8 +1,6 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  OnDestroy
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+
+import { Timestamp } from 'firebase/firestore';
 
 import {
   startOfDay,
@@ -15,8 +13,7 @@ import {
 
 import { UsersService } from '../users.service';
 
-
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -41,84 +38,61 @@ const colors: Record<string, EventColor> = {
   },
 };
 
-
-
-
 @Component({
   selector: 'app-calendar-component',
   templateUrl: './calendar-component.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./calendar-component.component.scss']
+  styleUrls: ['./calendar-component.component.scss'],
 })
 export class CalendarComponentComponent implements OnDestroy {
-
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
-
-  actions: CalendarEventAction[] = [
-    {
-      label: '<mat-icon>edit</mat-icon>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt">Delete</i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
   refresh = new Subject<void>();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'Default Event',
-      color: { ...colors['blue'] },
-      // actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-     }
+    // {
+    //   start: subDays(startOfDay(new Date()), 1),
+    //   end: addDays(new Date(), 1),
+    //   title: 'Default Event',
+    //   color: { ...colors['blue'] },
+    //   // actions: this.actions,
+    //   allDay: true,
+    //   resizable: {
+    //     beforeStart: true,
+    //     afterEnd: true,
+    //   },
+    //   draggable: true,
+    //  }
   ];
 
-
-
+  events$: Observable<any>;
 
   activeDayIsOpen: boolean = true;
 
   constructor(private usersService: UsersService) {
-    this.events= this.usersService.events;
+    this.events$ = this.usersService.events;
+    this.events$.subscribe((events) => {
+      this.events = events[0].events.map((event:any) => ({
+        ...event,
+        start: event.start.toDate(),
+        end: event.end.toDate(),
+      }));
+    });
   }
 
-
   async storeEvents() {
-    let docRef= doc(this.usersService.collection, 'events');
-    await updateDoc(docRef, {events: this.events});
-    this.usersService.events= this.events;
+    let docRef = doc(this.usersService.collection, 'events');
+    await updateDoc(docRef, { events: this.events });
   }
 
   ngOnDestroy(): void {
-    this.storeEvents()
+    this.storeEvents();
+    this.usersService.getAll();
   }
-  
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -149,11 +123,10 @@ export class CalendarComponentComponent implements OnDestroy {
       }
       return iEvent;
     });
-    this.handleEvent('Dropped or resized', event);
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
+    // this.modalData = { event, action };
     // this.modal.open(this.modalContent, { size: 'lg' });
   }
 
@@ -185,6 +158,4 @@ export class CalendarComponentComponent implements OnDestroy {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
-
-  
 }

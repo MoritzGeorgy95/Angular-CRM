@@ -90,7 +90,7 @@
   }
 }
 
-.login-btn {
+.login-btn, .signup-btn {
   background-color: #141d2f !important;
   color: white !important;
   transition: 225ms all ease-in-out;
@@ -99,8 +99,12 @@
   }
 }
 
-.login-btn:first-of-type {
+.signup-btn {
   outline: 1px solid white;
+}
+
+.btn {
+  font-size: 1.1rem;
 }
 
 .login-signup-prompt {
