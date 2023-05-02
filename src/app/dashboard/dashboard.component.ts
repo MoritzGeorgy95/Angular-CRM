@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
   events$: Observable<any>;
   events: Array<any>;
   dragging: boolean = false;
+  noGeo: boolean= false;
 
   constructor(public usersService: UsersService, private dialog: MatDialog) {
     this.notes$ = this.usersService.notes;
@@ -81,19 +82,21 @@ export class DashboardComponent implements OnInit {
           },
           (error) => {
             this.rejectPos(error);
+            this.noGeo= true;
           }
         );
       }
+      
     }
   }
 
   async getPos(position: any) {
-    let locationUrl = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=x6YRAVajQSGgAIVNUX20e8lbKyOwot7A&q=${position.coords.latitude}%2C${position.coords.longitude}`;
+    let locationUrl = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=x6YRAVajQSGgAIVNUX20e8lbKyOwot7A&q=${position.coords.latitude}%2C${position.coords.longitude}`;
     let locationResponse = await fetch(locationUrl);
     let locationData = await locationResponse.json();
     this.cityName = locationData.LocalizedName;
 
-    let weatherUrl = `http://dataservice.accuweather.com/currentconditions/v1/${locationData.Key}?apikey=x6YRAVajQSGgAIVNUX20e8lbKyOwot7A`;
+    let weatherUrl = `https://dataservice.accuweather.com/currentconditions/v1/${locationData.Key}?apikey=x6YRAVajQSGgAIVNUX20e8lbKyOwot7A`;
     let weatherResponse = await fetch(weatherUrl);
     let weatherData = await weatherResponse.json();
     this.temperature = weatherData[0].Temperature.Metric.Value;

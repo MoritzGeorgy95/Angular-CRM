@@ -28,9 +28,13 @@
         <img [src]="'assets/img/icons/' + weatherIcon + '.svg'" alt="" />
       </div>
 
-      <div *ngIf="!cityName && !temperature" class="fetching-weather-container">
+      <div *ngIf="!cityName && !temperature && !noGeo" class="fetching-weather-container">
         <h2>Fetching weather data</h2>
         <mat-spinner></mat-spinner>
+      </div>
+      <div *ngIf="!cityName && !temperature && noGeo" class="fetching-weather-container">
+        <h2>Geolocation disabled  <mat-icon>sentiment_dissatisfied</mat-icon></h2>
+        <p style="margin: 0; margin-top: .5rem;">Enable gelocation & refresh page.</p>
       </div>
     </div>
     <div
