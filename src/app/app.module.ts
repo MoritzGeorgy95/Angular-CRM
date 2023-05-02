@@ -40,7 +40,6 @@ import { DialogDeleteClientComponent } from './dialog-delete-client/dialog-delet
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
 import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
-import { DialogAddWidgetComponent } from './dialog-add-widget/dialog-add-widget.component';
 import { CalendarComponentComponent } from './calendar-component/calendar-component.component';
 
 //calendar
@@ -69,7 +68,6 @@ import { InfoComponent } from './info/info.component';
     UserDetailComponent,
     DialogEditDataComponent,
     DialogDeleteClientComponent,
-    DialogAddWidgetComponent,
     DialogUploadFileComponent,
     CalendarComponentComponent,
     DialogCalendarComponent,

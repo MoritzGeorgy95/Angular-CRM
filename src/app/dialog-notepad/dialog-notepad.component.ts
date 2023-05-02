@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
 import { UsersService } from '../users.service';
 import { doc, updateDoc } from 'firebase/firestore';
 @Component({

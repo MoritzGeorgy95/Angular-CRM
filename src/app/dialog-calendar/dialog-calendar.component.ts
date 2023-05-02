@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CalendarComponentComponent } from '../calendar-component/calendar-component.component';
 
 @Component({
   selector: 'app-dialog-calendar',

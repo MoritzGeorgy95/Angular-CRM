@@ -54,19 +54,7 @@ export class CalendarComponentComponent implements OnDestroy {
   refresh = new Subject<void>();
 
   events: CalendarEvent[] = [
-    // {
-    //   start: subDays(startOfDay(new Date()), 1),
-    //   end: addDays(new Date(), 1),
-    //   title: 'Default Event',
-    //   color: { ...colors['blue'] },
-    //   // actions: this.actions,
-    //   allDay: true,
-    //   resizable: {
-    //     beforeStart: true,
-    //     afterEnd: true,
-    //   },
-    //   draggable: true,
-    //  }
+    
   ];
 
   events$: Observable<any>;
@@ -126,8 +114,7 @@ export class CalendarComponentComponent implements OnDestroy {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    // this.modalData = { event, action };
-    // this.modal.open(this.modalContent, { size: 'lg' });
+    
   }
 
   addEvent(): void {
