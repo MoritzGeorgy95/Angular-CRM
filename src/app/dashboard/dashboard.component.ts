@@ -3,25 +3,13 @@ import {
   OnInit,
   ViewChildren,
   QueryList,
-  ElementRef,
-  AfterViewInit,
+  ElementRef
 } from '@angular/core';
-import { Firestore, collectionData } from '@angular/fire/firestore';
 import { UsersService } from '../users.service';
-import {
-  addDoc,
-  onSnapshot,
-  collection,
-  CollectionReference,
-  doc,
-  DocumentData,
-  getDoc,
-  updateDoc,
-} from 'firebase/firestore';
+
 import { MatDialog } from '@angular/material/dialog';
-import { DialogAddWidgetComponent } from '../dialog-add-widget/dialog-add-widget.component';
 import { DialogCalendarComponent } from '../dialog-calendar/dialog-calendar.component';
-import { Observable, of, toArray } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DialogNotepadComponent } from '../dialog-notepad/dialog-notepad.component';
 
 @Component({
