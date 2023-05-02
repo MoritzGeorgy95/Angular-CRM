@@ -26,6 +26,9 @@ export class DialogEditDataComponent {
   }
 
   async updateData() {
+    if (this.data.data.birthday) {
+      this.data.data.birthday.toLocaleDateString();
+    }
     let docRef = doc(this.usersService.collection, this.url);
     await updateDoc(docRef, this.data.data);
     this.dialog.closeAll();
@@ -33,5 +36,15 @@ export class DialogEditDataComponent {
 
   trackByFn(index: any, item: any) {
     return index;
+  }
+
+  toggleMale() {
+    this.data.data.male = true;
+    this.data.data.female = false;
+  }
+
+  toggleFemale() {
+    this.data.data.male = false;
+    this.data.data.female = true;
   }
 }

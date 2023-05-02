@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'crm-app';
   opened: boolean = true;
   time: string;
+  userMenuOpen:boolean= false;
 
   constructor(
     private auth: Auth,

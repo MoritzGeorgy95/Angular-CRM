@@ -2,8 +2,6 @@
   background-color: #141d2f;
 }
 
-
-
 .sidenav-container {
   height: 100vh;
 }
@@ -59,8 +57,6 @@ ul {
     }
   }
 
- 
-
   li:last-of-type {
     position: absolute;
     bottom: 1rem;
@@ -68,12 +64,6 @@ ul {
     left: 0;
   }
 }
-
-// .sidenav-placeholder-img {
-//   position: absolute;
-//   width: 100%;
-//   bottom: 1rem;
-// }
 
 .router-container {
   padding: 1rem;
@@ -124,7 +114,7 @@ mat-toolbar-row {
     }
     .color-dot {
       position: absolute;
-      right: .5rem;
+      right: 0.5rem;
       width: 10px;
       height: 10px;
       border-radius: 100%;
@@ -132,6 +122,64 @@ mat-toolbar-row {
       outline: 1px solid white;
       bottom: 0;
     }
-  }
 
+    .userinfo-wrapper {
+      position: absolute;
+      right: 25px;
+      top: 100%;
+      z-index: 3;
+      background: white;
+      color: black;
+      padding: 1rem 2rem;
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border: 1px solid #141d2f;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      h2 {
+        padding-bottom: 7px;
+        border-bottom: 2px solid gray;
+      }
+
+      div {
+        font-weight: 400;
+        margin-top: 1rem;
+        font-size: 1.1rem;
+        transition: 225ms all ease-in-out;
+        cursor: pointer;
+
+        mat-icon {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.screensize-alert {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: none;
+  background-color: #141d2f;
+  h1 {
+    color: white;
+    padding: 0 1rem;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .screensize-alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
 }

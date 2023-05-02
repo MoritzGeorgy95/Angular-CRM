@@ -16,21 +16,25 @@ import { trigger, style, transition, animate } from '@angular/animations';
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss'],
   animations: [
-    trigger(
-      'enterAnimation', [
-        transition(':enter', [
-          animate('225ms', style({
-            opacity: 1
-          }))
-        ]),
-        transition(':leave', [
-          animate('225ms', style({
-            opacity: 0
-          }))
-        ])
-      ]
-    )
-  ]
+    trigger('enterAnimation', [
+      transition(':enter', [
+        animate(
+          '225ms',
+          style({
+            opacity: 1,
+          })
+        ),
+      ]),
+      transition(':leave', [
+        animate(
+          '225ms',
+          style({
+            opacity: 0,
+          })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class UserDetailComponent {
   userData: any;
@@ -59,7 +63,12 @@ export class UserDetailComponent {
       this.customAvatar = this.usersService.currentUserCustomImage;
       this.documents = this.usersService.currentUserDocuments;
       this.sortProjectsByDeadline();
+     
     });
+  }
+
+  isObjectEmpty(obj: object): boolean {
+    return Object.keys(obj).length === 0;
   }
 
   editDataDialog(data: any) {
@@ -72,13 +81,13 @@ export class UserDetailComponent {
     });
   }
 
-  projectDialog(i:number) {
-    const dialogRef= this.dialog.open(DialogEditProjectComponent, {
-      data: [this.userData.projects[i], i]
+  projectDialog(i: number) {
+    const dialogRef = this.dialog.open(DialogEditProjectComponent, {
+      data: [this.userData.projects[i], i],
     });
-    dialogRef.afterClosed().subscribe(()=> {
+    dialogRef.afterClosed().subscribe(() => {
       this.getCurrentUser();
-    })
+    });
   }
 
   deleteClientDialog() {
@@ -158,32 +167,36 @@ export class UserDetailComponent {
   }
 
   async deleteProjects() {
-    this.userData.projects = this.userData.projects.filter((p: any) => !p.selected);
-    let docRef= doc(this.usersService.collection, this.url);
+    this.userData.projects = this.userData.projects.filter(
+      (p: any) => !p.selected
+    );
+    let docRef = doc(this.usersService.collection, this.url);
     await updateDoc(docRef, {
-      projects: this.userData.projects
-    })
+      projects: this.userData.projects,
+    });
     this.editMenuOpen2 = false;
   }
-
-  
 
   getSelectedProjectsCount(): number {
     let numberProjs = 0;
     if (this.userData.projects.length > 0) {
-      numberProjs = this.userData.projects.filter((p: any) => p.selected).length;
+      numberProjs = this.userData.projects.filter(
+        (p: any) => p.selected
+      ).length;
     }
     return numberProjs;
   }
 
   sortProjectsByDeadline(): void {
-    this.userData.projects.sort(
-      (a: { deadline: string }, b: { deadline: string }) => {
-        const deadlineA = new Date(a.deadline);
-        const deadlineB = new Date(b.deadline);
-        return deadlineA.getTime() - deadlineB.getTime();
-      }
-    );
+    if (this.userData.projects.length > 0) {
+      this.userData.projects.sort(
+        (a: { deadline: string }, b: { deadline: string }) => {
+          const deadlineA = new Date(a.deadline);
+          const deadlineB = new Date(b.deadline);
+          return deadlineA.getTime() - deadlineB.getTime();
+        }
+      );
+    }
   }
 
   getDeadlineClass(project: any, useCase: number) {

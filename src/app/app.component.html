@@ -28,27 +28,31 @@
         <div class="notifications-container">
           <button
             mat-fab
-            matTooltip="Notifications"
-            style="background-color: transparent; box-shadow: none;"
-            [routerLink]="['/']"
-          >
-            <mat-icon>notifications</mat-icon>
-          </button>
-          <button
-            mat-fab
             matTooltip="App Info"
-            style="background-color: transparent; box-shadow: none;"
+            style="background-color: transparent; box-shadow: none"
             [routerLink]="['/info']"
           >
             <mat-icon>info</mat-icon>
           </button>
-          <img src="assets/img/icon_person.png" alt="person-icon" />
+          <img src="assets/img/icon_person.png" alt="person-icon" (click)="userMenuOpen= !userMenuOpen" />
           <div class="color-dot"></div>
+          <div class="userinfo-wrapper" *ngIf="userMenuOpen">
+            <h2>{{ usersService.currentlyLoggedInUserName }}</h2>
+            <div (click)="logout()"><mat-icon>logout</mat-icon>Logout</div>
+          </div>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>
 
-    <div class="router-container" [ngStyle]="{'background-color': router.url == '/dashboard' || router.url == '/' ? '#f5f5f5' : '#ffffff'}">
+    <div
+      class="router-container"
+      [ngStyle]="{
+        'background-color':
+          router.url == '/dashboard' || router.url == '/'
+            ? '#f5f5f5'
+            : '#ffffff'
+      }"
+    >
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
@@ -56,4 +60,9 @@
 
 <div *ngIf="router.url == '/login'">
   <app-login></app-login>
+</div>
+
+
+<div class="screensize-alert">
+  <h1>This is a desktop application. Please change your device or enlarge browser window.</h1>
 </div>

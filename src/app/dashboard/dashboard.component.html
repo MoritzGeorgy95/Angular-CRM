@@ -39,22 +39,33 @@
       cdkDragBoundary=".widget-container"
       #widget
       (cdkDragEnded)="getWidgetFinalPos($event)"
+      (click)="openCalendarViewDialog()"
     >
       <div class="widget-description-container">
         <img src="assets/img/notifications.png" alt="" class="widget-icon" />
         <h2>Notifications</h2>
       </div>
       <div *ngIf="events && events.length === 0">
-        <p class="placeholder">No notifications.</p>
+        <p class="placeholder">No notifications for today.</p>
       </div>
-      <div class="notifications-container" *ngIf="events && events.length > 0">
+      <div class="events-container" *ngIf="events && events.length > 0">
         <ul>
           <li *ngFor="let event of events">
-            Event alert: {{ event.start.toDate().toISOString().split("T")[0] }};
-            {{ event.title }}
+            <div class="event-wrapper">
+              <div><mat-icon>event</mat-icon>
+                {{ event.title }} </div>
+              <div>
+                <mat-icon>schedule</mat-icon>
+                {{ event.start.toDate().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }) }}
+               
+              </div>
+            </div>
+            
+           
           </li>
         </ul>
       </div>
+      <div class="frozen-glass"></div>
     </div>
     <div
       class="widget calendar"

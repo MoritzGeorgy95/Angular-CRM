@@ -1,15 +1,40 @@
 <h1 mat-dialog-title class="mat-dialog-title">Edit {{data.data.placeholder}}</h1>
 <div mat-dialog-content class="mat-dialog-content">
   <ng-container *ngFor="let item of data.data | keyvalue let i= index trackBy: trackByFn">
-    <mat-form-field appearance="outline" *ngIf="item.key !== 'placeholder'">
+    <mat-form-field appearance="outline" *ngIf="item.key !== 'placeholder' &&  item.key !== 'female' && item.key !== 'male'">
       <mat-label>{{ item.key }}</mat-label>
       <input
-       
+       *ngIf="item.key != 'birthday'"
         matInput
         [(ngModel)]="data.data[$any(item.key)]"
         [value]= "item.value"
       />
+      <input matInput [matDatepicker]="picker" [value]= "item.value" [(ngModel)]="data.data[$any(item.key)]" *ngIf="item.key === 'birthday'"/>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+        *ngIf="item.key === 'birthday'"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    
+      <mat-checkbox
+        *ngIf="item.key == 'female'"
+        class="example-margin"
+        color="primary"
+        [(ngModel)]="data.data[$any(item.key)]"
+        (click)="toggleFemale()"
+        >Female</mat-checkbox
+      >
+      <mat-checkbox
+        *ngIf="item.key == 'male'"
+        class="example-margin"
+        color="primary"
+        [(ngModel)]="data.data[$any(item.key)]"
+        (click)="toggleMale()"
+        >Male</mat-checkbox
+      >
+
   </ng-container>
    
 </div>

@@ -50,7 +50,10 @@ export class DashboardComponent implements OnInit {
     this.events$ = this.usersService.events;
     this.events$.subscribe((events) => {
       if (events.length > 0 && events[0].events) {
-        this.events = events[0].events;
+        this.events = events[0].events.filter((event: any) => {
+          const today = new Date();
+          return event.start.toDate().toDateString() === today.toDateString();
+        });
       } else {
         this.events = [];
       }

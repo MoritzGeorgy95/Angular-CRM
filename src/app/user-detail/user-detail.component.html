@@ -61,7 +61,7 @@
             })
           "
         >
-          Edit Name/ Change Avatar<mat-icon>mode_edit</mat-icon>
+          Edit Name<mat-icon>mode_edit</mat-icon>
         </button>
         <button mat-menu-item (click)="deleteClientDialog()">
           Delete Client <mat-icon>delete_forever</mat-icon>
@@ -124,7 +124,8 @@
         (click)="
           editDataDialog({
             female: userData.female,
-            birthday: userData.birthday,
+            male: userData.male,
+            birthday: userData.birthday.toDate().toISOString(),
             placeholder: 'Personal Data'
           })
         "
@@ -220,7 +221,7 @@
     <h1>Projects</h1>
     <div
     class="project-placeholder"
-    *ngIf="userData.projects.length === 0"
+    *ngIf="userData.projects.length === 0 || isObjectEmpty(userData.projects)"
   >
     <mat-icon>article</mat-icon>
     <h2>No Projects created. Click on plus icon to create new</h2>
