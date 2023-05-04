@@ -33,7 +33,11 @@
           >
             <mat-icon>info</mat-icon>
           </button>
-          <img src="assets/img/icon_person.png" alt="person-icon" (click)="userMenuOpen= !userMenuOpen" />
+          <img
+            src="assets/img/icon_person.png"
+            alt="person-icon"
+            (click)="userMenuOpen = !userMenuOpen"
+          />
           <div class="color-dot"></div>
           <div class="userinfo-wrapper" *ngIf="userMenuOpen">
             <h2>{{ usersService.currentlyLoggedInUserName }}</h2>
@@ -46,10 +50,10 @@
     <div
       class="router-container"
       [ngStyle]="{
-        'background-color':
+        'background-image':
           router.url == '/dashboard' || router.url == '/'
-            ? '#f5f5f5'
-            : '#ffffff'
+            ? 'url(/assets/img/cool-background.png)'
+            : 'unset'
       }"
     >
       <router-outlet></router-outlet>
@@ -61,7 +65,9 @@
   <app-login></app-login>
 </div>
 
-
 <div class="screensize-alert">
-  <h1>This is a desktop application. Please change your device or enlarge browser window.</h1>
+  <h1>
+    This is a desktop application. Please change your device or enlarge browser
+    window.
+  </h1>
 </div>
