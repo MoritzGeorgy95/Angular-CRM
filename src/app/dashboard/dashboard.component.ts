@@ -3,10 +3,9 @@ import {
   OnInit,
   ViewChildren,
   QueryList,
-  ElementRef
+  ElementRef,
 } from '@angular/core';
 import { UsersService } from '../users.service';
-
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCalendarComponent } from '../dialog-calendar/dialog-calendar.component';
 import { Observable } from 'rxjs';
@@ -29,26 +28,35 @@ export class DashboardComponent implements OnInit {
   events$: Observable<any>;
   events: Array<any>;
   dragging: boolean = false;
-  noGeo: boolean= false;
+  noGeo: boolean = false;
+
+  /**
+   *
+   * @param usersService The usersService gets injected in order to gain access to all its properties which store all sorts of user data.
+   * @param dialog The MatDialog service gets injected in order to provide pre-styled material design dialogs in the component which can be opened and subscribed to.
+   */
 
   constructor(public usersService: UsersService, private dialog: MatDialog) {
     this.notes$ = this.usersService.notes;
     this.notes$.subscribe((notes) => {
       this.notes = notes;
     });
-    this.events$ = this.usersService.events;
-    this.events$.subscribe((events) => {
-      if (events.length > 0 && events[0].events) {
-        this.events = events[0].events.filter((event: any) => {
-          const today = new Date();
-          return event.start.toDate().toDateString() === today.toDateString();
-        });
-      } else {
+
+    this.events$.subscribe((events: any) => {
+      if (events.length <= 0 || !events[0].events) {
         this.events = [];
+        return;
       }
+      this.events = events[0].events.filter(
+        (event: any) =>
+          event.start.toDate().toDateString() === new Date().toDateString()
+      );
     });
   }
 
+  /**
+   * Get gelocation, current date/time & current weather to then be displayed within dashboard widgets.
+   */
   ngOnInit() {
     this.getCurrentDate();
     this.getCurrentWeather();
@@ -74,21 +82,20 @@ export class DashboardComponent implements OnInit {
       this.temperature = JSON.parse(cachedWeather).temperature;
       this.cityName = JSON.parse(cachedWeather).cityName;
       this.weatherIcon = JSON.parse(cachedWeather).weatherIcon;
-    } else {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            this.getPos(position);
-          },
-          (error) => {
-            this.rejectPos(error);
-            this.noGeo= true;
-          }
-        );
-      }
-      
+      return;
     }
+    navigator.geolocation.getCurrentPosition(
+      (position) => this.getPos(position),
+      (error) => {
+        this.rejectPos(error);
+        this.noGeo = true;
+      }
+    );
   }
+
+  /**
+   * @param position object with coordinate properties (lat; long)
+   */
 
   async getPos(position: any) {
     let locationUrl = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=x6YRAVajQSGgAIVNUX20e8lbKyOwot7A&q=${position.coords.latitude}%2C${position.coords.longitude}`;
@@ -102,7 +109,7 @@ export class DashboardComponent implements OnInit {
     this.temperature = weatherData[0].Temperature.Metric.Value;
     this.weatherIcon = weatherData[0].WeatherIcon;
 
-    // Store data in cache
+    // Store data in local storage
     const dataToCache = {
       cityName: this.cityName,
       temperature: this.temperature,
@@ -115,6 +122,14 @@ export class DashboardComponent implements OnInit {
     alert(error.message);
   }
 
+  /**
+   * Get widget positions after being dragged in order to prevent widgets from overlapping.
+   */
+  /**
+   *
+   * @param event dragging event
+   */
+
   getWidgetFinalPos(event: any) {
     //get positional data for currently dragged widget
     const draggedWidget = event.source.element.nativeElement;
@@ -124,40 +139,45 @@ export class DashboardComponent implements OnInit {
       if (widget.nativeElement !== draggedWidget) {
         const targetWidgetRect = widget.nativeElement.getBoundingClientRect();
 
-        if (
-          draggedWidgetRect.right > targetWidgetRect.left &&
-          draggedWidgetRect.left < targetWidgetRect.right &&
-          draggedWidgetRect.bottom > targetWidgetRect.top &&
-          draggedWidgetRect.top < targetWidgetRect.bottom
-        ) {
+        if (this.widgetOverlaps(draggedWidgetRect, targetWidgetRect)) {
           event.source._dragRef.reset();
         }
       }
     });
   }
 
+  widgetOverlaps(draggedWidgetRect: any, targetWidgetRect: any) {
+    return (
+      draggedWidgetRect.right > targetWidgetRect.left &&
+      draggedWidgetRect.left < targetWidgetRect.right &&
+      draggedWidgetRect.bottom > targetWidgetRect.top &&
+      draggedWidgetRect.top < targetWidgetRect.bottom
+    );
+  }
+
+  /**
+   * Logic to open calendar & notepad dialogs.
+   */
+
   openCalendarViewDialog() {
-    if (!this.dragging) {
-      this.dialog.open(DialogCalendarComponent, {
-        panelClass: 'custom-modalbox',
-      });
-    } else {
+    if (this.dragging) {
       this.dragging = false;
+      return;
     }
+    this.dialog.open(DialogCalendarComponent, {
+      panelClass: 'custom-modalbox',
+    });
   }
 
   openNotepadDialog(data: any) {
-    if (!this.dragging) {
-      const dialogRef = this.dialog.open(DialogNotepadComponent, {
-        panelClass: 'notepad-box',
-        data: { data },
-      });
-
-      dialogRef.afterClosed().subscribe((data) => {
-        this.notes$ = data;
-      });
-    } else {
+    if (this.dragging) {
       this.dragging = false;
+      return;
     }
+    const dialogRef = this.dialog.open(DialogNotepadComponent, {
+      panelClass: 'notepad-box',
+      data: { data },
+    });
+    dialogRef.afterClosed().subscribe((data) => (this.notes$ = data));
   }
 }
