@@ -41,15 +41,16 @@ export class DashboardComponent implements OnInit {
       this.notes = notes;
     });
 
-    this.events$.subscribe((events: any) => {
-      if (events.length <= 0 || !events[0].events) {
+    this.events$ = this.usersService.events;
+    this.events$.subscribe((events) => {
+      if (events.length > 0 && events[0].events) {
+        this.events = events[0].events.filter((event: any) => {
+          const today = new Date();
+          return event.start.toDate().toDateString() === today.toDateString();
+        });
+      } else {
         this.events = [];
-        return;
       }
-      this.events = events[0].events.filter(
-        (event: any) =>
-          event.start.toDate().toDateString() === new Date().toDateString()
-      );
     });
   }
 
@@ -167,24 +168,27 @@ export class DashboardComponent implements OnInit {
    */
 
   openCalendarViewDialog() {
-    if (this.dragging) {
+    if (!this.dragging) {
+      this.dialog.open(DialogCalendarComponent, {
+        panelClass: 'custom-modalbox',
+      });
+    } else {
       this.dragging = false;
-      return;
     }
-    this.dialog.open(DialogCalendarComponent, {
-      panelClass: 'custom-modalbox',
-    });
   }
 
   openNotepadDialog(data: any) {
-    if (this.dragging) {
+    if (!this.dragging) {
+      const dialogRef = this.dialog.open(DialogNotepadComponent, {
+        panelClass: 'notepad-box',
+        data: { data },
+      });
+
+      dialogRef.afterClosed().subscribe((data) => {
+        this.notes$ = data;
+      });
+    } else {
       this.dragging = false;
-      return;
     }
-    const dialogRef = this.dialog.open(DialogNotepadComponent, {
-      panelClass: 'notepad-box',
-      data: { data },
-    });
-    dialogRef.afterClosed().subscribe((data) => (this.notes$ = data));
   }
 }
