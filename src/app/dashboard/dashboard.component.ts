@@ -31,9 +31,8 @@ export class DashboardComponent implements OnInit {
   noGeo: boolean = false;
 
   /**
-   *
-   * @param usersService The usersService gets injected in order to gain access to all its properties which store all sorts of user data.
-   * @param dialog The MatDialog service gets injected in order to provide pre-styled material design dialogs in the component which can be opened and subscribed to.
+   * @param usersService The UsersService is injected to access client data and perform CRUD operations.
+   * @param dialog The MatDialog service is injected to open pre-styled material design dialogs.
    */
 
   constructor(public usersService: UsersService, private dialog: MatDialog) {
@@ -62,6 +61,9 @@ export class DashboardComponent implements OnInit {
     this.getCurrentWeather();
   }
 
+  /**
+   * Gets the current date and time, and formats it as a string.
+   */
   getCurrentDate() {
     const date = new Date();
     this.formattedDate = date.toLocaleString('en-US', {
@@ -76,6 +78,10 @@ export class DashboardComponent implements OnInit {
     }, 60000);
   }
 
+  /**
+   * Retrieves the current weather using geolocation.
+   * If the weather data is available in local storage, it is used; otherwise, an API request is made.
+   */
   async getCurrentWeather() {
     let cachedWeather = localStorage.getItem('weather');
     if (cachedWeather) {
@@ -94,7 +100,8 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * @param position object with coordinate properties (lat; long)
+   *Retrieves the current position coordinates and uses them to fetch location and weather data.
+   * @param position The object containing the coordinates (latitude and longitude).
    */
 
   async getPos(position: any) {

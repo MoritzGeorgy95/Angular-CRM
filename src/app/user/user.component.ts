@@ -22,9 +22,9 @@ export class UserComponent {
 
   /**
    *
-   * @param usersService The usersService gets injected in order to gain access to all its properties which store all sorts of user data.
+   * @param usersService The UsersService is injected to access client data and perform CRUD operations.
+   * @param dialog The MatDialog service is injected to open pre-styled material design dialogs.
    * @param router Router gets injected to enable direct URL navigation.
-   * @param dialog The MatDialog service gets injected in order to provide pre-styled material design dialogs in the component which can be opened and subscribed to.
    */
   constructor(
     public usersService: UsersService,

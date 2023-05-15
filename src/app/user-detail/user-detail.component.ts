@@ -191,14 +191,11 @@ export class UserDetailComponent {
     );
     const files = (await list(userStorageRef)).items;
 
-    // Loop over each file in the storage folder
     for (const file of files) {
-      // Check if the file's name is in the local array of selected documents
       const fileIndex = this.documents.findIndex(
         (d: any) => d.name === file.name
       );
 
-      // If the file is not in the local array, delete it from storage
       if (fileIndex === -1) {
         await deleteObject(file);
       }
