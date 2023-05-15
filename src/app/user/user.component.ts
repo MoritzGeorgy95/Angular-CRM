@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,13 +13,19 @@ import { map } from 'rxjs/operators';
 })
 export class UserComponent {
   users$: Observable<any>;
-  searchText: any;
+  searchText: string;
   numberOfClients: number = 0;
   companyInput: boolean = false;
   cityInput: boolean = false;
   genderInput: boolean = false;
   queryParam: string = '';
 
+  /**
+   *
+   * @param usersService The usersService gets injected in order to gain access to all its properties which store all sorts of user data.
+   * @param router Router gets injected to enable direct URL navigation.
+   * @param dialog The MatDialog service gets injected in order to provide pre-styled material design dialogs in the component which can be opened and subscribed to.
+   */
   constructor(
     public usersService: UsersService,
     private router: Router,
@@ -28,10 +34,17 @@ export class UserComponent {
     this.users$ = this.usersService.users;
   }
 
-  showUserDetail(id: any) {
+  /**
+   *
+   * @param id string; Client ID so user can click on client to see detailed information.
+   */
+  showUserDetail(id: string) {
     this.router.navigateByUrl(`/users/${id}`);
   }
 
+  /**
+   * Open Add New Client Dialog
+   */
   openDialog() {
     const dialogRef = this.dialog.open(DialogAddUserComponent, {});
 
@@ -40,6 +53,9 @@ export class UserComponent {
     });
   }
 
+  /**
+   * Function to search individual user
+   */
   searchUser() {
     this.users$ = this.users$.pipe(
       map((users: any[]) =>
@@ -57,6 +73,14 @@ export class UserComponent {
   sendMail(mail: string) {
     window.location.href = `mailto:${mail}`;
   }
+
+  /**
+   * Logic to filter clients according to certain criteria.
+   */
+
+  /**
+   * @param clickedCheckbox string; Checks which filter has been chosen by the user. Toggles the display of the corresponding input fields.
+   */
 
   onCheckboxClicked(clickedCheckbox: string) {
     this.queryParam = '';
