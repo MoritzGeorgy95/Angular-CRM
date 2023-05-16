@@ -2,7 +2,8 @@
   position: fixed;
   inset: 0;
   background-color: #141d2f;
-  background-image: url('/assets/img/curve_vector.png');
+  background-image: url('/assets/img/curve_vector.png'), linear-gradient(to bottom, #4f5c6b, #141d2f);
+  background-position: right 0% bottom 160%;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -18,22 +19,22 @@
   align-items: center;
   justify-content: center;
   background: white;
-  padding: 2rem 4rem;
+  padding: 4rem;
   border-radius: 20px;
   box-shadow: 0 0 4px 0 rgb(0 0 0 / 10%);
   gap: 1rem;
 
   h1 {
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 2.5rem !important;
     font-weight: 600;
     font-size: 1.7rem;
     border-bottom: 3px solid #141d2f;
-    padding-bottom: 7px;
+    padding-bottom: 18px;
   }
 
   .mat-mdc-form-field {
-    width: 350px;
+    width: 450px;
   }
 
   .login-button-wrapper {
