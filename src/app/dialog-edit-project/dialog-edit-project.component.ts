@@ -37,7 +37,6 @@ export class DialogEditProjectComponent {
     const adjustedDeadline = new Date(
       this.deadline.getTime() - timeZoneOffset * 60 * 1000
     );
-    const index = this.data[1];
     const docRef = doc(this.usersService.collection, this.url);
     const newProject = {
       title: this.title,
@@ -51,7 +50,7 @@ export class DialogEditProjectComponent {
     });
 
     await updateDoc(docRef, {
-      projects: arrayRemove(this.data[index]),
+      projects: arrayRemove(this.data[0]),
     });
 
     this.dialog.closeAll();
