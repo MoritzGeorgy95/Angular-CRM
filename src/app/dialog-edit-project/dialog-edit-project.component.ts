@@ -46,11 +46,11 @@ export class DialogEditProjectComponent {
     };
 
     await updateDoc(docRef, {
-      projects: arrayUnion(newProject),
+      projects: arrayRemove(this.data[0]),
     });
 
     await updateDoc(docRef, {
-      projects: arrayRemove(this.data[0]),
+      projects: arrayUnion(newProject),
     });
 
     this.dialog.closeAll();
