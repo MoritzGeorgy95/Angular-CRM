@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { UsersService } from './users.service';
 import { Auth } from '@angular/fire/auth';
 
@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   title = 'crm-app';
   opened: boolean = true;
   time: string;
-  userMenuOpen:boolean= false;
+  userMenuOpen: boolean = false;
 
   constructor(
     private auth: Auth,
@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
     if (authToken) {
       if (authToken === 'guest') {
         this.usersService.connectToDatabase('guest', 'Guest');
-        
       } else {
         const authData = JSON.parse(authToken);
         this.usersService.connectToDatabase(authData.id, authData.name);
@@ -36,9 +35,13 @@ export class AppComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/login');
     }
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.userMenuOpen = false;
+      }
+    });
   }
-
-
 
   getCurrentHour() {
     const currentHour = new Date().getHours();
@@ -57,5 +60,9 @@ export class AppComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.router.navigateByUrl('/login');
+  }
+
+  alert() {
+    alert('Legal notice still in working progress!');
   }
 }
