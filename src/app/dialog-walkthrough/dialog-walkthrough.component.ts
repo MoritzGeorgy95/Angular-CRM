@@ -10,10 +10,10 @@ export class DialogWalkthroughComponent {
   index: number = 0;
   tutorialSlides: Array<any> = [
     {
-      title: 'Welcome to my Simple CRM Web Application !',
-      img: '',
+      title: 'Welcome to Toolio CRM!',
+      img: 'welcome.jpg',
       description:
-        "Welcome to Toolio CRM! A lightweight customer relationship management tool, that allows you to create clients, upload client documents, create projects and set client events. This tutorial will guide you through the main functionalities of my web application. Let's dive in together, click Next to start the journey! ",
+        "A lightweight customer relationship management tool, that allows you to create clients, upload client documents, create projects and set client events. This tutorial will guide you through the main functionalities of my web application. Let's dive in together, click Next to start the journey! ",
     },
     {
       title: 'Dashboard',
@@ -48,9 +48,9 @@ export class DialogWalkthroughComponent {
     },
     {
       title: 'Congratulations!',
-      img: '',
+      img: 'start.jpg',
       description:
-        'Now you have a solid understanding of how Toolio works. Remember, this tool is for demonstration purposes, so feel free to explore and test all features without hesitation. Happy exploring!',
+        'Now you have a solid understanding of how Toolio works and are set to go! Remember, this tool is for demonstration purposes, so feel free to explore and test all features without hesitation. Happy exploring!',
     },
   ];
 

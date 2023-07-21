@@ -16,6 +16,7 @@
 
 .mat-mdc-card-content {
     border-top: 1px solid rgb(0 0 0 / 20%);
+    padding-top: 1rem;
 }
 
 .card-header {
@@ -63,12 +64,10 @@
     font-size: 1rem;
     text-align: center;
     line-height: 30px;
-}
-
-.special-description {
-    font-weight: 400;
     animation: zoomIn 0.6s ease-out;
 }
+
+
 
 @keyframes zoomIn {
     0% {

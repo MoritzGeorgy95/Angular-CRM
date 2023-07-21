@@ -5,11 +5,11 @@
             <mat-card-title>{{ tutorialSlides[index].title }}</mat-card-title>
         </div>
     </mat-card-header>
-    <img mat-card-image *ngIf="this.index != 0 && this.index != this.tutorialSlides.length - 1" class="tutorial-img" src="assets/img/tutorial/{{ tutorialSlides[index].img }}"
+    <img mat-card-image class="tutorial-img" src="assets/img/tutorial/{{ tutorialSlides[index].img }}"
         alt="navigation">
 
     <mat-card-content>
-        <p [class.special-description]="this.index == 0 || this.index == this.tutorialSlides.length - 1" class="description">{{ tutorialSlides[index].description }}</p>
+        <p class="description">{{ tutorialSlides[index].description }}</p>
     </mat-card-content>
 
     <mat-card-actions class="btn-container">
