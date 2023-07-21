@@ -57,6 +57,7 @@ import { DialogEditProjectComponent } from './dialog-edit-project/dialog-edit-pr
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InfoComponent } from './info/info.component';
 import { NewsComponent } from './news/news.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 
 
 
@@ -78,6 +79,7 @@ import { NewsComponent } from './news/news.component';
     DialogEditProjectComponent,
     InfoComponent,
     NewsComponent,
+    LegalNoticeComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,10 +10,10 @@
     <ul>
       <li [routerLink]="['/']"><mat-icon>fact_check</mat-icon>Dashboard</li>
       <li [routerLink]="['/users']"><mat-icon>groups</mat-icon>Clients</li>
-      <li ><mat-icon>feed</mat-icon>News</li>
+      <li [routerLink]="['/news']"><mat-icon>feed</mat-icon>News</li>
       <li [routerLink]="['/info']"><mat-icon>info</mat-icon>Help</li>
 
-      <li (click)="alert()"><mat-icon>policy</mat-icon>Legal Notice</li>
+      <li [routerLink]="['/legal']"><mat-icon>policy</mat-icon>Legal Notice</li>
       <li (click)="logout()"><mat-icon>logout</mat-icon>Logout</li>
     </ul>
   </mat-sidenav>

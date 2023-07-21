@@ -1,1 +1,32 @@
-<p>news works!</p>
+<div class="article-container" *ngIf="(newsService.news$| async) as newsData">
+
+    <mat-card class="article" *ngFor="let article of newsData.articles" >
+        
+            <mat-card-header>
+                <mat-card-title>{{article.title}}</mat-card-title>
+                <mat-card-subtitle>Source: <a [href]="article.source.url" target="_blank">{{article.source.name}}</a></mat-card-subtitle>
+            </mat-card-header>
+        
+            <img [src]="article.image" alt="article-img" (click)="openTab(article.url)">
+        
+            <mat-card-content>
+                <p>{{article.description}}</p>
+                <span>Published at: {{article.publishedAt}}</span>
+                
+            </mat-card-content>
+            <mat-card-actions>
+                <a [href]="article.url" target="_blank">Read More</a>
+            </mat-card-actions>
+        
+       
+    </mat-card>
+
+</div>
+<div *ngIf="!(newsService.news$| async) && !newsService.error" class="news-buffer spinner">
+    <mat-spinner></mat-spinner>
+    <h1>Loading News...</h1>
+</div>
+<div *ngIf="newsService.error" class="news-buffer error">
+    <mat-icon>warning</mat-icon>
+    <h1>Newsfeed Blocked By Provider</h1>
+</div>

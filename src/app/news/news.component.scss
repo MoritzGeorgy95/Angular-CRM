@@ -1,0 +1,99 @@
+.article-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+
+    .article {
+        width: 350px;
+        border-radius: 1.5rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        mat-card-header {
+            
+
+            mat-card-title {
+                font-size: 1.25em;
+                font-weight: 700;
+            }
+            mat-card-subtitle {
+                a {
+                    text-decoration: underline;
+                    color: rgba(0,0,0,.54);
+                }
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        mat-card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;margin-top: 1rem;
+
+            p {
+                margin: 0;
+                font-size: .9rem;
+                color: rgba($color: #000000, $alpha: .54);
+                font-weight: 500;
+
+            }
+
+            span {
+                font-size: .7rem;
+                color: rgba($color: #000000, $alpha: .54);
+            }
+
+           
+
+        }
+
+        mat-card-actions {
+            a {
+                color:  #29abe2;
+                margin-left: 1rem;
+            }
+        }
+    }
+}
+
+.news-buffer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+
+.spinner {
+    mat-spinner {
+        transform: scale(.8);
+    }
+}
+
+.mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: #141d2f;
+  }
+  
+
+.error {
+    mat-icon {
+        transform: scale(2.5);
+        color: red;
+    }
+
+}
