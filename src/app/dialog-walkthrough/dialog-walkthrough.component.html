@@ -1,0 +1,20 @@
+<mat-card class="mat-card" [class.mat-card-intro-outro]="this.index == 0 || this.index == this.tutorialSlides.length - 1">
+
+    <mat-card-header>
+        <div class="title-container">
+            <mat-card-title>{{ tutorialSlides[index].title }}</mat-card-title>
+        </div>
+    </mat-card-header>
+    <img mat-card-image *ngIf="this.index != 0 && this.index != this.tutorialSlides.length - 1" class="tutorial-img" src="assets/img/tutorial/{{ tutorialSlides[index].img }}"
+        alt="navigation">
+
+    <mat-card-content>
+        <p [class.special-description]="this.index == 0 || this.index == this.tutorialSlides.length - 1" class="description">{{ tutorialSlides[index].description }}</p>
+    </mat-card-content>
+
+    <mat-card-actions class="btn-container">
+        <button mat-stroked-button [disabled]="this.index == 0" (click)="previous();">Previous</button>
+        <button mat-stroked-button color="warn" (click)="close()">Close</button>
+        <button mat-stroked-button [disabled]="this.index == this.tutorialSlides.length - 1" (click)="next()">Next</button>
+    </mat-card-actions>
+</mat-card>

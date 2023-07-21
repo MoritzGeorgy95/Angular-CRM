@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogCalendarComponent } from '../dialog-calendar/dialog-calendar.component';
 import { Observable } from 'rxjs';
 import { DialogNotepadComponent } from '../dialog-notepad/dialog-notepad.component';
+import { NewsService } from '../news.service';
+import { DialogWalkthroughComponent } from '../dialog-walkthrough/dialog-walkthrough.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,7 +37,11 @@ export class DashboardComponent implements OnInit {
    * @param dialog The MatDialog service is injected to open pre-styled material design dialogs.
    */
 
-  constructor(public usersService: UsersService, private dialog: MatDialog) {
+  constructor(
+    public usersService: UsersService,
+    private dialog: MatDialog,
+    public newsService: NewsService
+  ) {
     this.notes$ = this.usersService.notes;
     this.notes$.subscribe((notes) => {
       this.notes = notes;
@@ -60,6 +66,20 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getCurrentDate();
     this.getCurrentWeather();
+    this.checkTutorial();
+  }
+
+  /**
+   * Check if tutorial has already been seen
+   */
+
+  checkTutorial() {
+    // let tutorial = localStorage.getItem('tutorialSeen');
+    // if (!tutorial) {
+    //   this.dialog.open(DialogWalkthroughComponent);
+    //   localStorage.setItem('tutorialSeen', 'true');
+    // }
+    this.dialog.open(DialogWalkthroughComponent);
   }
 
   /**

@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+}
+
+.mat-card {
+    min-height: 600px;
+    padding: 16px;
+}
+
+.mat-card-intro-outro {
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mat-mdc-card-content {
+    border-top: 1px solid rgb(0 0 0 / 20%);
+}
+
+.card-header {
+    width: 100%;
+}
+
+.title-container {
+    width: 100%;
+    text-align: center;
+
+    mat-card-title {
+        font-size: 1.5rem !important;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgb(0 0 0 / 20%);
+    }
+}
+
+.tutorial-img {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    border-bottom: 1px solid rgb(0 0 0 / 20%);
+    margin: 16px 0px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    border-top: 1px solid rgb(0 0 0 / 20%);
+    padding-top: 10px;
+}
+
+.flex-spacer {
+    flex: 1 1 auto;
+}
+
+.placeholder {
+    color: transparent !important;
+    cursor: default;
+}
+
+.description {
+    font-weight: 400;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 30px;
+}
+
+.special-description {
+    font-weight: 400;
+    animation: zoomIn 0.6s ease-out;
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
+

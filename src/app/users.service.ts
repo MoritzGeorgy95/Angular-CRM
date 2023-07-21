@@ -10,7 +10,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersService {
-
   private _users: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public readonly users = this._users.asObservable();
 
@@ -25,10 +24,9 @@ export class UsersService {
   currentUserCustomImage: any;
   currentUserDocuments: any;
   currentlyLoggedIn: string;
-  currentlyLoggedInUserName: string= "Guest";
+  currentlyLoggedInUserName: string = 'Guest';
 
-  constructor(private firestore: Firestore, public storage: Storage) {
-  }
+  constructor(private firestore: Firestore, public storage: Storage) {}
 
   async getAll() {
     const users: any[] = [];
@@ -37,19 +35,14 @@ export class UsersService {
 
     const dataBundle = await getDocs(this.collection);
     dataBundle.forEach((doc) => {
-      let data= doc.data() as {id?: string, notes?: any[], events?: any []}
+      let data = doc.data() as { id?: string; notes?: any[]; events?: any[] };
       if ('id' in data) {
         users.push(data);
+      } else if (data.events) {
+        events.push(data);
+      } else {
+        notes.push(data);
       }
-
-      else if (data.events) {
-        events.push(data)
-      }
-
-      else {
-        notes.push(data)
-      }
-      
     });
     this._users.next(users);
     this._notes.next(notes);
@@ -116,9 +109,9 @@ export class UsersService {
     }
   }
 
-  connectToDatabase(loggedInUser: string, loggedInUserUserName:string) {
+  connectToDatabase(loggedInUser: string, loggedInUserUserName: string) {
     this.currentlyLoggedIn = loggedInUser;
-    this.currentlyLoggedInUserName= loggedInUserUserName;
+    this.currentlyLoggedInUserName = loggedInUserUserName;
     this.collection = collection(
       this.firestore,
       `user_${this.currentlyLoggedIn}`
@@ -128,7 +121,9 @@ export class UsersService {
 
   async addNotesDocument(loggedInUser: string) {
     this.currentlyLoggedIn = loggedInUser;
-    await setDoc(doc(this.firestore, `user_${this.currentlyLoggedIn}`, 'notes'), {notes: []})
+    await setDoc(
+      doc(this.firestore, `user_${this.currentlyLoggedIn}`, 'notes'),
+      { notes: [] }
+    );
   }
-
 }

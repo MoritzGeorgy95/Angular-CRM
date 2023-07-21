@@ -14,11 +14,7 @@ export class AppComponent implements OnInit {
   time: string;
   userMenuOpen: boolean = false;
 
-  constructor(
-    private auth: Auth,
-    public router: Router,
-    public usersService: UsersService
-  ) {
+  constructor(public router: Router, public usersService: UsersService) {
     this.getCurrentHour();
   }
 
@@ -60,9 +56,5 @@ export class AppComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.router.navigateByUrl('/login');
-  }
-
-  alert() {
-    alert('Legal notice still in working progress!');
   }
 }

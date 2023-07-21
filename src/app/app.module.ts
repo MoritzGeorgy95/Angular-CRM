@@ -58,6 +58,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InfoComponent } from './info/info.component';
 import { NewsComponent } from './news/news.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
+import { DialogWalkthroughComponent } from './dialog-walkthrough/dialog-walkthrough.component';
 
 
 
@@ -80,6 +81,7 @@ import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
     InfoComponent,
     NewsComponent,
     LegalNoticeComponent,
+    DialogWalkthroughComponent,
   ],
   imports: [
     BrowserModule,
