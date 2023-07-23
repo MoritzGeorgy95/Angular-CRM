@@ -10,12 +10,13 @@
     >
     <div class="widget-description-container">
       <img src="assets/img/news.png" alt="" class="widget-icon news" />
-      <h2>Newsfeed</h2>
+      <h2>News Spotlight</h2>
     </div>
      <div class="news-container" *ngIf="(newsService.news$| async) as newsData">
         <div class="article" *ngFor="let article of newsData.articles.slice(0, 3)">
           <img [src]="article.image" alt="news-img">
-          <p>{{article.description}}</p>
+          <p>{{article.title}}</p>
+          <a [href]="article.url">Read</a>
         </div>
      </div>
     </div>
