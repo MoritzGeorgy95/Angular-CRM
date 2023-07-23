@@ -74,12 +74,11 @@ export class DashboardComponent implements OnInit {
    */
 
   checkTutorial() {
-    // let tutorial = localStorage.getItem('tutorialSeen');
-    // if (!tutorial) {
-    //   this.dialog.open(DialogWalkthroughComponent);
-    //   localStorage.setItem('tutorialSeen', 'true');
-    // }
-    this.dialog.open(DialogWalkthroughComponent);
+    let tutorial = localStorage.getItem('tutorialSeen');
+    if (!tutorial) {
+      this.dialog.open(DialogWalkthroughComponent);
+      localStorage.setItem('tutorialSeen', 'true');
+    }
   }
 
   /**
