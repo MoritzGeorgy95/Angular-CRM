@@ -1,25 +1,6 @@
 <div class="dashboard">
   <div class="widget-container">
-    <div
-      class="widget news"
-      cdkDrag
-      cdkDragBoundary=".widget-container"
-      #widget
-      (cdkDragEnded)="getWidgetFinalPos($event)"
-      
-    >
-    <div class="widget-description-container">
-      <img src="assets/img/news.png" alt="" class="widget-icon news" />
-      <h2>News Spotlight</h2>
-    </div>
-     <div class="news-container" *ngIf="(newsService.news$| async) as newsData">
-        <div class="article" *ngFor="let article of newsData.articles.slice(0, 3)">
-          <img [src]="article.image" alt="news-img">
-          <p>{{article.title}}</p>
-          <a [href]="article.url" target="_blank">Read</a>
-        </div>
-     </div>
-    </div>
+    
 
     <div
       class="widget weather"
@@ -44,6 +25,26 @@
         <h2>Geolocation disabled  <mat-icon>sentiment_dissatisfied</mat-icon></h2>
         <p style="margin: 0; margin-top: .5rem;">Enable gelocation & refresh page.</p>
       </div>
+    </div>
+    <div
+      class="widget news"
+      cdkDrag
+      cdkDragBoundary=".widget-container"
+      #widget
+      (cdkDragEnded)="getWidgetFinalPos($event)"
+      
+    >
+    <div class="widget-description-container">
+      <img src="assets/img/news.png" alt="" class="widget-icon news" />
+      <h2>News Spotlight</h2>
+    </div>
+     <div class="news-container" *ngIf="(newsService.news$| async) as newsData">
+        <div class="article" *ngFor="let article of newsData.articles.slice(0, 3)">
+          <img [src]="article.image" alt="news-img">
+          <p>{{article.title}}</p>
+          <a [href]="article.url" target="_blank">Read</a>
+        </div>
+     </div>
     </div>
     <div
       class="widget notifications"
