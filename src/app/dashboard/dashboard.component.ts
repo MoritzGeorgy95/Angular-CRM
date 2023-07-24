@@ -21,7 +21,7 @@ import { DialogWalkthroughComponent } from '../dialog-walkthrough/dialog-walkthr
 export class DashboardComponent implements OnInit {
   @ViewChildren('widget') widgetElements: QueryList<ElementRef>;
 
-  formattedDate: string;
+  time: string;
   cityName: string;
   temperature: number;
   weatherIcon: number;
@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
    * Get gelocation, current date/time & current weather to then be displayed within dashboard widgets.
    */
   ngOnInit() {
-    this.getCurrentDate();
+    this.getCurrentHour();
     this.getCurrentWeather();
     this.checkTutorial();
   }
@@ -82,20 +82,20 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * Gets the current date and time, and formats it as a string.
+   * Gets the current time, and formats it as a string.
    */
-  getCurrentDate() {
-    const date = new Date();
-    this.formattedDate = date.toLocaleString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    });
-    setTimeout(() => {
-      this.getCurrentDate();
-    }, 60000);
+  getCurrentHour() {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 5 && currentHour < 12) {
+      this.time = 'Good morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      this.time = 'Good afternoon';
+    } else if (currentHour >= 18 && currentHour < 22) {
+      this.time = 'Good evening';
+    } else {
+      this.time = 'Good night';
+    }
   }
 
   /**

@@ -25,7 +25,8 @@
           <h2>Toolio CRM</h2>
         </div>
         <div>
-          <h2>{{ time }}, {{ usersService.currentlyLoggedInUserName }}!</h2>
+          <!-- <h2>{{ time }}, {{ usersService.currentlyLoggedInUserName }}!</h2> -->
+          {{ date | date:'EEEE | d MMMM | y' }}
         </div>
         <div class="notifications-container">
           <button

@@ -11,12 +11,10 @@ import { Auth } from '@angular/fire/auth';
 export class AppComponent implements OnInit {
   title = 'crm-app';
   opened: boolean = true;
-  time: string;
   userMenuOpen: boolean = false;
+  date: Date = new Date();
 
-  constructor(public router: Router, public usersService: UsersService) {
-    this.getCurrentHour();
-  }
+  constructor(public router: Router, public usersService: UsersService) {}
 
   async ngOnInit() {
     const authToken = localStorage.getItem('authToken');
@@ -37,20 +35,6 @@ export class AppComponent implements OnInit {
         this.userMenuOpen = false;
       }
     });
-  }
-
-  getCurrentHour() {
-    const currentHour = new Date().getHours();
-
-    if (currentHour >= 5 && currentHour < 12) {
-      this.time = 'Good morning';
-    } else if (currentHour >= 12 && currentHour < 18) {
-      this.time = 'Good afternoon';
-    } else if (currentHour >= 18 && currentHour < 22) {
-      this.time = 'Good evening';
-    } else {
-      this.time = 'Good night';
-    }
   }
 
   logout() {

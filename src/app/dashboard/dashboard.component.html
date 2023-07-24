@@ -1,14 +1,17 @@
 <div class="dashboard">
-  <div class="widget-container">
-    
-
-    <div
+        <div
       class="widget weather"
       cdkDrag
       cdkDragBoundary=".widget-container"
       #widget
       (cdkDragEnded)="getWidgetFinalPos($event)"
     >
+
+      <div>
+        <h1>{{ time }}, {{ usersService.currentlyLoggedInUserName }}!</h1>
+      </div>
+
+
       <div *ngIf="cityName && temperature">
         <h2>
           {{ cityName }}
@@ -16,6 +19,7 @@
         <h2>{{ temperature }} C°</h2>
         <img [src]="'assets/img/icons/' + weatherIcon + '.svg'" alt="" />
       </div>
+
 
       <div *ngIf="!cityName && !temperature && !noGeo" class="fetching-weather-container">
         <h2>Fetching weather data</h2>
@@ -126,6 +130,4 @@
       </div>
       <div class="frozen-glass"></div>
     </div>
-  </div>
-
 </div>
