@@ -160,6 +160,7 @@
         display: flex;
         margin-bottom: 1rem;
         align-items: center;
+        font-size: 1rem;
 
         mat-icon {
           margin-right: 5px;
@@ -225,6 +226,8 @@
         display: flex;
         margin-bottom: 1rem;
         align-items: center;
+        font-size: 1rem;
+
         .event-wrapper {
           width: 100%;
           display: flex;
@@ -303,6 +306,7 @@ app-calendar-component {
 
 .widget-user-prompt {
   height: 100%;
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
 }
