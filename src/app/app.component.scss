@@ -184,3 +184,12 @@ mat-toolbar-row {
     z-index: 1000000;
   }
 }
+
+@media screen and (max-height: 750px) {
+  .screensize-alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000000;
+  }
+}
