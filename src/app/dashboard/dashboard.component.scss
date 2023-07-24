@@ -15,7 +15,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 0px 4px 0px rgb(0 0 0 / 30%);
+    box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 30%);
     border-radius: 30px;
     text-align: center;
     background-color: white;
@@ -29,6 +29,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      color: white;
     }
 
     .widget-description-container {
@@ -44,13 +45,16 @@
   .widget.news {
     grid-column: 3 / span 1;
     grid-row: 1 / span 2;
+    justify-content: flex-start;
+    
 
     .news-container {
       display: flex;
-      gap: 1rem;
       flex-direction: column;
+      justify-content: space-around;
       margin-top: 1rem;
       width: 100%;
+      height: 100%;
 
       .article {
         display: flex;
@@ -67,7 +71,7 @@
 
         p {
           margin: 0;
-          font-size: 0.8rem;
+          font-size: 0.9rem;
         }
 
         a {
@@ -95,6 +99,24 @@
     background-repeat: no-repeat;
     background-position: right 0% bottom 160%;
     color: white;
+
+    .greeting {
+      display: flex;
+      gap: .5rem;
+
+      h1 {
+        font-size: 2rem;
+        margin: 0;
+      }
+
+    }
+
+    .data {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+    }
+
   }
 
   .widget.notepad {
@@ -240,6 +262,10 @@
   .widget.calendar {
     grid-column: 2;
     grid-row: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    cursor: pointer;
   }
 }
 
@@ -249,7 +275,7 @@ mat-spinner {
 }
 
 .mat-mdc-progress-spinner {
-  --mdc-circular-progress-active-indicator-color: #141d2f;
+  --mdc-circular-progress-active-indicator-color: white;
 }
 
 app-calendar-component {

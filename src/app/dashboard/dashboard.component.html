@@ -1,133 +1,149 @@
 <div class="dashboard">
-        <div
-      class="widget weather"
-      cdkDrag
-      cdkDragBoundary=".widget-container"
-      #widget
-      (cdkDragEnded)="getWidgetFinalPos($event)"
+  <div
+    class="widget weather"
+    cdkDrag
+    cdkDragBoundary=".widget-container"
+    #widget
+    (cdkDragEnded)="getWidgetFinalPos($event)"
+  >
+    <div class="greeting">
+      <h1>{{ time }},</h1>
+      <h1 style="color: #29abe2">
+        {{ usersService.currentlyLoggedInUserName }}!
+      </h1>
+    </div>
+
+    <div *ngIf="cityName && temperature" class="data">
+      <h2 style="margin-left: 0.5rem">
+        {{ cityName }}
+      </h2>
+      <h2>{{ temperature }} C°</h2>
+      <img [src]="'assets/img/icons/' + weatherIcon + '.svg'" alt="" />
+    </div>
+
+    <div
+      *ngIf="!cityName && !temperature && !noGeo"
+      class="fetching-weather-container"
     >
-
-      <div>
-        <h1>{{ time }}, {{ usersService.currentlyLoggedInUserName }}!</h1>
-      </div>
-
-
-      <div *ngIf="cityName && temperature">
-        <h2>
-          {{ cityName }}
-        </h2>
-        <h2>{{ temperature }} C°</h2>
-        <img [src]="'assets/img/icons/' + weatherIcon + '.svg'" alt="" />
-      </div>
-
-
-      <div *ngIf="!cityName && !temperature && !noGeo" class="fetching-weather-container">
-        <h2>Fetching weather data</h2>
-        <mat-spinner></mat-spinner>
-      </div>
-      <div *ngIf="!cityName && !temperature && noGeo" class="fetching-weather-container">
-        <h2>Geolocation disabled  <mat-icon>sentiment_dissatisfied</mat-icon></h2>
-        <p style="margin: 0; margin-top: .5rem;">Enable gelocation & refresh page.</p>
-      </div>
+      <h2>Fetching weather data</h2>
+      <mat-spinner></mat-spinner>
     </div>
     <div
-      class="widget news"
-      cdkDrag
-      cdkDragBoundary=".widget-container"
-      #widget
-      (cdkDragEnded)="getWidgetFinalPos($event)"
-      
+      *ngIf="!cityName && !temperature && noGeo"
+      class="fetching-weather-container"
     >
+      <h2>Geolocation disabled <mat-icon>sentiment_dissatisfied</mat-icon></h2>
+      <p style="margin: 0; margin-top: 0.5rem">
+        Enable gelocation & refresh page.
+      </p>
+    </div>
+  </div>
+  <div
+    class="widget news"
+    cdkDrag
+    cdkDragBoundary=".widget-container"
+    #widget
+    (cdkDragEnded)="getWidgetFinalPos($event)"
+  >
     <div class="widget-description-container">
       <img src="assets/img/news.png" alt="" class="widget-icon news" />
       <h2>News Spotlight</h2>
     </div>
-     <div class="news-container" *ngIf="(newsService.news$| async) as newsData">
-        <div class="article" *ngFor="let article of newsData.articles.slice(0, 3)">
-          <img [src]="article.image" alt="news-img">
-          <p>{{article.title}}</p>
-          <a [href]="article.url" target="_blank">Read</a>
-        </div>
-     </div>
-    </div>
-    <div
-      class="widget notifications"
-      cdkDrag
-      cdkDragBoundary=".widget-container"
-      #widget
-      (cdkDragEnded)="getWidgetFinalPos($event)"
-      (click)="openCalendarViewDialog()"
-    >
-      <div class="widget-description-container">
-        <img src="assets/img/notifications.png" alt="" class="widget-icon" />
-        <h2>Notifications</h2>
-      </div>
-      <div *ngIf="events && events.length === 0">
-        <p class="placeholder">No nevents starting today.</p>
-      </div>
-      <div class="events-container" *ngIf="events && events.length > 0">
-        <ul>
-          <li *ngFor="let event of events">
-            <div class="event-wrapper">
-              <div><mat-icon>event</mat-icon>
-                {{ event.title }} </div>
-              <div>
-                <mat-icon>schedule</mat-icon>
-                {{ event.start.toDate().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }) }}
-               
-              </div>
-            </div>
-            
-           
-          </li>
-        </ul>
-      </div>
-      <div class="frozen-glass"></div>
-    </div>
-    <div
-      class="widget calendar"
-      cdkDrag
-      cdkDragBoundary=".widget-container"
-      #widget
-      (cdkDragStarted)="dragging = true"
-      (click)="openCalendarViewDialog()"
-      (cdkDragEnded)="getWidgetFinalPos($event)"
-    >
-      <div class="widget-description-container">
-        <img
-          src="assets/img/calendar.png"
-          alt=""
-          class="widget-icon calendar"
-        />
-        <h2>Client Calendar</h2>
-      </div>
-    </div>
-    <div
-      class="widget notepad"
-      cdkDrag
-      cdkDragBoundary=".widget-container"
-      #widget
-      (cdkDragStarted)="dragging = true"
-      (cdkDragEnded)="getWidgetFinalPos($event)"
-      (click)="openNotepadDialog(notes)"
-    >
-      <div class="widget-description-container">
-        <img src="assets/img/notes.png" alt="" class="widget-icon" />
-        <h2>Notepad</h2>
-      </div>
-      <div *ngIf="notes && notes[0] && notes[0].notes.length === 0">
-        <p class="placeholder">No notes in storage yet.</p>
-      </div>
+    <div class="news-container" *ngIf="newsService.news$ | async as newsData">
       <div
-        class="notes-container"
-        *ngIf="notes && notes[0] && notes[0].notes.length > 0"
+        class="article"
+        *ngFor="let article of newsData.articles.slice(0, 3)"
       >
-        <ul>
-          <li *ngFor="let note of notes[0].notes">
-            {{ note }}
-          </li>
-        </ul>
+        <img [src]="article.image" alt="news-img" />
+        <p>{{ article.title }}</p>
+        <a [href]="article.url" target="_blank">Read</a>
       </div>
-      <div class="frozen-glass"></div>
     </div>
+  </div>
+  <div
+    class="widget notifications"
+    cdkDrag
+    cdkDragBoundary=".widget-container"
+    #widget
+    (cdkDragEnded)="getWidgetFinalPos($event)"
+    (click)="openCalendarViewDialog()"
+  >
+    <div class="widget-description-container">
+      <img src="assets/img/notifications.png" alt="" class="widget-icon" />
+      <h2>Notifications</h2>
+    </div>
+    <div *ngIf="events && events.length === 0">
+      <p class="placeholder">No nevents starting today.</p>
+    </div>
+    <div class="events-container" *ngIf="events && events.length > 0">
+      <ul>
+        <li *ngFor="let event of events">
+          <div class="event-wrapper">
+            <div><mat-icon>event</mat-icon> {{ event.title }}</div>
+            <div>
+              <mat-icon>schedule</mat-icon>
+              {{
+                event.start
+                  .toDate()
+                  .toLocaleTimeString("en-US", {
+                    hour12: false,
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  })
+              }}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="frozen-glass"></div>
+  </div>
+  <div
+    class="widget calendar"
+    cdkDrag
+    cdkDragBoundary=".widget-container"
+    #widget
+    (cdkDragStarted)="dragging = true"
+    (click)="openCalendarViewDialog()"
+    (cdkDragEnded)="getWidgetFinalPos($event)"
+  >
+    <div class="widget-description-container" style="margin-top: 0.5rem">
+      <img src="assets/img/calendar.png" alt="" class="widget-icon calendar" />
+      <h2>Client Calendar</h2>
+    </div>
+    <div style="height: 100%; display: flex; align-items: center">
+      <mat-icon style="margin-left: 1rem; vertical-align: middle"
+        >ads_click</mat-icon
+      >
+      Click on widget to open calendar
+    </div>
+  </div>
+  <div
+    class="widget notepad"
+    cdkDrag
+    cdkDragBoundary=".widget-container"
+    #widget
+    (cdkDragStarted)="dragging = true"
+    (cdkDragEnded)="getWidgetFinalPos($event)"
+    (click)="openNotepadDialog(notes)"
+  >
+    <div class="widget-description-container">
+      <img src="assets/img/notes.png" alt="" class="widget-icon" />
+      <h2>Notepad</h2>
+    </div>
+    <div *ngIf="notes && notes[0] && notes[0].notes.length === 0">
+      <p class="placeholder">No notes in storage yet.</p>
+    </div>
+    <div
+      class="notes-container"
+      *ngIf="notes && notes[0] && notes[0].notes.length > 0"
+    >
+      <ul>
+        <li *ngFor="let note of notes[0].notes">
+          {{ note }}
+        </li>
+      </ul>
+    </div>
+    <div class="frozen-glass"></div>
+  </div>
 </div>
