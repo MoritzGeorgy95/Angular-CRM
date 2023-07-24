@@ -8,9 +8,7 @@
   >
     <div class="greeting">
       <h1>{{ time }},</h1>
-      <h1 style="color: #29abe2">
-        {{ usersService.currentlyLoggedInUserName }}!
-      </h1>
+      <h1 style="color: #29abe2;">{{ usersService.currentlyLoggedInUserName }}!</h1>
     </div>
 
     <div *ngIf="cityName && temperature" class="data">
@@ -72,8 +70,8 @@
       <img src="assets/img/notifications.png" alt="" class="widget-icon" />
       <h2>Notifications</h2>
     </div>
-    <div *ngIf="events && events.length === 0">
-      <p class="placeholder">No nevents starting today.</p>
+    <div *ngIf="events && events.length === 0" class="widget-user-prompt">
+      <p class="placeholder">No nevents starting today</p>
     </div>
     <div class="events-container" *ngIf="events && events.length > 0">
       <ul>
@@ -83,13 +81,11 @@
             <div>
               <mat-icon>schedule</mat-icon>
               {{
-                event.start
-                  .toDate()
-                  .toLocaleTimeString("en-US", {
-                    hour12: false,
-                    hour: "2-digit",
-                    minute: "2-digit"
-                  })
+                event.start.toDate().toLocaleTimeString("en-US", {
+                  hour12: false,
+                  hour: "2-digit",
+                  minute: "2-digit"
+                })
               }}
             </div>
           </div>
@@ -111,8 +107,9 @@
       <img src="assets/img/calendar.png" alt="" class="widget-icon calendar" />
       <h2>Client Calendar</h2>
     </div>
-    <div style="height: 100%; display: flex; align-items: center">
-      <mat-icon style="margin-left: 1rem; vertical-align: middle"
+    <div class="widget-user-prompt">
+      <mat-icon
+       id="calendar-icon"
         >ads_click</mat-icon
       >
       Click on widget to open calendar
@@ -131,8 +128,11 @@
       <img src="assets/img/notes.png" alt="" class="widget-icon" />
       <h2>Notepad</h2>
     </div>
-    <div *ngIf="notes && notes[0] && notes[0].notes.length === 0">
-      <p class="placeholder">No notes in storage yet.</p>
+    <div
+      *ngIf="notes && notes[0] && notes[0].notes.length === 0"
+      class="widget-user-prompt"
+    >
+      <p class="placeholder">No notes in storage yet</p>
     </div>
     <div
       class="notes-container"

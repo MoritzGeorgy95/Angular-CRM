@@ -46,7 +46,6 @@
     grid-column: 3 / span 1;
     grid-row: 1 / span 2;
     justify-content: flex-start;
-    
 
     .news-container {
       display: flex;
@@ -63,15 +62,15 @@
         align-items: center;
 
         img {
-          width: 50px;
-          height: 50px;
+          width: 70px;
+          height: 70px;
           border-radius: 100%;
           object-fit: cover;
         }
 
         p {
           margin: 0;
-          font-size: 0.9rem;
+          font-size: 1rem;
         }
 
         a {
@@ -102,13 +101,12 @@
 
     .greeting {
       display: flex;
-      gap: .5rem;
+      gap: 0.5rem;
 
       h1 {
         font-size: 2rem;
         margin: 0;
       }
-
     }
 
     .data {
@@ -116,7 +114,6 @@
       flex-direction: row-reverse;
       align-items: center;
     }
-
   }
 
   .widget.notepad {
@@ -295,4 +292,17 @@ app-calendar-component {
 .widget-icon.calendar,
 .widget-icon.news {
   width: 55px;
+}
+
+#calendar-icon {
+  margin-right: 1rem;
+  vertical-align: middle;
+  color: #29abe2;
+  transform: scale(1.2);
+}
+
+.widget-user-prompt {
+  height: 100%;
+    display: flex;
+    align-items: center;
 }
