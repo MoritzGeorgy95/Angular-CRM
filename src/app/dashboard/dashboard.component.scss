@@ -310,3 +310,26 @@ app-calendar-component {
   align-items: center;
   font-size: 1rem;
 }
+
+@media screen and (max-height: 750px) {
+  .dashboard {
+    height: unset;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .widget.news {
+
+    .news-container {
+      
+      .article {
+        
+        .article-text {
+          font-size: unset !important;
+        }
+
+       
+      }
+    }
+  }
+}

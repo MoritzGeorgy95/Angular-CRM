@@ -57,7 +57,7 @@
         *ngFor="let article of newsData.articles.slice(0, 3)"
       >
         <img [src]="article.image" alt="news-img" />
-        <p>{{ article.title }}</p>
+        <p class="article-text">{{ article.title }}</p>
         <a [href]="article.url" target="_blank">Read</a>
       </div>
     </div>
