@@ -46,7 +46,7 @@
     grid-column: 3 / span 1;
     grid-row: 1 / span 2;
     justify-content: flex-start;
-
+    position: relative;
     .news-container {
       display: flex;
       flex-direction: column;
@@ -275,7 +275,7 @@ mat-spinner {
 }
 
 .mat-mdc-progress-spinner {
-  --mdc-circular-progress-active-indicator-color: white;
+  --mdc-circular-progress-active-indicator-color: #29abe2;;
 }
 
 app-calendar-component {
@@ -310,6 +310,28 @@ app-calendar-component {
   align-items: center;
   font-size: 1rem;
 }
+
+.news-buffer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+
+.error {
+  mat-icon {
+      transform: scale(2.5);
+      color: red;
+  }
+
+}
+
+
 
 @media screen and (max-height: 750px) {
   .dashboard {

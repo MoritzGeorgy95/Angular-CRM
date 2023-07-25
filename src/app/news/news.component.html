@@ -26,7 +26,7 @@
     <mat-spinner></mat-spinner>
     <h1>Loading News...</h1>
 </div>
-<div *ngIf="newsService.error" class="news-buffer error">
+<div *ngIf="newsService.error && !(newsService.news$| async)" class="news-buffer error">
     <mat-icon>warning</mat-icon>
     <h1>Newsfeed Blocked By Provider</h1>
 </div>

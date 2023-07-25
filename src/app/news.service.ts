@@ -9,7 +9,7 @@ export class NewsService {
     this.news$ = this.fetchNews(this.url);
   }
 
-  apikey = '64f93eae2402d94f840b30f2b22c15ee';
+  apikey = 'be88d8f24f023305a408f362c621a428';
   category = 'general';
   url =
     'https://gnews.io/api/v4/top-headlines?category=' +
@@ -32,6 +32,7 @@ export class NewsService {
         .then((data) => {
           observer.next(data);
           observer.complete();
+          this.error = false;
         });
     });
   }
