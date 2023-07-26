@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NewsService {
-  constructor() {
+  constructor(private http: HttpClient) {
     this.news$ = this.fetchNews(this.url);
   }
 
+  placeholderImageUrl: string = 'assets/img/placeholdernoimg.png';
   apikey = 'be88d8f24f023305a408f362c621a428';
   category = 'general';
   url =
@@ -35,5 +37,10 @@ export class NewsService {
           this.error = false;
         });
     });
+  }
+
+  replaceImg(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.placeholderImageUrl;
   }
 }

@@ -7,7 +7,8 @@
                 <mat-card-subtitle>Source: <a [href]="article.source.url" target="_blank">{{article.source.name}}</a></mat-card-subtitle>
             </mat-card-header>
         
-            <img [src]="article.image" alt="article-img" (click)="openTab(article.url)">
+            <img [src]="article.image" alt="article-img" (click)="openTab(article.url)" (error)="newsService.replaceImg($event)"
+            >
         
             <mat-card-content>
                 <p>{{article.description}}</p>
