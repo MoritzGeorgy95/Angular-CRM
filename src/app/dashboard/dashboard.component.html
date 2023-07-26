@@ -61,14 +61,14 @@
         <a [href]="article.url" target="_blank">Read</a>
       </div>
     </div>
-    <div *ngIf="!(newsService.news$| async) && !newsService.error" class="news-buffer spinner">
+    <div *ngIf="!(newsService.news$ | async) && !(newsService.error$ | async)" class="news-buffer spinner">
       <mat-spinner></mat-spinner>
       <h1>Loading News...</h1>
-  </div>
-  <div *ngIf="newsService.error" class="news-buffer error">
+    </div>
+    <div *ngIf="newsService.error$ | async" class="news-buffer error">
       <mat-icon>warning</mat-icon>
       <h1>Newsfeed Blocked By Provider</h1>
-  </div>
+    </div>
   </div>
   <div
     class="widget notifications"

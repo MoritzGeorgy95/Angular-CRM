@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -7,36 +7,40 @@ import { HttpClient } from '@angular/common/http';
 })
 export class NewsService {
   constructor(private http: HttpClient) {
-    this.news$ = this.fetchNews(this.url);
+    this.fetchNews(this.url); // No need to return the Observable here
   }
 
   placeholderImageUrl: string = 'assets/img/placeholdernoimg.png';
-  apikey = 'be88d8f24f023305a408f362c621a428';
+  apikey = '64f93eae2402d94f840b30f2b22c15e';
   category = 'general';
   url =
     'https://gnews.io/api/v4/top-headlines?category=' +
     this.category +
     '&lang=en&country=us&max=10&apikey=' +
     this.apikey;
-  news$: Observable<any>;
-  error: boolean = false;
 
-  fetchNews(url: string): Observable<any> {
-    return new Observable((observer) => {
-      fetch(url)
-        .then((response) => {
-          if (!response.ok) {
-            this.error = true;
-            throw new Error('Newsfeed blocked by provider!');
-          }
+  private newsSubject = new BehaviorSubject<any>(null);
+  news$ = this.newsSubject.asObservable();
+
+  private errorSubject = new BehaviorSubject<boolean>(false);
+  error$ = this.errorSubject.asObservable();
+
+  fetchNews(url: string): void {
+    fetch(url)
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
           return response.json();
-        })
-        .then((data) => {
-          observer.next(data);
-          observer.complete();
-          this.error = false;
-        });
-    });
+        } else {
+          throw new Error('Newsfeed blocked by provider!');
+        }
+      })
+      .then((data) => {
+        this.newsSubject.next(data);
+        this.errorSubject.next(false); // Reset error flag on successful response
+      })
+      .catch((error) => {
+        this.errorSubject.next(true); // Set error flag on error
+      });
   }
 
   replaceImg(event: Event) {

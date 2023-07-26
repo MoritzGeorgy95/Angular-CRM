@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from '../users.service';
 import { addDoc, updateDoc } from 'firebase/firestore';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-dialog-add-user',
   templateUrl: './dialog-add-user.component.html',
   styleUrls: ['./dialog-add-user.component.scss'],
 })
-
 export class DialogAddUserComponent {
   data = {
     firstname: '',
@@ -23,30 +23,39 @@ export class DialogAddUserComponent {
     id: '',
     company: '',
     website: '',
-    projects: {}
+    projects: {},
   };
 
-  customImage: File | null; 
+  customImage: File | null;
 
-  constructor(private dialog: MatDialog, private usersService: UsersService) {}
+  constructor(
+    private dialog: MatDialog,
+    private usersService: UsersService,
+    private toast: HotToastService
+  ) {}
 
   onNoClick() {
     this.dialog.closeAll();
   }
 
   async submitData() {
-    const docRef = await addDoc(this.usersService.collection, this.data);
-    
-    let id= docRef.id
-    
-    await updateDoc(docRef, { id: id });
+    if (this.formValidator()) {
+      const docRef = await addDoc(this.usersService.collection, this.data);
 
-    if (this.customImage) {
-      await this.usersService.uploadImage(this.customImage, id);
+      let id = docRef.id;
+
+      await updateDoc(docRef, { id: id });
+
+      if (this.customImage) {
+        await this.usersService.uploadImage(this.customImage, id);
+      }
+
+      this.dialog.closeAll();
+    } else {
+      this.toast.error(
+        'Please complete form with valid data! All fields need to contain a value.'
+      );
     }
-
-    this.dialog.closeAll();
-    
   }
 
   toggleMale() {
@@ -60,13 +69,28 @@ export class DialogAddUserComponent {
   }
 
   onFileSelected(event: any) {
-    const file= event.target.files[0];
+    const file = event.target.files[0];
     if (file) {
       this.customImage = file;
     }
   }
 
   resetCustomImage() {
-    this.customImage= null;
+    this.customImage = null;
+  }
+
+  formValidator() {
+    let valid = true;
+    let data = this.data as any;
+    for (const key in this.data) {
+      if (key === 'male' || key === 'female' || key === 'id') {
+        continue;
+      }
+      if (data[key] === '' || !data[key]) {
+        valid = false;
+        break;
+      }
+    }
+    return valid;
   }
 }

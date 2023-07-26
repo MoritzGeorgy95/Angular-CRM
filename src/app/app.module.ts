@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//Material Design
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,13 +25,15 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UsersService } from './users.service';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+//Hot Toast
+import { HotToastModule } from '@ngneat/hot-toast';
 
 //components
 import { AppComponent } from './app.component';
@@ -59,8 +62,6 @@ import { InfoComponent } from './info/info.component';
 import { NewsComponent } from './news/news.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { DialogWalkthroughComponent } from './dialog-walkthrough/dialog-walkthrough.component';
-
-
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { DialogWalkthroughComponent } from './dialog-walkthrough/dialog-walkthro
       useFactory: adapterFactory,
     }),
     NgbModalModule,
+    HotToastModule.forRoot(),
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -117,8 +119,9 @@ import { DialogWalkthroughComponent } from './dialog-walkthrough/dialog-walkthro
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
-    provideStorage(()=> getStorage()),
-    FontAwesomeModule],
+    provideStorage(() => getStorage()),
+    FontAwesomeModule,
+  ],
   providers: [UsersService],
   bootstrap: [AppComponent],
 })
