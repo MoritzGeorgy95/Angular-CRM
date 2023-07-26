@@ -21,7 +21,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Enter your Email</mat-label>
       <input matInput [(ngModel)]="email" />
-      <button mat-icon-button matSuffix>
+      <button mat-icon-button matSuffix tabIndex="-1">
         <mat-icon>email</mat-icon>
       </button>
     </mat-form-field>
@@ -38,6 +38,7 @@
         (click)="hide = !hide"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide"
+        tabIndex="-1"
       >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
@@ -54,14 +55,14 @@
     <mat-form-field appearance="outline">
       <mat-label>Enter your Username</mat-label>
       <input matInput [(ngModel)]="userName" />
-      <button mat-icon-button matSuffix>
+      <button mat-icon-button matSuffix tabIndex="-1">
         <mat-icon>person</mat-icon>
       </button>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Enter your Email</mat-label>
       <input matInput [(ngModel)]="email" />
-      <button mat-icon-button matSuffix>
+      <button mat-icon-button matSuffix tabIndex="-1">
         <mat-icon>email</mat-icon>
       </button>
     </mat-form-field>
@@ -78,6 +79,7 @@
         (click)="hide = !hide"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide"
+        tabIndex="-1"
       >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { Storage } from '@angular/fire/storage';
+import { HotToastService } from '@ngneat/hot-toast';
 import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 
 import { getDownloadURL, list, ref, uploadBytes } from 'firebase/storage';
@@ -26,7 +27,11 @@ export class UsersService {
   currentlyLoggedIn: string;
   currentlyLoggedInUserName: string = 'Guest';
 
-  constructor(private firestore: Firestore, public storage: Storage) {}
+  constructor(
+    private firestore: Firestore,
+    public storage: Storage,
+    private toast: HotToastService
+  ) {}
 
   async getAll() {
     const users: any[] = [];
@@ -89,7 +94,7 @@ export class UsersService {
   async uploadImage(file: File, id: string) {
     const allowedTypes = ['image/png', 'image/jpeg'];
     if (allowedTypes.indexOf(file.type) === -1) {
-      alert('Invalid file type! Please upload a PNG or JPEG image.');
+      this.toast.error('Invalid file type! Please upload a PNG or JPEG image.');
     } else {
       const filePath = `user_${this.currentlyLoggedIn}/avatarImages/${id}/${file.name}`;
       const imagesRef = ref(this.storage, filePath);
@@ -101,7 +106,9 @@ export class UsersService {
     const allowedTypes = ['application/pdf'];
 
     if (allowedTypes.indexOf(file.type) === -1) {
-      alert('Invalid file type! Documents have to be in pdf format!');
+      this.toast.error(
+        'Invalid file type! Documents have to be in pdf format!'
+      );
     } else {
       const filePath = `user_${this.currentlyLoggedIn}/documents/${id}/${file.name}`;
       const documentRef = ref(this.storage, filePath);

@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { DialogNotepadComponent } from '../dialog-notepad/dialog-notepad.component';
 import { NewsService } from '../news.service';
 import { DialogWalkthroughComponent } from '../dialog-walkthrough/dialog-walkthrough.component';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,7 +41,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     public usersService: UsersService,
     private dialog: MatDialog,
-    public newsService: NewsService
+    public newsService: NewsService,
+    private toast: HotToastService
   ) {
     this.notes$ = this.usersService.notes;
     this.notes$.subscribe((notes) => {
@@ -146,7 +148,7 @@ export class DashboardComponent implements OnInit {
   }
 
   rejectPos(error: any) {
-    alert(error.message);
+    this.toast.error(error.message);
   }
 
   /**

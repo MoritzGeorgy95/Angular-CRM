@@ -7,6 +7,7 @@ import {
   updateProfile,
 } from '@angular/fire/auth';
 import { UsersService } from '../users.service';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,8 @@ export class LoginComponent {
   constructor(
     public router: Router,
     private auth: Auth,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private toast: HotToastService
   ) {}
 
   /**
@@ -63,7 +65,7 @@ export class LoginComponent {
         this.router.navigateByUrl('/dashboard');
       }
     } catch (error) {
-      alert(error);
+      this.toast.error((error as any).toString());
     }
   }
 
@@ -90,7 +92,7 @@ export class LoginComponent {
         });
       }
     } catch (error) {
-      alert(error);
+      this.toast.error((error as any).toString());
     }
   }
 }
