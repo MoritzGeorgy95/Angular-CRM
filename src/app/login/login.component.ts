@@ -85,6 +85,7 @@ export class LoginComponent {
         await updateProfile(user, { displayName: this.userName });
         setTimeout(() => {
           this.usersService.addNotesDocument(this.auth.currentUser?.uid || '');
+          this.usersService.addEventsDocument(this.auth.currentUser?.uid || '');
           this.logIn();
         });
       }

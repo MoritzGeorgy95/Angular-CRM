@@ -126,4 +126,12 @@ export class UsersService {
       { notes: [] }
     );
   }
+
+  async addEventsDocument(loggedInUser: string) {
+    this.currentlyLoggedIn = loggedInUser;
+    await setDoc(
+      doc(this.firestore, `user_${this.currentlyLoggedIn}`, 'events'),
+      { events: [] }
+    );
+  }
 }
