@@ -176,14 +176,14 @@ mat-toolbar-row {
   }
 }
 
-// @media screen and (max-width: 1250px) {
-//   .screensize-alert {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     z-index: 1000000;
-//   }
-// }
+@media screen and (max-width: 1250px) {
+  .screensize-alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000000;
+  }
+}
 
 
 

@@ -11,7 +11,7 @@ export class NewsService {
   }
 
   placeholderImageUrl: string = 'assets/img/placeholdernoimg.png';
-  apikey = '64f93eae2402d94f840b30f2b22c15e';
+  apikey = '64f93eae2402d94f840b30f2b22c15ee';
   category = 'general';
   url =
     'https://gnews.io/api/v4/top-headlines?category=' +
