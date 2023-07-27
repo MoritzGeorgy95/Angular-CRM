@@ -19,7 +19,7 @@ export class DialogWalkthroughComponent {
       title: 'Dashboard',
       img: 'dashboard.png',
       description:
-        'On the dashboard page, click on widgets to try out their functionality. You can also reposition widgets by dragging them around. The notifications widget displays all calendar events with a start date set to today.',
+        'On the dashboard page, click on widgets to try out their functionality. You can also reposition widgets by dragging them around on bigger screens. The notifications widget displays all calendar events with a start date set to today.',
     },
     {
       title: 'Clients',
